@@ -1,28 +1,34 @@
-== README
+TIPS for accessing DB:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+> rails db
+--> opens up sqlite3 through rails
 
-Things you may want to cover:
+sqlite >.headers on
+sqlite >.mode columns
+--> turn headers on and show database data in column mode, for readability
 
-* Ruby version
+sqlite >pragma table_info('TABLE_NAME_HERE');
+--> print table columns/type/primekey ...
 
-* System dependencies
+=====================================================================================
+CREATING model:
 
-* Configuration
+> cd to app/models
 
-* Database creation
+> rails generate model MODEL_NAME (singular)
+--> this creates XXXXXXXX_create_model_table.rb in db/migrate; add your table attributes in this file
 
-* Database initialization
+=====================================================================================
+DROP & CREATE db: (update db changes)
 
-* How to run the test suite
+>rake db:drop:all
+>rake db:create:all
+>rake db:migrate
 
-* Services (job queues, cache servers, search engines, etc.)
+If you use Rails version < 4.1, don't forget to prepare test database:
 
-* Deployment instructions
+>rake db:test:prepare
 
-* ...
+=====================================================================================
+HAPPY CODING!
 
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
