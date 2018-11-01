@@ -5,20 +5,39 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version 2.5.3
+* Ruby version 2.5.3/ Rails 5.2 +
 
-* System dependencies
+* System dependencies - Windows OS
 
-* Configuration
+First run "bundle install"
+if any error on gem installation for sqlite3, try commenting out the ", git: "https://github.com/larskanis/sqlite3-ruby", branch: "add-gemspec" part
 
-* Database creation
+TIPS for accessing DB:
 
-* Database initialization
+#opens up sqlite3 through rails
+> rails db 
 
-* How to run the test suite
+#turn headers on and show database data in column mode, for readability
+sqlite >.headers on 
+sqlite >.mode columns
 
-* Services (job queues, cache servers, search engines, etc.)
+#see table structure
+sqlite >pragma table_info(your_table); 
 
-* Deployment instructions
 
-* ...
+DROP & CREATE db: (update db changes)
+
+>rake db:drop:all >rake db:create:all >rake db:migrate
+
+If you use Rails version < 4.1, don't forget to prepare test database:
+
+>rake db:test:prepare
+
+If you get permission denied error, just delete development.sqlite3 & schema.rb files and run rake db:migrate command
+
+HAPPY CODING!
+
+saving images: https://www.youtube.com/watch?v=fVtGy3QL9xg
+
+
+
