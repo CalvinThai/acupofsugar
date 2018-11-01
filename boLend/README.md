@@ -35,9 +35,10 @@ If you use Rails version < 4.1, don't forget to prepare test database:
 
 If you get permission denied error, just delete development.sqlite3 & schema.rb files and run rake db:migrate command
 
-HAPPY CODING!
+tutorial on saving images: https://www.youtube.com/watch?v=fVtGy3QL9xg
 
-saving images: https://www.youtube.com/watch?v=fVtGy3QL9xg
+
+HAPPY CODING!
 
 
 
