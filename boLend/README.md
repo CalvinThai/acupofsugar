@@ -18,10 +18,13 @@ TIPS for accessing DB:
 > rails db 
 
 #turn headers on and show database data in column mode, for readability
+
 sqlite >.headers on 
+
 sqlite >.mode columns
 
 #see table structure
+
 sqlite >pragma table_info(your_table); 
 
 
