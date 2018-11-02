@@ -2,7 +2,8 @@
     <%= text_field_tag :name, params[:name], placeholder: "Search user name" %>
     <%= submit_tag 'Search ', name: nil %>
 <% end %>
-
+<%= @users.present?%> <%= @user.fname%>
+	
 <% if not @users %>
 	<% if params[:name]!='' and params[:name] %>
 		<div>
@@ -13,7 +14,7 @@
 <% else %>
 	<% for user in @users%>
  		<div >
-   		   <strong> <%= user.name %> </strong>
+   		   <strong> <%= user.fname %> <%= user.lname %></strong>
 	 	</div>
  	<% end %>
 <% end %>

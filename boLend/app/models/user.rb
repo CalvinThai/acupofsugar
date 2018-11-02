@@ -3,7 +3,8 @@ class User < ApplicationRecord
   
   def self.search(name)
     if name
-      @users = User.where('name LIKE ?', "%#{name}%")
+      name = name.split(" ")
+      @users = User.where("fname LIKE ? OR fname LIKE?", "%#{name[0]}%","%#{name[1]}%")
     end
   end
 end
