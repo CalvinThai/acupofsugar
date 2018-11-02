@@ -5,3 +5,9 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+user = User.create(fname: 'John', lname: 'Doe', email:'abc@mail.com')
+items = Item.create([{name: 'pencil', descr: 'brand new condition', status: 'available',user_id: user.id},
+	{name: 'eraser', descr: 'brand new condition', status: 'lentout',user_id: user.id},
+	{name: 'ps4 console', descr: 'brand new condition', status: 'borrowed' ,user_id: user.id},
+	{name: 'god of war 4', descr: 'brand new condition', status: 'borrowed' ,user_id: user.id},
+	{name: 'spider-man new universe', descr: 'brand new condition', status: 'available', user_id: user.id}])
