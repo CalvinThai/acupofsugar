@@ -1,0 +1,21 @@
+<h2>Items you've wishlisted</h2>
+
+<table>
+  <tr>
+    <th>Item name</th>
+    <th>Description</th>
+    <th colspan="2"></th>
+  </tr>
+
+  <% @wish_items.each do |item| %>
+    <tr>
+      <td><%= link_to item.name %></td>
+      <td><%= item.descr %></td>
+      <td><%= item.user_id %></td>
+      <td><%= item.id %></td>
+      <td><%= link_to 'Send a borrow request'%></td>
+      <td><%= link_to 'Delete', user_wish_list_path(item.user_id, item.id), method: :delete,
+              data: { confirm: 'Are you sure?' }%></td>  <!-- item will be deleted from the list -->
+    </tr>
+  <% end %>
+</table>

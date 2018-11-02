@@ -1,0 +1,23 @@
+<h2>Items you've borrowed</h2>
+
+<table>
+  <tr>
+    <th>Item name</th>
+    <th>Description</th>
+    <th>Due date</th>
+    <th>Contact owner</th>
+    <th colspan="2"></th>
+  </tr>
+
+  <% @borrowed_items.each do |item| %>
+    <% owner = User.find(item.i_uid) %>
+    <tr>
+      <td><%= link_to item.name %></td>
+      <td><%= item.descr %></td>
+      <td><%= item.due_on %></td>
+      <td><%= owner.fname %> <%= owner.lname %></td> <%# link to user profile OR invoke messanger %>
+      <td><%= link_to 'Return this item' %></td>
+      <td><%= link_to 'send a due-date extension request' %></td>
+    </tr>
+  <% end %>
+</table>
