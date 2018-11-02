@@ -1,4 +1,4 @@
-<h1>items <%= @user.fname %> has borrowed</h1>
+<h1>items <%= @user.fname %> is wishing for</h1>
 
 <table>
   <tr>
@@ -7,7 +7,7 @@
     <th colspan="3"></th>
   </tr>
 
-  <% @borrowed_items.each do |item| %>
+  <% @wish_items.each do |item| %>
     <tr>
       <td><%= item.name %></td>
       <td><%= item.descr %></td>
