@@ -1,0 +1,20 @@
+<%= form_tag(users_path, method: :get) do %>
+    <%= text_field_tag :name, params[:name], placeholder: "Search user name" %>
+    <%= submit_tag 'Search ', name: nil %>
+<% end %>
+
+<% if not @users %>
+	<% if params[:name]!='' and params[:name] %>
+		<div>
+			We couldn't find any user name for 
+			<span>	<%=params[:name] %> </span>
+		</div>
+	<% end %>
+<% else %>
+	<% for user in @users%>
+ 		<div >
+   		   <strong> <%= user.name %> </strong>
+	 	</div>
+ 	<% end %>
+<% end %>
+

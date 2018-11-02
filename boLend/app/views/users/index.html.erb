@@ -1,4 +1,6 @@
 <h1>Main page</h1>
 
+<%= render template: "search_users/index" %>
+
 <p>Testing borrowed items list - assuming a user has logged in</p>
 <%= link_to 'See items borrowed by this user', user_path(@user) %>
