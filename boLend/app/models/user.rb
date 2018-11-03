@@ -3,8 +3,10 @@ class User < ApplicationRecord
   searchkick
   User.reindex
   
-	has_many :items
-  	has_many :wishlists
+  has_many :items, dependent: :destroy
+  has_many :wish_lists, dependent: :destroy
+  has_many :borrowed_items, dependent: :destroy
+  has_many :on_hold_items, dependent: :destroy
   	
   def self.user_search(name)
     if name.present?              
