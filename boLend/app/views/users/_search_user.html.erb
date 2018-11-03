@@ -2,10 +2,9 @@
     <%= text_field_tag :name, params[:name], placeholder: "Search user name" %>
     <%= submit_tag 'Search ', name: nil %>
 <% end %>
-<%= @users.present?%> <%= @user.fname%>
-	
-<% if not @users %>
-	<% if params[:name]!='' and params[:name] %>
+
+<% if not @users.present? %>
+	<% if params[:name].present? and @users.blank?%>
 		<div>
 			We couldn't find any user name for 
 			<span>	<%=params[:name] %> </span>
