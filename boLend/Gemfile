@@ -60,3 +60,6 @@ gem 'high_voltage', '~> 3.1'
 
 # Searchkick
 gem 'searchkick'
+
+# HasFriendship
+gem 'has_friendship'

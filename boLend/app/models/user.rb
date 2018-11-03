@@ -2,6 +2,7 @@ class User < ApplicationRecord
   #searchkick gem
   searchkick
   User.reindex
+  has_friendship
   
   has_many :items, dependent: :destroy
   has_many :wish_lists, dependent: :destroy
