@@ -8,8 +8,14 @@
 user = User.create(fname: 'John', lname: 'Doe', email:'abc@mail.com')
 user2 = User.create(fname: 'tony', lname: 'stark', email:'tony@mail.com')
 user3 = User.create(fname: 'smith', lname: 'lynn', email:'smith@mail.com')
-items = Item.create([{name: 'pencil', descr: 'brand new condition', status: 'available',user_id: user.id},
-	{name: 'eraser', descr: 'brand new condition', status: 'lentout',user_id: user.id},
-	{name: 'ps4 console', descr: 'brand new condition', status: 'borrowed' ,user_id: user.id},
-	{name: 'god of war 4', descr: 'brand new condition', status: 'borrowed' ,user_id: user.id},
-	{name: 'spider-man new universe', descr: 'brand new condition', status: 'available', user_id: user.id}])
+items = Item.create([{name: 'pencil', descr: 'brand new condition', status: 'lentout',user_id: user3.id},
+	{name: 'eraser', descr: 'brand new condition', status: 'lentout',user_id: user3.id},
+	{name: 'ps4 console', descr: 'brand new condition', status: 'available' ,user_id: user2.id},
+	{name: 'god of war 4', descr: 'brand new condition', status: 'available' ,user_id: user2.id},
+	{name: 'spider-man new universe', descr: 'brand new condition', status: 'available', user_id: user2.id}])
+WishList.create([
+	{item_id: items[3].id, user_id: user.id},
+	{item_id: items[4].id, user_id: user.id}])
+BorrowedItem.create([{item_id: items[1].id, user_id: user.id, due_on: "2018/11/11"},
+	{item_id: items[0].id, user_id: user.id, due_on: "2018/12/02"}])
+OnHoldItem.create([{item_id: items[2].id, user_id: user.id, req_on: "2018/10/31"}])

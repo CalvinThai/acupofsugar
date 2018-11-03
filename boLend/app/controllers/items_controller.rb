@@ -1,7 +1,10 @@
 class ItemsController < ApplicationController
 	def index
 		@user = User.find(params[:user_id])
-		@borrowed_items = @user.items.where('status = ?', "borrowed") #need borrowed_items table
-		@wish_items = WishList.joins(:item).select("items.*").where('wish_lists.user_id = ?', params[:user_id]) #all items that have been wishlisted by this user
+		@borrowed_items = BorrowedItem.joins(:item).select("items.user_id as i_uid, items.*, borrowed_items.*").where('borrowed_items.user_id = ?', params[:user_id]) 
+		@wish_items = WishList.joins(:item).select("items.user_id as i_uid, items.*, wish_lists.*").where('wish_lists.user_id = ?', params[:user_id]) #all items that have been wishlisted by this user
+		#the above is same as:
+		#@wish_items = Item.joins(:wish_lists).select("items.*").where(...)
+		@on_hold_items = OnHoldItem.joins(:item).select("items.*, on_hold_items.*").where('on_hold_items.user_id = ?', params[:user_id]) 
 	end
 end
