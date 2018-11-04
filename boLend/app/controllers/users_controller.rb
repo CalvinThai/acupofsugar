@@ -11,10 +11,6 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.find(1) #should be the current login user
-    @friend = User.find(params[:friend])
-    @user.friend_request(@friend)
-    render 'index'
   end
   
 end

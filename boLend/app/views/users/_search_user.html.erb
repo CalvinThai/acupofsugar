@@ -14,13 +14,6 @@
  		<div>
 			<!--should be directed to user profile page later -->
 			<%= link_to "#{user.fname} #{user.lname}", user_path(user) %> 
-			<% if @user.friends.include?(user) %>
-				<%= button_tag 'Friends', disabled: true %>
-			<% elsif not @user.pending_friends.include?(user)%>
-				<%= button_to 'Add Friend', users_path(:friend => user), method: :post, form: {style: 'display:inline-block;'} %>
-			<% else%>
-				<%= button_tag 'Request Pending', :disabled => true %>
-			<% end %>
 	 	</div>
  	<% end %>
 <% end %>
