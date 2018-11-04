@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_02_212942) do
+ActiveRecord::Schema.define(version: 2018_11_04_175760) do
 
   create_table "borrowed_items", force: :cascade do |t|
     t.integer "user_id"
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 2018_11_02_212942) do
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_borrowed_items_on_item_id"
     t.index ["user_id"], name: "index_borrowed_items_on_user_id"
+  end
+
+  create_table "friendships", force: :cascade do |t|
+    t.string "friendable_type"
+    t.integer "friendable_id"
+    t.integer "friend_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer "blocker_id"
+    t.integer "status"
   end
 
   create_table "items", force: :cascade do |t|
