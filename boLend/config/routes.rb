@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   	resources :on_hold_items
   	resources :wish_lists
     resources :friendships
+    resources :lend_items
   end
   get 'admin' => 'admin#index'
   controller :sessions do

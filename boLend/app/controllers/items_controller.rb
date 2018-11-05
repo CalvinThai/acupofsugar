@@ -6,6 +6,6 @@ class ItemsController < ApplicationController
 		#the above is same as:
 		#@wish_items = Item.joins(:wish_lists).select("items.*").where(...)
 		@on_hold_items = OnHoldItem.joins(:item).select("items.*, on_hold_items.*").where('on_hold_items.user_id = ?', params[:user_id])
-		#@approve_items = OnHoldItem.joins(:item).select("items.*, on_hold_items.*").where('items.user_id = ?', params[:user_id]) 
+		@approve_items = OnHoldItem.joins(:item, :user).select("items.*, on_hold_items.*, user.email").where("items.user_id = ? AND on_hold_items.approved = ?", params[:user_id], 'pending')
 	end
 end

@@ -1,0 +1,32 @@
+<h2>Your Items others have requested to borrow</h2>
+
+<% if @approve_items.length > 0 %>
+  <table>
+    <tr>
+      <th>Item name</th>
+      <th>Description</th>
+      <th>Requested By</th>
+      <th>Requested on</th>
+      <th colspan="2">Approval</th>
+    </tr>
+
+    <% @approve_items.each do |item| %>
+      <tr>
+        <td><%= link_to item.name %></td>
+        <td><%= item.descr %></td>
+        <td><%= item.email %></td>
+        <td><%= item.req_on %></td>
+        <td>
+          <% if item.approved == 'pending' %>
+            <%= link_to 'Approve Request', user_lend_items_path(:hold_id => item.id, :result => "approved"), method: :put %>
+            <%= link_to 'Deny Request', user_lend_items_path(:hold_id => item.id, :result => "denied"), method: :put  %>
+         <% else %>
+           <%= item.approved  %>
+         <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p>No Pending Requests for Approval</p>
+<% end %>
