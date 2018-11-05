@@ -4,8 +4,11 @@ class FriendshipsController < ApplicationController
     @friend_requirer = User.find(params[:friend_requirer])
     @friend_requiree = User.find(params[:friend_requiree])
     @friend_requirer.friend_request(@friend_requiree)
-    
-    redirect_to users_path
+    @user = @friend_requirer
+    @users = User.user_search(params[:name])
+    respond_to do |format|               
+        format.js 
+    end 
   end
   
 end

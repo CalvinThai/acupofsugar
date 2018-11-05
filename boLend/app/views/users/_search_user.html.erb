@@ -10,13 +10,9 @@
 		</div>
 	<% end %>
 <% else %>
-	<% for user in @users%>
- 		<div>
-			<!--should be directed to user profile page later -->
-			<%= link_to "#{user.fname} #{user.lname}", user_path(user) %> 
-			<%= render "friendships/user_friendships" , user: user%>
-	 	</div>
- 	<% end %>
+	<div id="user_list">
+		<%= render "friendships/user_friendships" , collection: @users, name: params[:name]%>
+	</div>
 <% end %>
 
 
