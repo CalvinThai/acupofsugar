@@ -3,6 +3,9 @@ class UsersController < ApplicationController
     @users = User.user_search(params[:name])
 		@user = User.find(1) #for testing
 	end
+  def indexx
+    @users = User.all
+  end
 	def show
 		@user = User.find(params[:id])
 	end
@@ -16,7 +19,7 @@ class UsersController < ApplicationController
 
   end
   private def user_params
-    params.require(:user).permit(:email, :password)
+    params.require(:user).permit(:email, :password_digest, :fname, :lname)
   end
   
 end
