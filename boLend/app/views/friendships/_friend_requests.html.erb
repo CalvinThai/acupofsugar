@@ -1,0 +1,23 @@
+<% request_num = @user.requested_friends.length %>
+<% if request_num>0 %>
+	<% request_list = @user.requested_friends %>
+	<p> You have <%=pluralize(request_num, 'friend request') %> from the following 
+	<%= if request_num<2 then'user' else 'users' end %> </p>
+	<% for requirer in request_list%>
+		<div>
+			<%= link_to "#{requirer.fname} #{requirer.lname}", user_path(requirer) %> 
+			<%= form_tag user_friendship_path(@user,id:1), method: :put,style: 				'display:inline-block;',remote: true do %>
+			  <%= hidden_field_tag :friend_requirer, requirer.id %>
+			  <%= hidden_field_tag :friend_requiree, @user.id %>
+			  <%= hidden_field_tag :decision, true %>
+			  <%= submit_tag 'Accept' %>
+			<% end %>
+			<%= form_tag user_friendship_path(@user,id:1), method: :put,style: 				'display:inline-block;',remote: true do %>
+			  <%= hidden_field_tag :friend_requirer, requirer.id %>
+			  <%= hidden_field_tag :friend_requiree, @user.id %>
+			  <%= hidden_field_tag :decision, false %>
+			  <%= submit_tag 'Decline' %>
+			<% end %>
+		</div>
+	<% end %>
+<% end %>

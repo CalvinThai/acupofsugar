@@ -1,0 +1,6 @@
+<% friends = @user.friends %>
+<div><strong> Friend List </strong></div>
+<% for friend in friends%>
+	<div ><%= link_to "#{friend.fname} #{friend.lname}", user_path(friend) %></div>
+<%end%>
+<br/>
