@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_04_175760) do
+ActiveRecord::Schema.define(version: 2018_11_04_232944) do
 
   create_table "borrowed_items", force: :cascade do |t|
     t.integer "user_id"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2018_11_04_175760) do
     t.date "req_on"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "approved", default: "pending", null: false
     t.index ["item_id"], name: "index_on_hold_items_on_item_id"
     t.index ["user_id"], name: "index_on_hold_items_on_user_id"
   end

@@ -5,6 +5,7 @@
     <th>Item name</th>
     <th>Description</th>
     <th>Requested on</th>
+    <th>Approved By Lender</th>
     <th colspan="2"></th>
   </tr>
 
@@ -13,6 +14,7 @@
       <td><%= link_to item.name %></td>
       <td><%= item.descr %></td>
       <td><%= item.req_on%></td>
+      <td><%= item.approved%></td>
 
       <td><%= link_to 'Cancel request', user_on_hold_item_path(item.user_id, item.id), method: :delete,
               data: { confirm: 'Are you sure?' }%></td>  <!-- item will be deleted from the list -->
