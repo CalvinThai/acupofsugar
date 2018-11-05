@@ -10,5 +10,4 @@ class FriendshipsController < ApplicationController
         format.js 
     end 
   end
-  
 end

@@ -11,7 +11,8 @@ class User < ApplicationRecord
   has_many :on_hold_items, dependent: :destroy
   	
   def self.user_search(name)
-    if name.present?              
+    if name.present?    
+        name = name.gsub(/[^0-9A-Za-z\s]/, '')
         @users = User.search name, operator: "or", fields: [:lname,:fname], misspellings: {edit_distance: 3}, limit: 5 
     else
       return nil
