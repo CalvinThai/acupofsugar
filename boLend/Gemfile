@@ -63,3 +63,6 @@ gem 'searchkick'
 
 # HasFriendship
 gem 'has_friendship'
+
+# Jquery rails
+gem 'jquery-rails'
