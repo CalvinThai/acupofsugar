@@ -19,7 +19,6 @@ class UsersController < ApplicationController
     params.require(:user).permit(:email, :password)
   end
 
-
   #def create
    # @user = User.find(1) #should be the current login user
     #@friend = User.find(params[:friend])
