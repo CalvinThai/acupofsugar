@@ -1,5 +1,8 @@
 <% provide(:title, "Log in") %>
 <h1>Log in</h1>
+<% if flash[:notice] %>
+    <div class="notice"><%= flash[:notice] %></div>
+<% end %>
 
 <div class="row">
   <div class="col-md-6 col-md-offset-3">

@@ -2,8 +2,10 @@
  
 <table>
   <tr>
-    <th>Title</th>
-    <th>Text</th>
+    <th>EMAIL</th>
+    <th>PASSWORD</th>
+    <th> FNAME </th>
+    <th> LNAME </th>
     <th></th>
   </tr>
  
@@ -11,6 +13,9 @@
     <tr>
       <td><%= user.email %></td>
       <td><%= user.password_digest %></td>
+      <td><%= user.fname %></td>
+      <td><%= user.lname %></td>
+
     </tr>
   <% end %>
 </table>
