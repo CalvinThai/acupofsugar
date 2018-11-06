@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2018_11_06_213142) do
     t.string "lname", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "email_confirmed", default: false
+    t.boolean "email_confirmed", default: true
     t.string "confirm_token"
   end
 

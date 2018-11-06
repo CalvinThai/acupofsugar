@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 	def index
     @users = User.user_search(params[:name])
-		@user = User.find(session[:user_id]) #for testing
+	#	@user = User.find(session[:user_id]) #for testing
 	end
   def indexx
     @users = User.all
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       user.email_activate
       flash[:success] = 'Welcome to BoLend! Your account has been verified.'
       redirect_to root_url
-    else 
+    else
       flash[:error] = 'Error: user does not exist.'
       redirect_to root_url
     end
