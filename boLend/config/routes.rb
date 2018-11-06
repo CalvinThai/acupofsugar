@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   	resources :wish_lists
     resources :friendships
     resources :lend_items
+    member do
+      get :confirm_email
+    end
   end
 
   resources :items

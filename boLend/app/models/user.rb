@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  before_create :confirmation_token
   #searchkick gem
   searchkick
   User.reindex
@@ -18,6 +19,11 @@ class User < ApplicationRecord
       return nil
     end
   end
+  def email_activate
+    self.email_confirmed = true
+    self.confirm_token = nil
+    save!(:validate => false)
+  end
 
 
   before_save { self.email = email.downcase }
@@ -27,5 +33,12 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
+
+  private
+  def confirmation_token
+    if self.confirm_token.blank?
+      self.confirm_token = SecureRandom.urlsafe_base64.to_s
+    end
+  end
 
 end
