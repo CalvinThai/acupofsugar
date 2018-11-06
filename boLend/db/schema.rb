@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_05_182258) do
+ActiveRecord::Schema.define(version: 2018_11_06_170336) do
 
   create_table "borrowed_items", force: :cascade do |t|
     t.integer "user_id"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 2018_11_05_182258) do
     t.string "lname", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "email_confirmed", default: false
+    t.string "confirm_token"
   end
 
   create_table "wish_lists", force: :cascade do |t|
