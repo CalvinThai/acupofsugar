@@ -11,12 +11,17 @@ class SessionsController < ApplicationController
    # if user && user.authenticate(params[:password])
    #if user && user.authenticate(params[:password_digest])
    if user && user.authenticate(params[:session][:password_digest])
-      flash[:notice] = "suceess"
-      session[:user_id] = user.id
-      redirect_to login_url
-      # Log the user in and redirect to the user's show page.
+      if user.email_confirmed
+        flash[:failure] = "suceess"
+        session[:user_id] = user.id
+        redirect_to user #should login to the user page
+        # Log the user in and redirect to the user's show page.
+      else 
+        flash[:failure] =  'Please verify your email address.'
+        redirect_to login_url
+      end
     else
-      flash[:notice] = "rekt"
+      flash[:failure] = "rekt"
       redirect_to login_url
     end
   end
