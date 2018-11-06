@@ -1,0 +1,18 @@
+<%= form_tag('/items', method: :get) do %>
+    <%= text_field_tag :name, params[:name], placeholder: "Search item" %>
+    <%= submit_tag 'Search ', name: nil %>
+<% end %>
+<% if not @items.present? %>
+	<% if params[:name].present? and @items.blank?%>
+		<div>
+			We couldn't find any items for
+			<span>	<%=params[:name] %> </span>
+		</div>
+	<% end %>
+  <% end %>
+  
+  <% @items.each do |item| %>
+  <ul>
+    <li> <%= link_to item.name, item_path(item) %> </li> <br>
+  </ul>
+  <% end %>

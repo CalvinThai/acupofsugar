@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'users/index'
   get 'users/new'
+  get 'items/index'
+  get 'items/show'
 
   resources :users do
   	resources :items
@@ -13,6 +15,9 @@ Rails.application.routes.draw do
     resources :friendships
     resources :lend_items
   end
+
+  resources :items
+  
   get 'admin' => 'admin#index'
   controller :sessions do
     get 'login' => :new
