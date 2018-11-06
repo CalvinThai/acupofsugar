@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_06_170336) do
+ActiveRecord::Schema.define(version: 2018_11_06_213142) do
 
   create_table "borrowed_items", force: :cascade do |t|
     t.integer "user_id"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2018_11_06_170336) do
   create_table "items", force: :cascade do |t|
     t.string "name", null: false
     t.text "descr"
-    t.string "status", null: false
+    t.string "status", default: "available", null: false
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 2018_11_06_170336) do
     t.string "lname", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "email_confirmed", default: true
+    t.boolean "email_confirmed", default: false
     t.string "confirm_token"
   end
 

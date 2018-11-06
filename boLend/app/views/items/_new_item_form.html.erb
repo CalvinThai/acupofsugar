@@ -1,0 +1,15 @@
+<div>
+  <%= form_with(model: [ @user, @user.items.build ], local: true) do |form| %>
+    <p>
+      <%= form.label :inputName %><br>
+      <%= form.text_field :name %>
+    </p>
+    <p>
+      <%= form.label :inputDescription %><br>
+      <%= form.text_area :descr %>
+    </p>
+    <p>
+      <%= form.submit %>
+    </p>
+  <% end %>
+</div>
