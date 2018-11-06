@@ -1,0 +1,5 @@
+$("#friend_request_list").html("<%= j render  "friendships/friend_requests" %>");
+$("#friend_list").html("<%= j render  "friendships/friends" %>");
+if (<%=params[:decision]=="true"%>){ 
+	alert("You have become friend with <%= @requirer.fname%> <%=@requirer.lname %>");
+}
