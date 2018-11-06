@@ -1,5 +1,6 @@
 <% friends = @user.friends %>
 <div><strong> Friend List </strong></div>
+<% if friends.empty?%><div>You don't have any friends yet! Please start by searching for users through the search bar above.</div><% end %>
 <% for friend in friends%>
 	<div ><%= link_to "#{friend.fname} #{friend.lname}", user_path(friend) %></div>
 <%end%>
