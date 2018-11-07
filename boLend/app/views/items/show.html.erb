@@ -1,1 +1,32 @@
-<h1><%= @item.name %> is here </h1>
+<h1><%= @item.name %> <%= @item.id %> is here </h1>
+<p>contact owner: <%= @user.fname%>, <%= link_to @user.email%> </p>
+
+<!-- item profile here -->
+<p>IMAGE HERE</p>
+
+<p>Description: <%= @item.descr %></p>
+
+
+<!-- debugging purposes -->
+<%if !@user.errors %>
+<div>
+	<p>DB Error msg: </p>
+	<%= @user.errors.full_messages%>
+</div>
+<%end%>
+
+<!-- uncomment below: only allow other users to wishlist/send borrow request -->
+<%#if session[:user_id] && session[:user_id] != @user.id%>
+	<%if !@user.wish_lists.find_by_item_id(@item.id) %>
+	<div><%= link_to 'Wish list this item' , user_wish_lists_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), method: :post%></div>
+	<%else%>
+		<div><%= link_to 'remove from wish list' , user_wish_list_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), method: :delete%></div>
+	<%end%>
+	<%if !@user.on_hold_items.find_by_item_id(@item.id) %>
+	<div><%= link_to 'Send borrow request' , user_on_hold_items_path(user_id: @user.id, item_id: @item.id, req_on: Time.now.strftime("%m/%d/%Y"), from: 'itemIndex'), method: :post%></div>
+	<%else%>
+		<div><%= link_to 'Cancel borrow request' , user_on_hold_item_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), method: :delete%></div>
+	<%end%>
+<%#end%>
+
+<p><%= link_to 'Back to manage items' , user_items_path(@user.id, @item.id)%></p>
