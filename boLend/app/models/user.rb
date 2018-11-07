@@ -10,6 +10,8 @@ class User < ApplicationRecord
   has_many :wish_lists, dependent: :destroy
   has_many :borrowed_items, dependent: :destroy
   has_many :on_hold_items, dependent: :destroy
+  has_many :conversations, :foreign_key => :sender_id
+
   	
   def self.user_search(name)
     if name.present?    
