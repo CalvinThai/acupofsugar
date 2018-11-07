@@ -22,10 +22,13 @@ class ItemsController < ApplicationController
 		#		render :new
 		#end
 	end
+#	search = params[:search].presence || "*"
 
+	  #  @items = Item.search search, aggs: [:status]
 	def index
 
    	@items = Item.item_search(params[:name])
+		@aggs = Item.item_agg(params[:status])
 		@user_items = Item.where("items.user_id = ?",params[:user_id])
 		#@item = Item.find(1)
 	  @borrowed_items = BorrowedItem.joins(:item).select("items.user_id as i_uid, items.*, borrowed_items.*").where('borrowed_items.user_id = ?', params[:user_id])
