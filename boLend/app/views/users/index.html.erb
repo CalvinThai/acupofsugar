@@ -1,13 +1,6 @@
 <h1>
-	<% time = Time.now.hour%>
-	<% if time > 6 and time <12 %>
-		Good Morning
-	<% elsif time >= 12 and time <17%>
-		Good Afternoon
-	<% else %>
-		Good Evening
-	<% end %>
-	<%=@user.fname%> <%=@user.lname%>
+	<%= @time %>
+	<%=@user.fname.capitalize%>
 </h1>
 
 <%= render  "users/search_user" %>
