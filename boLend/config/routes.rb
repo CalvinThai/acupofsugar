@@ -28,7 +28,13 @@ Rails.application.routes.draw do
     delete 'logout' => :destroy
   end
 
+
   #save for later use, redirect user to /profile page rather than /user/:id - by jiehao
   #get 'profile', to: 'users#show'
+
+  resources :conversations do
+  resources :messages
+ end
+
 
 end
