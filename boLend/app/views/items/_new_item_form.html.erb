@@ -15,9 +15,10 @@
 
     <p>
       <%= form.label :inputCategory %><br>
-      <%= form.text_area :category %>
+
+      <%= form.select :category, [['Technology', 'Technology'],['Pets', 'Pets']] %>
     </p>
-    
+
     <p>
       <%= form.submit %>
     </p>
