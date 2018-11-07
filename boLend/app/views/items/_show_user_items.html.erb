@@ -5,6 +5,7 @@
     <th>Item name</th>
     <th>Description</th>
     <th>Status</th>
+    <th>Category</th>
   </tr>
 
   <% @user_items.each do |item| %>
@@ -12,6 +13,8 @@
       <td><%= link_to item.name %></td> <!--add item_path(item)-->
       <td><%= item.descr %></td>
       <td><%= item.status %></td>
+      <td><%= item.category %></td>
+
       <!--add item.return_date column to db for lentout items-->
     </tr>
   <% end %>

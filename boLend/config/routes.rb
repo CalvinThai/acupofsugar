@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'admin/index'
   get 'welcome/index'
-  root 'welcome#index'
+  root 'items#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'users/indexx'
   get 'users/new'
@@ -20,14 +20,14 @@ Rails.application.routes.draw do
   end
 
   resources :items
-  
+
   get 'admin' => 'admin#index'
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
     delete 'logout' => :destroy
   end
-  
+
   #save for later use, redirect user to /profile page rather than /user/:id - by jiehao
   #get 'profile', to: 'users#show'
 
