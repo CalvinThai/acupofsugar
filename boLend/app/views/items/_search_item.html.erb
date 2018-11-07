@@ -31,7 +31,7 @@
 
 
 <h2>Agg2</h2>
-  <% @aggs.aggs do |item| %>
+  <% @status_filter.each do |item| %>
   <ul>
     <li> <%= link_to item.name, item_path(item) %> </li> <br>
   </ul>

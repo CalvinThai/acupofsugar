@@ -27,4 +27,16 @@ else
 	end
 
 end
+
+def self.status_filter(status)
+	if status.present?
+
+
+			@status_filter = Item.search status, operator: "or", fields: [:status], misspellings: {edit_distance: 3}, limit: 5
+	else
+		@status_filter = Item.all
+
+	end
+
+end
 end
