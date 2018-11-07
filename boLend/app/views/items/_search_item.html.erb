@@ -18,9 +18,9 @@
   </ul>
   <% end %>
   <h2>Agg1a</h2>
-  
-  <% if :status.present? %>
-    <% if @aggs.aggs["status"].present? %>
+
+
+    <% if @aggs.aggs["status"].present? and @aggs.present? %>
           <span>Status</span>
           <ul  class="menu">
           <% @aggs.aggs["status"]["buckets"].each do |filter| %>
@@ -28,7 +28,7 @@
           <% end %>
           </ul>
       <% end %>
-<% end %>
+
 
 <h2>Agg2</h2>
   <% @aggs.aggs do |item| %>

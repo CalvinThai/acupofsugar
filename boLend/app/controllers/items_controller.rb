@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
 	def index
 
    	@items = Item.item_search(params[:name])
-		@aggs = Item.item_agg(params[:status])
+		@aggs = Item.search "*", aggs: [:status], operator: "or", fields: [:name], misspellings: {edit_distance: 3}, limit: 5
 		@user_items = Item.where("items.user_id = ?",params[:user_id])
 		#@item = Item.find(1)
 	  @borrowed_items = BorrowedItem.joins(:item).select("items.user_id as i_uid, items.*, borrowed_items.*").where('borrowed_items.user_id = ?', params[:user_id])
