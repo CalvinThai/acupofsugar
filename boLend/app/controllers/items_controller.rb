@@ -40,9 +40,16 @@ class ItemsController < ApplicationController
 		@approve_items = OnHoldItem.joins(:item, :user).select("items.*, on_hold_items.*, users.email").where("items.user_id = ? AND on_hold_items.approved = ?", params[:user_id], 'pending')
 	end
 
-	def show
-		@user = User.find(params[:user_id])
+	def show #can be invoked from many URI; use the item_path if applicable
+		@user;
+		if(params[:user_id])
+		  	@user = User.find(params[:user_id])
+		end
+		#find user if not passed by params, required for user-specific actions
 		@item = Item.find(params[:id])
+		if(!@user)
+			@user = User.find(@item.user_id)
+		end
 	end
 
 	private
