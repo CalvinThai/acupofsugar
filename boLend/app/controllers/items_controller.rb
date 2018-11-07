@@ -28,8 +28,11 @@ class ItemsController < ApplicationController
 	def index
 
    	@items = Item.item_search(params[:name])
-		@aggs = Item.search "*", aggs: [:status], operator: "or", fields: [:name], misspellings: {edit_distance: 3}, limit: 5
+		@aggs = Item.search "*", aggs: [:status]
+		@category_aggs = Item.search "*", aggs: [:category]
 		@status_filter = Item.status_filter(params[:status])
+		@category_filter = Item.category_filter(params[:category])
+
 		@user_items = Item.where("items.user_id = ?",params[:user_id])
 		#@item = Item.find(1)
 	  @borrowed_items = BorrowedItem.joins(:item).select("items.user_id as i_uid, items.*, borrowed_items.*").where('borrowed_items.user_id = ?', params[:user_id])

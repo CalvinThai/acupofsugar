@@ -1,6 +1,6 @@
 <%= form_tag('/items', method: :get) do %>
     <%= text_field_tag :name, params[:name], placeholder: "Search item" %>
-    <%= text_field_tag :status, params[:status], placeholder: "Status" %>
+
     <%= submit_tag 'Search ', name: nil %>
 <% end %>
 <% if not @items.present? %>
@@ -29,29 +29,24 @@
           </ul>
       <% end %>
 
+      <% if @category_aggs.aggs["category"].present? and @category_aggs.present? %>
+            <span>Category</span>
+            <ul  class="menu">
+            <% @category_aggs.aggs["category"]["buckets"].each do |filter| %>
+              <li><%= link_to "#{filter["key"]} (#{filter["doc_count"]})", "/items?category=#{filter["key"]}"%></li>
+            <% end %>
+            </ul>
+        <% end %>
+      <h2>Agg2</h2>
+        <% @status_filter.each do |item| %>
+        <ul>
+          <li> <%= link_to item.name, item_path(item) %> </li> <br>
+        </ul>
+        <% end %>
+        <h2>Agg3</h2>
 
-<h2>Agg2</h2>
-  <% @status_filter.each do |item| %>
-  <ul>
-    <li> <%= link_to item.name, item_path(item) %> </li> <br>
-  </ul>
-  <% end %>
-
-  <h2>Items you own</h2>
-
-  <table>
-    <tr>
-      <th>Item name</th>
-      <th>Description</th>
-      <th>Status</th>
-    </tr>
-
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= link_to item.name %></td> <!--add item_path(item)-->
-        <td><%= item.descr %></td>
-        <td><%= item.status %></td>
-        <!--add item.return_date column to db for lentout items-->
-      </tr>
-    <% end %>
-  </table>
+        <% @category_filter.each do |item| %>
+        <ul>
+          <li> <%= link_to item.name, item_path(item) %> </li> <br>
+        </ul>
+        <% end %>

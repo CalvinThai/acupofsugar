@@ -18,23 +18,27 @@ class Item < ApplicationRecord
 
 end
 
-def self.item_agg(status)
-if status.present?
-			@aggs = Item.search "*", aggs: [:status], operator: "or", fields: [:name], misspellings: {edit_distance: 3}, limit: 5
-
-else
-@aggs
-	end
-
-end
 
 def self.status_filter(status)
 	if status.present?
 
 
-			@status_filter = Item.search status, operator: "or", fields: [:status], misspellings: {edit_distance: 3}, limit: 5
+			@status_filter = Item.search status, operator: "or", fields: [:status], misspellings: {edit_distance: 3}
 	else
 		@status_filter = Item.all
+
+	end
+
+end
+
+
+def self.category_filter(category)
+	if category.present?
+
+
+			@category_filter = Item.search category, operator: "or", fields: [:category], misspellings: {edit_distance: 3}
+	else
+		@category_filter = Item.all
 
 	end
 
