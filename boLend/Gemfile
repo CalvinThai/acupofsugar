@@ -65,3 +65,5 @@ gem 'has_friendship'
 
 # Jquery rails
 gem 'jquery-rails'
+
+gem 'kaminari'

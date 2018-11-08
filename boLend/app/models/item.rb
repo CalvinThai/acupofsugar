@@ -1,5 +1,5 @@
 class Item < ApplicationRecord
-	searchkick
+	searchkick text_middle: [:name]
 	Item.reindex
 	belongs_to :user
 	has_many :wish_lists, dependent: :destroy
@@ -10,7 +10,7 @@ class Item < ApplicationRecord
     if name.present?
         name = name.gsub(/[^0-9A-Za-z\s]/, '')
 
-        @items = Item.search name, operator: "or", fields: [:name], misspellings: {edit_distance: 3}, limit: 5
+        @items = Item.search name, operator: "or", fields: [:name], match: :text_middle, misspellings: {edit_distance: 3}, per_page: 3
 		else
       @items = Item.all
 
