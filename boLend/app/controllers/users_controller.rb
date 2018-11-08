@@ -29,8 +29,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      #UserMailer.registration_confirmation(@user).deliver
-      UserMailer.with(user: @user).welcome_email.deliver_later
+      UserMailer.registration_confirmation(@user).deliver_now
+      #UserMailer.with(user: @user).welcome_email.deliver
       flash[:registration_msg] = "Registration successful! Please verify your email address."
       redirect_to users_new_url
 
