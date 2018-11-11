@@ -25,7 +25,6 @@ class UsersController < ApplicationController
     end
   end
 
-
   def create
     @user = User.new(user_params)
     if @user.save
@@ -37,6 +36,21 @@ class UsersController < ApplicationController
     else
       flash[:registration_msg] = "Registration Failure"
       redirect_to users_new_url
+    end
+  end
+
+  def edit
+    @user = User.find(session[:user_id])
+  end
+
+  def update
+    @user = User.find(session[:user_id])
+    if @user.update_attributes(user_params)
+      flash[:success] = "updated"
+      redirect_to @user
+
+    else
+
     end
   end
 
@@ -52,7 +66,7 @@ class UsersController < ApplicationController
   end
   
   private def user_params
-    params.require(:user).permit(:email, :password, :fname, :lname)
+    params.require(:user).permit(:email, :password, :fname, :lname, :phonenum, :address)
   end
 
 end

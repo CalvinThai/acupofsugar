@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_11_050549) do
+ActiveRecord::Schema.define(version: 2018_11_11_184540) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -100,11 +100,13 @@ ActiveRecord::Schema.define(version: 2018_11_11_050549) do
     t.string "lname", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "email_confirmed", default: true
+    t.boolean "email_confirmed", default: false
     t.string "confirm_token"
     t.string "category"
     t.string "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.string "phonenum"
+    t.string "address"
   end
 
   create_table "wish_lists", force: :cascade do |t|

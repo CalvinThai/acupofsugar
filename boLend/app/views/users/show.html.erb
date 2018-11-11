@@ -1,3 +1,6 @@
 <h1><%= @user.fname %>'s personal page</h1>
 
 <%= link_to 'Manage items >', user_items_path(@user) %>
+<p>
+<%= link_to 'Edit user information', edit_user_path(@user)%>
+</p>
