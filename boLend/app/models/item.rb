@@ -5,6 +5,7 @@ class Item < ApplicationRecord
 	has_many :wish_lists, dependent: :destroy
 	has_many :borrowed_items, dependent: :destroy
 	has_many :on_hold_items, dependent: :destroy
+	has_many_attached :images
 
 	self.per_page = 5
 	scope :with_category, -> (category) { where('category = ?', category)}
