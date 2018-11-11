@@ -23,4 +23,14 @@ class FriendshipsController < ApplicationController
         format.js 
     end
   end
+  
+  def destroy
+    @friend_remover = User.find(params[:friend_remover])
+    @friend_removee = User.find(params[:friend_removee])
+    @friend_remover.remove_friend(@friend_removee)
+    @user = @friend_remover
+    respond_to do |format|
+        format.js 
+    end
+  end
 end

@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
 	def index
     @users = User.user_search(params[:name])
-		@user = User.find(session[:user_id]) #for testing
+		#@user = User.find(session[:user_id]) #for testing
+    @user = User.find(1)
     @time = greetings_by_time
 	end
   def indexx

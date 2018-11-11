@@ -2,6 +2,13 @@
 <div><strong> Friend List </strong></div>
 <% if friends.empty?%><div>You don't have any friends yet! Please start by searching for users through the search bar above.</div><% end %>
 <% for friend in friends%>
-	<div ><%= link_to "#{friend.fname} #{friend.lname}", user_path(friend) %></div>
+	<div >
+		<%= link_to "#{friend.fname} #{friend.lname}", user_path(friend) %>
+		<%= form_tag user_friendship_path(@user,id:1), method: :delete,style: 				'display:inline-block;',remote: true do %>
+		  <%= hidden_field_tag :friend_remover, @user.id%>
+		  <%= hidden_field_tag :friend_removee, friend.id %>
+		  <%= submit_tag 'Remove Friend' %>
+		<% end %>
+	</div>
 <%end%>
 <br/>
