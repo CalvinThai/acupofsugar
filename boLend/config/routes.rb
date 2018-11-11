@@ -11,7 +11,9 @@ Rails.application.routes.draw do
 
   resources :users do
   	resources :items
-  	resources :on_hold_items
+  	resources :on_hold_items do
+      put 'update_request_status'
+    end
   	resources :wish_lists
     resources :friendships
     resources :lend_items

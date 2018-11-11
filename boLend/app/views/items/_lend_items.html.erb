@@ -18,8 +18,8 @@
         <td><%= item.req_on %></td>
         <td>
           <% if item.approved == 'pending' %>
-            <%= link_to 'Approve Request', user_lend_items_path(:hold_id => item.id, :result => "approved"), method: :put %>
-            <%= link_to 'Deny Request', user_lend_items_path(:hold_id => item.id, :result => "denied"), method: :put  %>
+            <%= link_to 'Approve Request', user_on_hold_item_update_request_status_path(:on_hold_item_id => item.id, :result => "approved"), method: :put %>
+            <%= link_to 'Deny Request', user_on_hold_item_update_request_status_path(:on_hold_item_id => item.id, :result => "denied"), method: :put  %>
          <% else %>
            <%= item.approved  %>
          <% end %>

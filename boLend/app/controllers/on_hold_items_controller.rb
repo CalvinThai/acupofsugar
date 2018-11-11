@@ -10,6 +10,19 @@ class OnHoldItemsController < ApplicationController
     	@on_hold_item.destroy
     	back_to_prev_path
 	end
+
+	def update_request_status
+		@on_hold_item = OnHoldItem.find(params[:on_hold_item_id])
+		if params[:result] == "approved"
+			@on_hold_item.approve_req
+			@on_hold_item.save
+		elsif params[:result] == "denied"
+			@on_hold_item.reject_req
+			@on_hold_item.save
+		end
+		#need to add message success/fail and refresh page
+	end
+
 	private
 	 def on_hold_item_params
  		 #puts params.inspect
