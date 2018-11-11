@@ -25,9 +25,27 @@ class ItemsController < ApplicationController
 #	search = params[:search].presence || "*"
 
 	  #  @items = Item.search search, aggs: [:status]
-	def index
 
-   	@items = Item.item_search(params)
+
+	def index
+		@filterrific = initialize_filterrific(
+			Item,
+			params[:filterrific],
+			select_options: {
+      sorted_by: Item.options_for_sorted_by,
+			with_category: Item.options_for_category
+
+    }
+
+		) or return
+		@items = @filterrific.find.page(params[:page])
+
+		respond_to do |format|
+			format.html
+			format.js
+		end
+
+   	#@items = Item.item_search(params)
 		@aggs = Item.search "*", aggs: [:status]
 		@category_aggs = Item.search "*", aggs: [:category]
 		@status_filter = Item.status_filter(params[:status])
