@@ -27,7 +27,7 @@ class ItemsController < ApplicationController
 	  #  @items = Item.search search, aggs: [:status]
 	def index
 
-   	@items = Item.item_search(params[:name])
+   	@items = Item.item_search(params)
 		@aggs = Item.search "*", aggs: [:status]
 		@category_aggs = Item.search "*", aggs: [:category]
 		@status_filter = Item.status_filter(params[:status])

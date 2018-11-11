@@ -17,7 +17,8 @@
     <li> <%= link_to item.name, item_path(item) %> </li> <br>
   </ul>
   <% end %>
-  <h2>Agg1a</h2>
+
+  <h2>Filters</h2>
 
 
     <% if @aggs.aggs["status"].present? and @aggs.present? %>
@@ -36,17 +37,4 @@
               <li><%= link_to "#{filter["key"]} (#{filter["doc_count"]})", "/items?category=#{filter["key"]}"%></li>
             <% end %>
             </ul>
-        <% end %>
-      <h2>Agg2</h2>
-        <% @status_filter.each do |item| %>
-        <ul>
-          <li> <%= link_to item.name, item_path(item) %> </li> <br>
-        </ul>
-        <% end %>
-        <h2>Agg3</h2>
-
-        <% @category_filter.each do |item| %>
-        <ul>
-          <li> <%= link_to item.name, item_path(item) %> </li> <br>
-        </ul>
         <% end %>
