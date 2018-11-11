@@ -6,6 +6,10 @@ class UserMailer <ActionMailer::Base
 		#mail(:to @user.email, subject: 'Register plz')
 		mail to: @user.email, subject: "Regtistration Confirmation for Bolend"
 	end 
+	def password_reset(user)
+		@user = user
+		mail to: @user.email, subject: "Bolend Password Reset"
+	end
 
 
 end

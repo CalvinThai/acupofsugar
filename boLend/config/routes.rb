@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'users/new'
   get 'items/index'
   get 'items/show'
+  resources :password_resets
 
   resources :users do
   	resources :items

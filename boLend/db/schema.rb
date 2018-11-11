@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_07_171531) do
+ActiveRecord::Schema.define(version: 2018_11_08_220634) do
 
   create_table "borrowed_items", force: :cascade do |t|
     t.integer "user_id"
@@ -82,6 +82,8 @@ ActiveRecord::Schema.define(version: 2018_11_07_171531) do
     t.boolean "email_confirmed", default: false
     t.string "confirm_token"
     t.string "category"
+    t.string "password_reset_token"
+    t.datetime "password_reset_sent_at"
   end
 
   create_table "wish_lists", force: :cascade do |t|
