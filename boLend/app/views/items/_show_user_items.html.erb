@@ -1,21 +1,29 @@
 <h2>Items you own</h2>
 
+<% if @user_items.length > 0 %>
 <table>
   <tr>
     <th>Item name</th>
     <th>Description</th>
     <th>Status</th>
     <th>Category</th>
+    <th colspan="2">Manage</th>
   </tr>
 
   <% @user_items.each do |item| %>
     <tr>
-      <td><%= link_to item.name %></td> <!--add item_path(item)-->
+      <td><%= link_to item.name, item_path(item) %></td>
       <td><%= item.descr %></td>
       <td><%= item.status %></td>
       <td><%= item.category %></td>
-
+      <td><%= link_to 'edit', edit_user_item_path(@user.id, item.id) %></td> 
+      <td><%= link_to 'delete', user_item_path(@user.id, item.id), method: :delete,
+              data: { confirm: 'Are you sure?'} %></td> 
       <!--add item.return_date column to db for lentout items-->
     </tr>
   <% end %>
 </table>
+<%else%>
+  <p>You don't own any items</p>
+<%end%>
+<div><%= link_to 'Add a new item', new_user_item_path(@user.id)%></div>

@@ -28,6 +28,8 @@ class ItemsController < ApplicationController
 
 
 	def index
+		#testing only, empty session
+		#session[:user_id] = nil;
 		@filterrific = initialize_filterrific(
 			Item,
 			params[:filterrific],
@@ -50,15 +52,13 @@ class ItemsController < ApplicationController
 		@category_aggs = Item.search "*", aggs: [:category]
 		@status_filter = Item.status_filter(params[:status])
 		@category_filter = Item.category_filter(params[:category])
-
-		@user_items = Item.where("items.user_id = ?",params[:user_id])
-		#@item = Item.find(1)
-	  @borrowed_items = BorrowedItem.joins(:item).select("items.user_id as i_uid, items.*, borrowed_items.*").where('borrowed_items.user_id = ?', params[:user_id])
-		@wish_items = WishList.joins(:item).select("items.user_id as i_uid, items.*, wish_lists.*").where('wish_lists.user_id = ?', params[:user_id]) #all items that have been wishlisted by this user
-		#the above is same as:
-		#@wish_items = Item.joins(:wish_lists).select("items.*").where(...)
-		@on_hold_items = OnHoldItem.joins(:item).select("items.*, on_hold_items.*").where('on_hold_items.user_id = ?', params[:user_id])
-		@approve_items = OnHoldItem.joins(:item, :user).select("items.*, on_hold_items.*, users.email").where("items.user_id = ? AND on_hold_items.approved = ?", params[:user_id], 'pending')
+		
+		#find user if view is for /users/:id/items
+		if(params[:user_id])
+			@user = User.find(params[:user_id])
+			get_manageable_items
+		end
+		
 	end
 
 	def show #can be invoked from many URI; use the item_path if applicable
@@ -72,10 +72,37 @@ class ItemsController < ApplicationController
 			@user = User.find(@item.user_id)
 		end
 	end
-
+	def edit
+		@user = User.find(params[:user_id])
+		@item = @user.items.find_by_id(params[:id])
+	end
+	def update
+		@user = User.find(params[:user_id])
+		#@item = Item.find(params[:id])
+	    @item = @user.items.find_by_id(params[:id])
+	    if @item.update(item_params)
+	      redirect_to user_items_path(@user.id)
+	    else
+	      render 'edit'
+	    end
+	end
+	def destroy
+		@user = User.find(params[:user_id])
+		@item = @user.items.find_by_id(params[:id])
+    	@item.destroy
+    	redirect_to user_items_path(@user.id)
+	end
 	private
  	 def item_params
  		 params.require(:item).permit(:name, :descr, :status, :category)
+ 	 end
+ 	 #get all items of interest by this user
+ 	 def get_manageable_items
+ 	 	@user_items = Item.where("items.user_id = ?",params[:user_id])
+	 	@borrowed_items = BorrowedItem.joins(:item).select("items.user_id as i_uid, items.*, borrowed_items.*").where('borrowed_items.user_id = ?', params[:user_id])
+		@wish_items = WishList.joins(:item).select("items.user_id as i_uid, items.*, wish_lists.*").where('wish_lists.user_id = ?', params[:user_id]) #all items that have been wishlisted by this user
+		@on_hold_items = OnHoldItem.joins(:item).select("items.*, on_hold_items.*").where('on_hold_items.user_id = ?', params[:user_id])
+		@approve_items = OnHoldItem.joins(:item, :user).select("items.*, on_hold_items.*, users.email").where("items.user_id = ? AND on_hold_items.approved = ?", params[:user_id], 'pending')
  	 end
 
 

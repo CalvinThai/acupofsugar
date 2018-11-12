@@ -1,5 +1,5 @@
 <div>
-  <%= form_with(model: [ @user, @user.items.build ], local: true) do |form| %>
+  <%= form_with(model: [ @user, @item ], local: true) do |form| %>
     <p>
       <%= form.label :inputName %><br>
       <%= form.text_field :name %>

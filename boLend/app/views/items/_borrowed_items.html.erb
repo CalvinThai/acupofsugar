@@ -1,5 +1,6 @@
 <h2>Items you've borrowed</h2>
 
+<% if @borrowed_items.length > 0 %>
 <table>
   <tr>
     <th>Item name</th>
@@ -12,7 +13,7 @@
   <% @borrowed_items.each do |item| %>
     <% owner = User.find(item.i_uid) %>
     <tr>
-      <td><%= link_to item.name %></td>
+      <td><%= link_to item.name, item_path(item) %></td>
       <td><%= item.descr %></td>
       <td><%= item.due_on %></td>
       <td><%= owner.fname %> <%= owner.lname %></td> <%# link to user profile OR invoke messanger %>
@@ -21,3 +22,6 @@
     </tr>
   <% end %>
 </table>
+<%else%>
+  <p>You don't have any borrowed items</p>
+<%end%>

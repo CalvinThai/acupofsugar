@@ -1,5 +1,5 @@
 <h1><%= @item.name %> <%= @item.id %> is here </h1>
-<p>contact owner: <%= @user.fname%>, <%= link_to @user.email%> </p>
+<p>contact owner: <%= @user.fname%>, <%= link_to @user.email%> </p> <!-- should link to message -->
 
 <!-- item profile here -->
 <p>IMAGE HERE</p>
@@ -15,8 +15,8 @@
 </div>
 <%end%>
 
-<!-- uncomment below: only allow other users to wishlist/send borrow request -->
-<%#if session[:user_id] && session[:user_id] != @user.id%>
+<!-- only allow other users to wishlist/send borrow request -->
+<%if session[:user_id] && session[:user_id] != @user.id%>
 	<%if !@user.wish_lists.find_by_item_id(@item.id) %>
 	<div><%= link_to 'Wish list this item' , user_wish_lists_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), method: :post%></div>
 	<%else%>
@@ -27,6 +27,9 @@
 	<%else%>
 		<div><%= link_to 'Cancel borrow request' , user_on_hold_item_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), method: :delete%></div>
 	<%end%>
-<%#end%>
+<!-- not logged in - prompt user to login/sign up -->
+<%elsif session[:user_id] == nil %>
+	<div>Interested in this item? <%=link_to 'Please login/sign up', login_path, method: :get %></div>
+<%end%>
 
-<p><%= link_to 'Back to manage items' , user_items_path(@user.id, @item.id)%></p>
+<p><%= link_to 'Back', :back %><%#= link_to 'Back to manage items' , user_items_path(@user.id)%></p>

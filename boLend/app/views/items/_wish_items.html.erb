@@ -1,5 +1,6 @@
 <h2>Items you've wishlisted</h2>
 
+<% if @wish_items.length > 0 %>
 <table>
   <tr>
     <th>Item name</th>
@@ -9,7 +10,7 @@
 
   <% @wish_items.each do |item| %>
     <tr>
-      <td><%= link_to item.name %></td>
+      <td><%= link_to item.name, item_path(item)%></td>
       <td><%= item.descr %></td>
       <td><%= item.user_id %></td>
       <td><%= item.id %></td>
@@ -19,3 +20,6 @@
     </tr>
   <% end %>
 </table>
+<%else%>
+  <p>You don't have any wish lists</p>
+<%end%>

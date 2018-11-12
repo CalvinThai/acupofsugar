@@ -26,7 +26,7 @@ class OnHoldItemsController < ApplicationController
 	private
 	 def on_hold_item_params
  		 #puts params.inspect
- 		 params.permit(:id,:item_id,:user_id)
+ 		 params.permit(:id,:item_id,:user_id, :req_on)
  	 end
 
  	 def find_user_set_item_id

@@ -1,5 +1,6 @@
 <h2>Items you've requested to borrow</h2>
 
+<% if @on_hold_items.length > 0 %>
 <table>
   <tr>
     <th>Item name</th>
@@ -11,13 +12,20 @@
 
   <% @on_hold_items.each do |item| %>
     <tr>
-      <td><%= link_to item.name %></td>
+      <td><%= link_to item.name, item_path(item)%></td>
       <td><%= item.descr %></td>
       <td><%= item.req_on%></td>
       <td><%= item.approved%></td>
 
-      <td><%= link_to 'Cancel request', user_on_hold_item_path(item.user_id, item.id), method: :delete,
-              data: { confirm: 'Are you sure?' }%></td>  <!-- item will be deleted from the list -->
+      <td>
+        <%if item.approved == "pending"%>
+        <%= link_to 'Cancel request', user_on_hold_item_path(item.user_id, item.id), method: :delete,
+              data: { confirm: 'Are you sure?' }%>
+        <%end%>        
+      </td>  <!-- item will be deleted from the list -->
     </tr>
   <% end %>
 </table>
+<%else%>
+  <p>You don't have any on-hold requests</p>
+<%end%>
