@@ -63,14 +63,12 @@ class ItemsController < ApplicationController
 
 	def show #can be invoked from many URI; use the item_path if applicable
 		@user;
-		if(params[:user_id])
-		  	@user = User.find(params[:user_id])
+		if(session[:user_id])
+		  	@user = User.find(session[:user_id])
 		end
 		#find user if not passed by params, required for user-specific actions
 		@item = Item.find(params[:id])
-		if(!@user)
-			@user = User.find(@item.user_id)
-		end
+		@owner_id = @item.user_id
 	end
 	def edit
 		@user = User.find(params[:user_id])
