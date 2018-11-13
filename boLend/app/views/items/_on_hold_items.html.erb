@@ -12,14 +12,14 @@
 
   <% @on_hold_items.each do |item| %>
     <tr>
-      <td><%= link_to item.name, item_path(item)%></td>
+      <td><%= link_to item.name, item_path(item.item_id)%></td>
       <td><%= item.descr %></td>
       <td><%= item.req_on%></td>
       <td><%= item.approved%></td>
 
       <td>
         <%if item.approved == "pending"%>
-        <%= link_to 'Cancel request', user_on_hold_item_path(item.user_id, item.id), method: :delete,
+        <%= link_to 'Cancel request', user_on_hold_item_path(item.user_id, item.item_id), method: :delete,
               data: { confirm: 'Are you sure?' }%>
         <%end%>        
       </td>  <!-- item will be deleted from the list -->

@@ -5,6 +5,14 @@ class WishListsController < ApplicationController
 	def create
    		@wish_item = @user.wish_lists.create(wish_item_params)
    		back_to_prev_path
+   		#respond_to do |format|
+        	#format.js { 
+    		#	render :template => "items/user_action_ajax.js.erb", 
+           	#	:layout => false  
+ 			#}
+ 			#format.js { render :action => 'items/user_action_ajax.js.erb'}
+ 			#format.js
+    	#end
 	end
 	def update
 	end
@@ -12,6 +20,14 @@ class WishListsController < ApplicationController
    		@wish_item = @user.wish_lists.find_by_item_id(@item_id)
     	@wish_item.destroy
     	back_to_prev_path
+    	#respond_to do |format|
+        	#format.js { 
+    		#	render :template => "items/user_action_ajax.js.erb", 
+           	#	:layout => false  
+ 			#}
+ 			#format.js { render :action => 'items/user_action_ajax.js.erb'}
+ 			#format.js
+    	#end
 	end
 	private
  	 def wish_item_params

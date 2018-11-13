@@ -94,7 +94,7 @@ class ItemsController < ApplicationController
 	end
 	private
  	 def item_params
- 		 params.require(:item).permit(:name, :image, :descr, :status, :category)
+ 		 params.require(:item).permit(:name, images: [], :descr, :status, :category)
  	 end
  	 #get all items of interest by this user
  	 def get_manageable_items
