@@ -3,12 +3,16 @@
 	<%=@user.fname.capitalize%>
 </h1>
 
+<div id="search_user_list">
 <%= render  "users/search_user" %>
+</div>
 <br/>
+
 <div id="friend_request_list">
 	<%= render  "friendships/friend_requests"%>
 </div>
 <br/>
+
 <div id="friend_list">
 	<%= render  "friendships/friends"%>
 </div>

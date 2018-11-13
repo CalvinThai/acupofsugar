@@ -1,3 +1,4 @@
+$("#search_user_list").html("<%= j render  "users/search_user" %>");
 $("#friend_request_list").html("<%= j render  "friendships/friend_requests" %>");
 $("#friend_list").html("<%= j render  "friendships/friends" %>");
 if (<%=params[:decision]=="true"%>){ 
