@@ -5,6 +5,10 @@
       <%= form.text_field :name %>
     </p>
     <p>
+      <%= form.label :images %><br>
+      <%= form.file_field :images, multiple: true  %>
+    </p>
+    <p>
       <%= form.label :inputDescription %><br>
       <%= form.text_area :descr %>
     </p>

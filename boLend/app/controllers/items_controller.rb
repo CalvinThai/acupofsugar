@@ -52,25 +52,23 @@ class ItemsController < ApplicationController
 		@category_aggs = Item.search "*", aggs: [:category]
 		@status_filter = Item.status_filter(params[:status])
 		@category_filter = Item.category_filter(params[:category])
-		
+
 		#find user if view is for /users/:id/items
 		if(params[:user_id])
 			@user = User.find(params[:user_id])
 			get_manageable_items
 		end
-		
+
 	end
 
 	def show #can be invoked from many URI; use the item_path if applicable
 		@user;
-		if(params[:user_id])
-		  	@user = User.find(params[:user_id])
+		if(session[:user_id])
+		  	@user = User.find(session[:user_id])
 		end
 		#find user if not passed by params, required for user-specific actions
 		@item = Item.find(params[:id])
-		if(!@user)
-			@user = User.find(@item.user_id)
-		end
+		@owner_id = @item.user_id
 	end
 	def edit
 		@user = User.find(params[:user_id])
@@ -94,8 +92,8 @@ class ItemsController < ApplicationController
 	end
 	private
  	 def item_params
- 		 params.require(:item).permit(:name, :descr, :status, :category)
- 	 end
+ 		 params.require(:item).permit(:name, :descr, :status, :category, images: [])
+	 end
  	 #get all items of interest by this user
  	 def get_manageable_items
  	 	@user_items = Item.where("items.user_id = ?",params[:user_id])

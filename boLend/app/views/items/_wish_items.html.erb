@@ -10,12 +10,16 @@
 
   <% @wish_items.each do |item| %>
     <tr>
-      <td><%= link_to item.name, item_path(item)%></td>
+      <td><%= link_to item.name, item_path(item.item_id)%></td>
       <td><%= item.descr %></td>
       <td><%= item.user_id %></td>
-      <td><%= item.id %></td>
-      <td><%= link_to 'Send a borrow request'%></td>
-      <td><%= link_to 'Delete', user_wish_list_path(item.user_id, item.id), method: :delete,
+      <td><%= item.item_id %></td>
+      <td>
+        <% if @on_hold_items.length == 0 || @user.on_hold_items.find_by_item_id(item.item_id) == false %> 
+          <%= link_to 'Send a borrow request' , user_on_hold_items_path(user_id: @user.id, item_id: item.item_id, req_on: Time.now.strftime("%m/%d/%Y")), method: :post%>
+        <%end%>
+      </td>
+      <td><%= link_to 'Delete', user_wish_list_path(item.user_id, item.item_id), method: :delete,
               data: { confirm: 'Are you sure?' }%></td>  <!-- item will be deleted from the list -->
     </tr>
   <% end %>

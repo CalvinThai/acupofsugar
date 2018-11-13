@@ -6,7 +6,7 @@ class OnHoldItemsController < ApplicationController
    		back_to_prev_path
 	end
 	def destroy
-   		@on_hold_item = @user.on_hold_items.find(@item_id)
+   		@on_hold_item = @user.on_hold_items.find_by_item_id(@item_id)
     	@on_hold_item.destroy
     	back_to_prev_path
 	end

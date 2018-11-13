@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       user.email_activate
       flash[:success] = 'Welcome to BoLend! Your account has been verified.'
       redirect_to root_url
-    else 
+    else
       flash[:error] = 'Error: user does not exist.'
       redirect_to root_url
     end
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
       "Good Evening"
     end
   end
-  
+
   private def user_params
     params.require(:user).permit(:email, :password, :fname, :lname, :phonenum, :address)
   end
