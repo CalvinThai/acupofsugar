@@ -1,14 +1,17 @@
 <% for user in @users%>
  	<div>
 		<!--should be directed to user profile page later -->
-		<%= link_to "#{user.fname} #{user.lname}", user_path(user) %> 
-		<% if user != @user%>
-			<% if @user.friends.include?(user) %> 
-				<%= button_tag 'Friends', disabled: true %> 
-			<% elsif not @user.pending_friends.include?(user)%> 
-				<%= button_to 'Add Friend', user_friendships_path(@user,friend_requirer: @user, 				friend_requiree:user,name: params[:name]), form: {style:'display:inline-block;'}, remote: true%> 
-			<% else %> 
-				<%= button_tag 'Friend Request Sent', disabled: true %>
+		<% if not @user.blocked_friends.include?(user)%>
+			<%= link_to "#{user.fname} #{user.lname}", user_path(user) %> 
+		
+			<% if user != @user%>
+				<% if @user.friends.include?(user) %> 
+					<%= button_tag 'Friends', disabled: true %> 
+				<% elsif not @user.pending_friends.include?(user)%> 
+					<%= button_to 'Add Friend', user_friendships_path(@user,friend_requirer: @user, friend_requiree:user,name: params[:name]), form: {style:'display:inline-block;'}, remote: true%> 
+				<% else%> 
+					<%= button_tag 'Friend Request Sent', disabled: true %>
+				<% end %>
 			<% end %>
 		<% end %>
 	</div>

@@ -16,8 +16,10 @@ class FriendshipsController < ApplicationController
     @requirer = User.find(params[:friend_requirer])
     if params[:decision]=="true"
       @user.accept_request(@requirer)
-    else
+    elsif params[:decision]=="false"
       @user.decline_request(@requirer)
+    else
+      @user.block_friend(@requirer)
     end
     respond_to do |format|
         format.js 
@@ -27,7 +29,14 @@ class FriendshipsController < ApplicationController
   def destroy
     @friend_remover = User.find(params[:friend_remover])
     @friend_removee = User.find(params[:friend_removee])
-    @friend_remover.remove_friend(@friend_removee)
+    @decision = params[:decision]
+    if @decision=="unfriend"
+      @friend_remover.remove_friend(@friend_removee)
+    elsif @decision=="block"
+      @friend_remover.block_friend(@friend_removee)
+    else
+      @friend_remover.unblock_friend(@friend_removee)
+    end
     @user = @friend_remover
     respond_to do |format|
         format.js 
