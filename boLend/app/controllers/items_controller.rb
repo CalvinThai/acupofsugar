@@ -94,8 +94,8 @@ class ItemsController < ApplicationController
 	end
 	private
  	 def item_params
- 		 params.require(:item).permit(:name, images: [], :descr, :status, :category)
- 	 end
+ 		 params.require(:item).permit(:name, :descr, :status, :category, images: [])
+	 end
  	 #get all items of interest by this user
  	 def get_manageable_items
  	 	@user_items = Item.where("items.user_id = ?",params[:user_id])
