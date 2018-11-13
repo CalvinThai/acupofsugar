@@ -2,8 +2,11 @@
 <p>contact owner: <%= @user.fname%>, <%= link_to @user.email%> </p> <!-- should link to message -->
 
 <!-- item profile here -->
-<p>IMAGE HERE</p>
-
+<% @item.images.each do |image| %>
+<p>
+	<%= image_tag(image) %>
+</p>
+<% end %>
 <p>Description: <%= @item.descr %></p>
 
 
@@ -23,7 +26,7 @@
 		<div><%= link_to 'remove from wish list' , user_wish_list_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), method: :delete%></div>
 	<%end%>
 	<%if !@user.on_hold_items.find_by_item_id(@item.id) %>
-	<div><%= link_to 'Send borrow request' , user_on_hold_items_path(user_id: @user.id, item_id: @item.id, req_on: Time.now.strftime("%m/%d/%Y"), from: 'itemIndex'), method: :post%></div>
+	<div><%= link_to 'Send borrow request' , user_on_hold_items_path(user_id: session[:user_id], item_id: @item.id, req_on: Time.now.strftime("%m/%d/%Y"), from: 'itemIndex'), method: :post%></div>
 	<%else%>
 		<div><%= link_to 'Cancel borrow request' , user_on_hold_item_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), method: :delete%></div>
 	<%end%>

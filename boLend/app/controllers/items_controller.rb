@@ -52,13 +52,13 @@ class ItemsController < ApplicationController
 		@category_aggs = Item.search "*", aggs: [:category]
 		@status_filter = Item.status_filter(params[:status])
 		@category_filter = Item.category_filter(params[:category])
-		
+
 		#find user if view is for /users/:id/items
 		if(params[:user_id])
 			@user = User.find(params[:user_id])
 			get_manageable_items
 		end
-		
+
 	end
 
 	def show #can be invoked from many URI; use the item_path if applicable
@@ -94,7 +94,7 @@ class ItemsController < ApplicationController
 	end
 	private
  	 def item_params
- 		 params.require(:item).permit(:name, :descr, :status, :category)
+ 		 params.require(:item).permit(:name, :image, :descr, :status, :category)
  	 end
  	 #get all items of interest by this user
  	 def get_manageable_items
