@@ -13,3 +13,10 @@
 --> Added one more column here: "add_column :on_hold_items, :approved, :string, default: 'pending', null: false"
 
 ![borrowed_items](https://user-images.githubusercontent.com/43587783/47945391-0308a300-ded8-11e8-9d8a-09aab21bc577.jpg)
+
+
+![messages](https://user-images.githubusercontent.com/31141615/48387335-6b6b3780-e6c3-11e8-8173-f490d8213231.png)
+
+
+![conversations](https://user-images.githubusercontent.com/31141615/48387353-7d4cda80-e6c3-11e8-86be-7a02f0d30122.png)
+
