@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 2018_11_11_184540) do
     t.string "lname", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "email_confirmed", default: true
+    t.boolean "email_confirmed", default: false
     t.string "confirm_token"
     t.string "category"
     t.string "password_reset_token"
