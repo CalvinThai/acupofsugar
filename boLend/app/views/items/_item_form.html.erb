@@ -1,7 +1,7 @@
 <div>
   <%= form_with(model: [ @user, @item ], local: true) do |form| %>
     <p>
-      <%= form.label :inputName %><br>
+      <%= form.label :name %><br>
       <%= form.text_field :name %>
     </p>
     <p>
@@ -9,18 +9,18 @@
       <%= form.file_field :images, multiple: true  %>
     </p>
     <p>
-      <%= form.label :inputDescription %><br>
+      <%= form.label :description %><br>
       <%= form.text_area :descr %>
     </p>
     <p>
-      <%= form.label :inputStatus %><br>
+      <%= form.label :status %><br>
       <%= form.text_area :status %>
     </p>
 
     <p>
-      <%= form.label :inputCategory %><br>
+      <%= form.label :category %><br>
 
-      <%= form.select :category, [['Technology', 'Technology'],['Pets', 'Pets']] %>
+      <%= form.select :category, [['Technology', 'Technology'],['Pets', 'Pets'],['Other', 'Other']] %>
     </p>
 
     <p>
