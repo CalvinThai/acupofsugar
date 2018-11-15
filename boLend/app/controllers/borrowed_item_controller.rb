@@ -12,6 +12,6 @@ class BorrowedItemsController < ApplicationController
 
   private
    def borrowed_item_params
-     params.permit(:id,:item_id,:user_id, :due_on)
+     params.permit(:id,:item_id,:user_id, :due_date)
    end
 end

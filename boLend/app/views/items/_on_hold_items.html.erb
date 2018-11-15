@@ -5,6 +5,7 @@
   <tr>
     <th>Item name</th>
     <th>Description</th>
+    <th>Item status</th>
     <th>Requested on</th>
     <th>Desired duration</th>
     <th>Approval status</th>
@@ -15,6 +16,7 @@
     <tr>
       <td><%= link_to item.name, item_path(item.item_id)%></td>
       <td><%= item.descr %></td>
+      <td><%= item.status %></td>
       <td><%= item.req_on.strftime("%Y-%m-%d") %></td>
       <td><%= item.due_date.strftime("%Y-%m-%d") %></td>
       <td><%= item.approved%></td>
