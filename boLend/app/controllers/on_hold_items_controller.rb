@@ -24,12 +24,16 @@ class OnHoldItemsController < ApplicationController
 
 	def update_request_status
 		@on_hold_item = OnHoldItem.find(params[:on_hold_item_id])
+		@item = Item.find(@on_hold_item.item_id)
 		if params[:result] == "approved"
 			@on_hold_item.approve_req
 			@on_hold_item.save
+			#@item.lent_out <-- will do this when borrowed item is created
+			redirect_to  user_items_path(params[:user_id])
 		elsif params[:result] == "denied"
 			@on_hold_item.reject_req
 			@on_hold_item.save
+			redirect_to  user_items_path(params[:user_id])
 		end
 		#need to add message success/fail and refresh page
 	end

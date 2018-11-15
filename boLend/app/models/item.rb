@@ -6,6 +6,8 @@ class Item < ApplicationRecord
 	has_many :borrowed_items, dependent: :destroy
 	has_many :on_hold_items, dependent: :destroy
 	has_many_attached :images
+	validates :name, presence: true #{ message: "Name must be given." }
+	validates :descr, presence: true #{ message: "Brief description must be given." }
 
 	self.per_page = 5
 	scope :with_category, -> (category) { where('category = ?', category)}
@@ -131,4 +133,11 @@ def self.category_filter(category)
 	end
 
 end
+
+
+#change status when item is lent out
+def lent_out
+	update_attributes(status: 'Lent Out')
+end
+
 end

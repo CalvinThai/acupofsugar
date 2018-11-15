@@ -6,17 +6,23 @@
 	<% for requirer in request_list%>
 		<div>
 			<%= link_to "#{requirer.fname} #{requirer.lname}", user_path(requirer) %> 
-			<%= form_tag user_friendship_path(@user,id:1), method: :put,style: 				'display:inline-block;',remote: true do %>
+			<%= form_tag user_friendship_path(@user,id:1), method: :put,style:'display:inline-block;',remote: true do %>
 			  <%= hidden_field_tag :friend_requirer, requirer.id %>
 			  <%= hidden_field_tag :friend_requiree, @user.id %>
 			  <%= hidden_field_tag :decision, true %>
 			  <%= submit_tag 'Accept' %>
 			<% end %>
-			<%= form_tag user_friendship_path(@user,id:1), method: :put,style: 				'display:inline-block;',remote: true do %>
+			<%= form_tag user_friendship_path(@user,id:1), method: :put,style:'display:inline-block;', data: { confirm: "Are you sure to decline the friend request from #{requirer.fname} #{requirer.lname}?" }, remote: true do %>
 			  <%= hidden_field_tag :friend_requirer, requirer.id %>
 			  <%= hidden_field_tag :friend_requiree, @user.id %>
 			  <%= hidden_field_tag :decision, false %>
 			  <%= submit_tag 'Decline' %>
+			<% end %>
+			<%= form_tag user_friendship_path(@user,id:1), method: :put,style:'display:inline-block;', data: { confirm: "Are you sure to reject the friend request and block #{requirer.fname} #{requirer.lname}?" }, remote: true do %>
+			  <%= hidden_field_tag :friend_requirer, requirer.id %>
+			  <%= hidden_field_tag :friend_requiree, @user.id %>
+			  <%= hidden_field_tag :decision, "block" %>
+			  <%= submit_tag 'Block' %>
 			<% end %>
 		</div>
 	<% end %>

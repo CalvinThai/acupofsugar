@@ -1,0 +1,20 @@
+<% blocked_users = @user.blocked_friends %>
+<div>
+	<strong> Block List </strong>
+</div>
+<% if blocked_users.empty?%>
+	<div>The list is empty! Good for you!</div>
+<% end %>
+
+<% for user in blocked_users%>
+	<div >
+		<%= link_to "#{user.fname} #{user.lname}", user_path(user) %>
+		<%= form_tag user_friendship_path(@user,id:1), method: :delete,style:'display:inline-block;',data: { confirm: "Are you sure to unblock #{user.fname} #{user.lname}?" },remote: true do %>
+		  <%= hidden_field_tag :friend_remover, @user.id%>
+		  <%= hidden_field_tag :friend_removee, user.id %>
+		  <%= hidden_field_tag :decision, "unblock" %>
+		  <%= submit_tag 'Unblock' %>
+		<% end %>
+	</div>
+<%end%>
+<br/>

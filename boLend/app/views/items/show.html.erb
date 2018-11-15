@@ -1,6 +1,5 @@
 <h1><%= @item.name %> <%= @item.id %> is here </h1>
-<% owner = User.find(@owner_id)%>
-<p>contact owner: <%= owner.fname%>, <%= link_to owner.email %> </p> <!-- should link to message -->
+<p>contact owner: <%= User.find(@item.user_id).fname%>, <%= link_to User.find(@item.user_id).email%> </p> <!-- should link to message -->
 
 <!-- item profile here -->
 <% @item.images.each do |image| %>
