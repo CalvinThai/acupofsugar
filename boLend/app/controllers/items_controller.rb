@@ -28,6 +28,11 @@ class ItemsController < ApplicationController
 
 
 	def index
+		#find user if view is for /users/:id/items
+		if(params[:user_id])
+			@user = User.find(params[:user_id])
+			get_manageable_items
+		end
 		#testing only, empty session
 		#session[:user_id] = nil;
 		@filterrific = initialize_filterrific(
@@ -51,13 +56,7 @@ class ItemsController < ApplicationController
 		@aggs = Item.search "*", aggs: [:status]
 		@category_aggs = Item.search "*", aggs: [:category]
 		@status_filter = Item.status_filter(params[:status])
-		@category_filter = Item.category_filter(params[:category])
-
-		#find user if view is for /users/:id/items
-		if(params[:user_id])
-			@user = User.find(params[:user_id])
-			get_manageable_items
-		end
+		@category_filter = Item.category_filter(params[:category])		
 
 	end
 
@@ -102,6 +101,4 @@ class ItemsController < ApplicationController
 		@on_hold_items = OnHoldItem.joins(:item).select("items.*, on_hold_items.*").where('on_hold_items.user_id = ?', params[:user_id])
 		@approve_items = OnHoldItem.joins(:item, :user).select("items.*, on_hold_items.*, users.email").where("items.user_id = ? AND on_hold_items.approved = ?", params[:user_id], 'pending')
  	 end
-
-
 end
