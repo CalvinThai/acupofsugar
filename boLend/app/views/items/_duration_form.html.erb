@@ -1,7 +1,7 @@
    <%= form_for([ @user, @on_hold_item ]) do |form| %>
     <p>
       <%= form.label 'I would like to borrow this item until:' %><br>
-      <%= form.date_select(:due_date, :order => [:month, :day, :year]) %>
+      <%= form.date_field(:due_date) %>
       <%= form.hidden_field(:user_id, :value => @user.id) %>
       <%= form.hidden_field(:item_id , :value => @item.id) %>
       <%= form.hidden_field(:req_on, :value => Time.now.strftime('%d/%m/%Y')) %>

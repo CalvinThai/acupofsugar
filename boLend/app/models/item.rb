@@ -140,4 +140,9 @@ def lent_out
 	update_attributes(status: 'Lent Out')
 end
 
+#when returned
+def item_returned
+	update_attributes(status: 'Returned')
+end
+
 end
