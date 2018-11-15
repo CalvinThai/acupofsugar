@@ -1,32 +1,54 @@
 <h2>Your Items others have requested to borrow</h2>
 
-<% if @approve_items.length > 0 %>
+<% if @lend_items.length > 0 %>
+  <% if @pending_items.length > 0 %>
+    <h3>Pending Requests</h3>
+    <table>
+      <tr>
+        <th>Item name</th>
+        <th>Description</th>
+        <th>Requested By</th>
+        <th>Requested on</th>
+        <th colspan="2">Approval</th>
+      </tr>
+      <% @pending_items.each do |item| %>
+        <tr>
+          <td><%= link_to item.name %></td>
+          <td><%= item.descr %></td>
+          <td><%= User.find_by_id(item.user_id).fname %></td>
+          <td><%= item.req_on %></td>
+          <td>
+            <%= button_to 'Approve Request', user_on_hold_item_update_request_status_path(:on_hold_item_id => item.id, :result => "approved"), method: :put %>
+            <%= button_to 'Deny Request', user_on_hold_item_update_request_status_path(:on_hold_item_id => item.id, :result => "denied"), method: :put  %>
+          <td>
+        </tr>
+    <% end %>
+    </table>
+  <% end %>
+  <% if @approved_items.length > 0 %>
+  <h3>Approved Requests</h3>
   <table>
     <tr>
       <th>Item name</th>
       <th>Description</th>
       <th>Requested By</th>
       <th>Requested on</th>
-      <th colspan="2">Approval</th>
+      <th>Return Date</th>
     </tr>
-
-    <% @approve_items.each do |item| %>
-      <tr>
-        <td><%= link_to item.name %></td>
-        <td><%= item.descr %></td>
-        <td><%= item.email %></td>
-        <td><%= item.req_on %></td>
-        <td>
-          <% if item.approved == 'pending' %>
-            <%= link_to 'Approve Request', user_on_hold_item_update_request_status_path(:on_hold_item_id => item.id, :result => "approved"), method: :put %>
-            <%= link_to 'Deny Request', user_on_hold_item_update_request_status_path(:on_hold_item_id => item.id, :result => "denied"), method: :put  %>
-         <% else %>
-           <%= item.approved  %>
-         <% end %>
-        </td>
-      </tr>
+    <% @approved_items.each do |item| %>
+    <tr>
+      <td><%= link_to item.name %></td>
+      <td><%= item.descr %></td>
+      <td><%= User.find_by_id(item.user_id).fname %></td>
+      <td><%= item.req_on %></td>
+      <td>
+           <%= link_to 'Confirm Pickup', new_user_borrowed_item_path(:user_id => item.user_id,:on_hold_item_id => item.id) %>
+      </td>
+      <% end %>
+    </tr>
     <% end %>
   </table>
+
 <% else %>
-  <p>No Pending Requests for Approval</p>
+  <p>There are no items that require your attention</p>
 <% end %>

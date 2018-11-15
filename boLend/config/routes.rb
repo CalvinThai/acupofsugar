@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     end
   	resources :wish_lists
     resources :friendships
+    resources :borrowed_items
     resources :lend_items
     member do
       get :confirm_email

@@ -1,0 +1,14 @@
+<h1>Confirm Item Borrowing Details</h1>
+<div>
+  <%= form_with(model: [@user, @borrowed_item], local: true) do |form| %>
+    <%= hidden_field_tag "borrowed_item[user_id]", "#{params[:user_id]}" %>
+    <%= hidden_field_tag "borrowed_item[item_id]", "#{OnHoldItem.find_by_id(params[:on_hold_item_id]).item_id}" %>
+    <p>
+      <%= form.label :specify_Return_Date %><br>
+      <%= form.date_field :due_on %>
+    </p>
+    <p>
+      <%= form.submit "Confirm Borrower Has Picked Up Item"%>
+    </p>
+  <% end %>
+</div>
