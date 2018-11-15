@@ -15,7 +15,7 @@
     <tr>
       <td><%= link_to item.name, item_path(item.item_id) %></td>
       <td><%= item.descr %></td>
-      <td><%= item.due_on %></td>
+      <td><%= item.due_date.strftime("%Y-%m-%d") %></td>
       <td><%= owner.fname %> <%= owner.lname %></td> <%# link to user profile OR invoke messanger %>
       <td><%= link_to 'Return this item' %></td>
       <td><%= link_to 'send a due-date extension request' %></td>

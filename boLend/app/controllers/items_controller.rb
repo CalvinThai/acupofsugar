@@ -35,6 +35,11 @@ class ItemsController < ApplicationController
 
 
 	def index
+		#find user if view is for /users/:id/items
+		if(params[:user_id])
+			@user = User.find(params[:user_id])
+			get_manageable_items
+		end
 		#testing only, empty session
 		#session[:user_id] = nil;
 		@filterrific = initialize_filterrific(
@@ -59,12 +64,6 @@ class ItemsController < ApplicationController
 		@category_aggs = Item.search "*", aggs: [:category]
 		@status_filter = Item.status_filter(params[:status])
 		@category_filter = Item.category_filter(params[:category])
-
-		#find user if view is for /users/:id/items
-		if(params[:user_id])
-			@user = User.find(params[:user_id])
-			get_manageable_items
-		end
 
 	end
 

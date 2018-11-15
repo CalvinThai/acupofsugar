@@ -6,15 +6,5 @@
 
 <!-- user specific view for /users/:id/items -->
 <%if @user && session[:user_id] && session[:user_id] == @user.id%>
-<h1>Manage Items</h1>
-
-<%= render  "show_user_items" %>
-
-<%= render  "lend_items" %>
-
-<%= render  "borrowed_items" %>
-
-<%= render  "on_hold_items" %>
-
-<%= render  "wish_items" %>
+	<div id="user_items"><%= render  "items/manage_items_view" %></div>
 <%end%>
