@@ -8,7 +8,14 @@ class ItemsController < ApplicationController
 		    @user = User.find(params[:user_id])
 		    @item = @user.items.create(item_params)
 			#	@item.status = "available"
-		    redirect_to user_items_path(@user)#user_item_path(@user,@item)
+				if @item.save
+					flash[:success] = "Item successfully added!"
+					redirect_to user_items_path(@user)
+				else
+					flash[:alert] = "Information did not meet requirements"
+					render :new
+				end
+		    #redirect_to user_items_path(@user)#user_item_path(@user,@item)
 
 		#@item = Item.new()
 		#@item.name = params[:name]

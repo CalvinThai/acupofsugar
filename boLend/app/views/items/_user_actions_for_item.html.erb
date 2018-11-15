@@ -1,13 +1,15 @@
 <%if @user && @user.id != @owner_id%>
 	<%if !@user.wish_lists.find_by_item_id(@item.id) %>
-	<div><%= link_to 'Wish list this item' , user_wish_lists_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), remote: true, method: :post%></div>
+	<div><%= button_to 'Wish list this item' , user_wish_lists_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), remote: true, method: :post%></div>
 	<%else%>
-		<div><%= link_to 'remove from wish list' , user_wish_list_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), remote: true, method: :delete%></div>
+		<div><%= button_to 'remove from wish list' , user_wish_list_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), remote: true, method: :delete%></div>
 	<%end%>
 	<%if !@user.on_hold_items.find_by_item_id(@item.id) %>
-	<div><%= link_to 'Send borrow request' , user_on_hold_items_path(user_id: @user.id, item_id: @item.id, req_on: Time.now.strftime("%m/%d/%Y"), from: 'itemIndex'), method: :post%></div>
+		<div><%= button_to 'Send borrow request' , user_on_hold_items_path(user_id: @user.id, item_id: @item.id, req_on: Time.now.strftime("%m/%d/%Y"), from: 'itemIndex'), method: :post%></div>
+	<!--%= user_id: @user.id, item_id: @item.id, req_on: Time.now.strftime("%m/%d/%Y") %-->
+	<!--<div>How long?</div> -->
 	<%else%>
-		<div><%= link_to 'Cancel borrow request' , user_on_hold_item_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), method: :delete%></div>
+		<div><%= button_to 'Cancel borrow request' , user_on_hold_item_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), method: :delete%></div>
 	<%end%>
 <!-- not logged in - prompt user to login/sign up -->
 <%elsif @user == nil %>
