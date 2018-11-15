@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   resources :password_resets
 
   resources :users do
-  	resources :items
+  	resources :items do
+      put 'lent_out'
+    end
   	resources :on_hold_items do
       put 'update_request_status'
     end

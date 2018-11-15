@@ -9,6 +9,7 @@
         <th>Description</th>
         <th>Requested By</th>
         <th>Requested on</th>
+        <th>Requested Return Date</th>
         <th colspan="2">Approval</th>
       </tr>
       <% @pending_items.each do |item| %>
@@ -17,6 +18,7 @@
           <td><%= item.descr %></td>
           <td><%= User.find_by_id(item.user_id).fname %></td>
           <td><%= item.req_on %></td>
+          <td><%= item.due_date %></td>
           <td>
             <%= button_to 'Approve Request', user_on_hold_item_update_request_status_path(:on_hold_item_id => item.id, :result => "approved"), method: :put %>
             <%= button_to 'Deny Request', user_on_hold_item_update_request_status_path(:on_hold_item_id => item.id, :result => "denied"), method: :put  %>
@@ -26,14 +28,15 @@
     </table>
   <% end %>
   <% if @approved_items.length > 0 %>
-  <h3>Approved Requests</h3>
+  <h3>Approved Requests/ On Loan</h3>
   <table>
     <tr>
       <th>Item name</th>
       <th>Description</th>
       <th>Requested By</th>
       <th>Requested on</th>
-      <th>Return Date</th>
+      <th>Requested Return Date</th>
+      <th>Approved Return Date</th>
     </tr>
     <% @approved_items.each do |item| %>
     <tr>
@@ -41,14 +44,20 @@
       <td><%= item.descr %></td>
       <td><%= User.find_by_id(item.user_id).fname %></td>
       <td><%= item.req_on %></td>
-      <td>
-           <%= link_to 'Confirm Pickup', new_user_borrowed_item_path(:user_id => item.user_id,:on_hold_item_id => item.id) %>
-      </td>
-      <% end %>
+      <td><%= item.due_date %></td>
+        <% if BorrowedItem.exists?(:item_id => item.item_id) == false %>
+          <td>
+               <%= link_to 'Confirm Pickup', new_user_borrowed_item_path(:user_id => item.user_id,:on_hold_item_id => item.id) %>
+          </td>
+        <% else %>
+          <td>
+            <%= BorrowedItem.find_by_item_id(item.item_id).due_date %>
+          </td>
+        <% end %>
     </tr>
     <% end %>
   </table>
-
+<% end %>
 <% else %>
   <p>There are no items that require your attention</p>
 <% end %>
