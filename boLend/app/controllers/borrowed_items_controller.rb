@@ -10,7 +10,8 @@ class BorrowedItemsController < ApplicationController
     @borrowed_item = @user.borrowed_items.create(borrowed_item_params)
     if @borrowed_item.save
       flash[:success] = "Item successfully added!"
-      @curr_user = User.find_by_item_id(@borrowed_item.item_id)
+
+      @curr_user = User.find_by_id(Item.find_by_id(@borrowed_item.item_id).user_id)
       redirect_to user_items_path(@curr_user)
     else
       flash[:alert] = "Information did not meet requirements"
@@ -24,6 +25,6 @@ class BorrowedItemsController < ApplicationController
 
   private
    def borrowed_item_params
-     params.require(:borrowed_item).permit(:id,:item_id,:user_id, :due_on)
+     params.require(:borrowed_item).permit(:id,:item_id,:user_id, :due_date)
    end
 end
