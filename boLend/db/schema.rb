@@ -133,6 +133,8 @@ ActiveRecord::Schema.define(version: 2018_11_16_052209) do
     t.datetime "password_reset_sent_at"
     t.string "phonenum"
     t.string "address"
+    t.string "provider"
+    t.string "uid"
   end
 
   create_table "wish_lists", force: :cascade do |t|
