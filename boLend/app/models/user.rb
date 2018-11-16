@@ -42,6 +42,19 @@ class User < ApplicationRecord
       self[column]= SecureRandom.urlsafe_base64
     end while User.exists?(column=> self[column])
   end
+    def self.create_with_omniauth(auth)
+  
+  user = find_or_create_by(uid: auth['uid'], provider:  auth['provider'])
+  user.email = "#{auth['uid']}@#{auth[‘provider’]}.com"
+  user.password = auth['uid']
+  user.fname = auth[‘info’]['fname']
+  if User.exists?(user)
+    user
+  else
+    user.save!
+    user
+  end
+end
 
 
   before_save { self.email = email.downcase }

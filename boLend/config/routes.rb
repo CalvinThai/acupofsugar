@@ -35,6 +35,10 @@ Rails.application.routes.draw do
     post 'login' => :create
     delete 'logout' => :destroy
   end
+    Rails.application.routes.draw do
+  get 'auth/facebook/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/')
+end
 
 
   #save for later use, redirect user to /profile page rather than /user/:id - by jiehao
