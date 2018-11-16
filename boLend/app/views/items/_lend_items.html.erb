@@ -47,6 +47,7 @@
       <td><%= item.due_date %></td>
         <% if BorrowedItem.exists?(:item_id => item.item_id) == false %>
           <td>
+            <!-- add confirm return button here -->
                <%= link_to 'Confirm Pickup', new_user_borrowed_item_path(:user_id => item.user_id,:on_hold_item_id => item.id) %>
           </td>
         <% else %>

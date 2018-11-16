@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_15_034707) do
+ActiveRecord::Schema.define(version: 2018_11_16_052209) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2018_11_15_034707) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "due_date"
+    t.datetime "returned_on"
     t.index ["item_id"], name: "index_borrowed_items_on_item_id"
     t.index ["user_id"], name: "index_borrowed_items_on_user_id"
   end
@@ -92,6 +93,30 @@ ActiveRecord::Schema.define(version: 2018_11_15_034707) do
     t.datetime "due_date"
     t.index ["item_id"], name: "index_on_hold_items_on_item_id"
     t.index ["user_id"], name: "index_on_hold_items_on_user_id"
+  end
+
+  create_table "review_borrowers", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "item_id"
+    t.integer "rating", null: false
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "borrower_id"
+    t.index ["item_id"], name: "index_review_borrowers_on_item_id"
+    t.index ["user_id"], name: "index_review_borrowers_on_user_id"
+  end
+
+  create_table "review_lender_and_items", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "item_id"
+    t.integer "rating", null: false
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "lender_id"
+    t.index ["item_id"], name: "index_review_lender_and_items_on_item_id"
+    t.index ["user_id"], name: "index_review_lender_and_items_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

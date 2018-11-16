@@ -141,7 +141,7 @@ def lent_out
 end
 
 #when returned
-def item_returned
+def returned
 	update_attributes(status: 'Returned')
 end
 

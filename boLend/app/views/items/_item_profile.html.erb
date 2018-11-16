@@ -1,0 +1,6 @@
+<% @item.images.each do |image| %>
+<p>
+	<%= image_tag(image) %>
+</p>
+<% end %>
+<p>Description: <%= @item.descr %></p>

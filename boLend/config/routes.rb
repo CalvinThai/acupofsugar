@@ -20,6 +20,8 @@ Rails.application.routes.draw do
     resources :friendships
     resources :borrowed_items
     resources :lend_items
+    resources :review_lender_and_items
+    resources :review_borrowers
     member do
       get :confirm_email
     end

@@ -1,6 +1,6 @@
 <h2>Items you've borrowed</h2>
 
-<% if @borrowed_items.length > 0 %>
+<% if @curr_items.length > 0 %>
 <table>
   <tr>
     <th>Item name</th>
@@ -10,18 +10,45 @@
     <th colspan="2"></th>
   </tr>
 
-  <% @borrowed_items.each do |item| %>
-    <% owner = User.find(item.i_uid) %>
+  <% @curr_items.each do |item| %>
+    <% @owner = User.find(item.i_uid) %>
     <tr>
       <td><%= link_to item.name, item_path(item.item_id) %></td>
       <td><%= item.descr %></td>
+      <td><%#= item.status %></td>
       <td><%= item.due_date.strftime("%Y-%m-%d") %></td>
-      <td><%= owner.fname %> <%= owner.lname %></td> <%# link to user profile OR invoke messanger %>
-      <td><%= link_to 'Return this item' %></td>
+      <td><%= link_to "#{@owner.fname} #{@owner.lname}", conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post"%></td> <%# link to user profile OR invoke messanger %>
+      <td>
+        <%= link_to 'Confirm return', new_user_review_lender_and_item_path(user_id: item.user_id, item_id: item.item_id)%></td>
       <td><%= link_to 'send a due-date extension request' %></td>
+    </tr>
+  <% end %> 
+</table>
+<% end %> 
+<!-- showing borrow history -->
+<% if @past_items.length > 0 %>
+<h3>Borrow history</h3>
+<table>
+  <tr>
+    <th>Item name</th>
+    <th>Description</th>
+    <th>Due date</th>
+    <th>Return date</th>
+    <th>Contact owner</th>
+  </tr>
+
+  <% @past_items.each do |item| %>
+    <% @owner = User.find(item.i_uid) %>
+    <tr>
+      <td><%= link_to item.name, user_review_lender_and_item_path(user_id: item.user_id, id: item.item_id) %></td>
+      <td><%= item.descr %></td>
+      <td><%= item.due_date.strftime("%Y-%m-%d") %></td>
+      <td><%= item.returned_on.strftime("%Y-%m-%d") %></td>
+      <td><%= link_to "#{@owner.fname} #{@owner.lname}", conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post"%><%#= link_to "#{@owner.fname} #{@owner.lname}" %></td> <%# link to user profile OR invoke messanger %>
     </tr>
   <% end %>
 </table>
-<%else%>
+<% end %>
+<% if @borrowed_items.length == 0%>
   <p>You don't have any borrowed items</p>
 <%end%>

@@ -1,0 +1,42 @@
+<h1>Review the item and lender</h1>
+
+<% if @review_lender.errors.any? %>
+    <div class="error_explanation">
+      <h2>
+        <%= pluralize(@review_lender.errors.count, "error") %> prohibited
+        this review from being saved:
+      </h2>
+      <ul>
+        <% @review_lender.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<div id="item_profile">
+	<% owner = User.find(@item.user_id)%>
+	<p>Lender: <%= owner.fname %> <%= owner.lname %></p> <!-- should go to user profile page -->
+	<p>Item: <%= @item.name %></p>
+	<%= render partial: 'items/item_profile' %>
+</div>
+
+<p>Please fill out this review form after returning the item.</p>
+<div>
+  <%= form_with(model: [@user, @review_lender], local: true) do |form| %>
+     <%= form.hidden_field(:user_id, :value => @user.id) %>
+     <%= form.hidden_field(:item_id , :value => @item.id) %>
+     <%= form.hidden_field(:lender_id , :value => @item.user_id) %>
+    <p>
+      <%= form.label 'Rate item/lender: ' %><br>
+      <%= form.number_field :rating %>
+    </p>
+    <p>
+      <%= form.label 'Leave comment: ' %><br>
+      <%= form.text_area :comment %>
+    </p>
+    <p>
+      <%= form.submit "Submit review"%>
+    </p>
+  <% end %>
+</div>

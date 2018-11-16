@@ -1,13 +1,11 @@
 <h1><%= @item.name %> <%= @item.id %> is here </h1>
-<p>contact owner: <%= User.find(@item.user_id).fname%>, <%= link_to User.find(@item.user_id).email%> </p> <!-- should link to message -->
+<% @owner = User.find(@item.user_id)%>
+<p>contact owner: <%= link_to "#{@owner.fname} #{@owner.lname}", conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post"%> </p> <!-- should link to message -->
 
 <!-- item profile here -->
-<% @item.images.each do |image| %>
-<p>
-	<%= image_tag(image) %>
-</p>
-<% end %>
-<p>Description: <%= @item.descr %></p>
+<div id="item_profile">
+	<%= render partial: 'item_profile' %>
+</div>
 
 
 <!-- debugging purposes -->
@@ -24,4 +22,7 @@
 </div>
 
 
-<p><%= link_to 'Back', :back %><%#= link_to 'Back to manage items' , user_items_path(@user.id)%></p>
+<p><%= link_to '< To search items', items_path %></p>
+<%if session[:user_id] && session[:user_id] == @user.id%>
+<p><%= link_to '< To manage items' , user_items_path(@user.id)%></p>
+<%end%>

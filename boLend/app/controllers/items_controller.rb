@@ -104,6 +104,8 @@ class ItemsController < ApplicationController
  	 def get_manageable_items
  	 	@user_items = Item.where("items.user_id = ?",params[:user_id])
 	 	@borrowed_items = BorrowedItem.joins(:item).select("items.user_id as i_uid, items.*, borrowed_items.*").where('borrowed_items.user_id = ?', params[:user_id])
+		@curr_items = @borrowed_items.where(returned_on: nil);
+		@past_items = @borrowed_items.where.not(returned_on: nil);
 		@wish_items = WishList.joins(:item).select("items.user_id as i_uid, items.*, wish_lists.*").where('wish_lists.user_id = ?', params[:user_id]) #all items that have been wishlisted by this user
 		@on_hold_items = OnHoldItem.joins(:item).select("items.*, on_hold_items.*").where('on_hold_items.user_id = ?', params[:user_id])
 		@lend_items = OnHoldItem.joins(:item, :user).select("items.*, on_hold_items.*, users.email").where("items.user_id = ?", params[:user_id])
