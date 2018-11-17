@@ -53,6 +53,7 @@ end
 
 
   def destroy
+    flash[:failure] = "successfully logged out"
     session[:user_id] = nil
     redirect_to login_url
   end
