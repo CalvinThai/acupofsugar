@@ -17,8 +17,8 @@
           <td><%= link_to item.name %></td>
           <td><%= item.descr %></td>
           <td><%= User.find_by_id(item.user_id).fname %></td>
-          <td><%= item.req_on %></td>
-          <td><%= item.due_date %></td>
+          <td><%= item.req_on.strftime("%Y-%m-%d") %></td>
+          <td><%= item.due_date.strftime("%Y-%m-%d")%></td>
           <td>
             <%= button_to 'Approve Request', user_on_hold_item_update_request_status_path(:on_hold_item_id => item.id, :result => "approved"), method: :put %>
             <%= button_to 'Deny Request', user_on_hold_item_update_request_status_path(:on_hold_item_id => item.id, :result => "denied"), method: :put  %>
@@ -37,23 +37,29 @@
       <th>Requested on</th>
       <th>Requested Return Date</th>
       <th>Approved Return Date</th>
+      <th colspan="1"></th>
     </tr>
     <% @approved_items.each do |item| %>
     <tr>
       <td><%= link_to item.name %></td>
       <td><%= item.descr %></td>
       <td><%= User.find_by_id(item.user_id).fname %></td>
-      <td><%= item.req_on %></td>
-      <td><%= item.due_date %></td>
-        <% if BorrowedItem.exists?(:item_id => item.item_id) == false %>
+      <td><%= item.req_on.strftime("%Y-%m-%d") %></td>
+      <td><%= item.due_date.strftime("%Y-%m-%d")%></td>
+        <% borrowed_item = BorrowedItem.find_by_item_id(item.item_id)%>
+        <% if borrowed_item == nil %>
           <td>
             <!-- add confirm return button here -->
                <%= link_to 'Confirm Pickup', new_user_borrowed_item_path(:user_id => item.user_id,:on_hold_item_id => item.id) %>
           </td>
         <% else %>
-          <td>
-            <%= BorrowedItem.find_by_item_id(item.item_id).due_date %>
+           <td>
+            <%= borrowed_item.due_date.strftime("%Y-%m-%d") %>
           </td>
+          <% if borrowed_item.returned_on != nil%>
+            <td><%= link_to 'Confirm return', new_user_review_borrower_path(:user_id => @user.id,:item_id => item.item_id, :borrower_id => borrowed_item.user_id) %></td>
+           <%#else%>
+           <% end %>
         <% end %>
     </tr>
     <% end %>

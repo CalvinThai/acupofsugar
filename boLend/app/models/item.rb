@@ -145,4 +145,10 @@ def returned
 	update_attributes(status: 'Returned')
 end
 
+#after return confirmed
+def available
+	update_attributes(status: 'available')
+end
+
+
 end

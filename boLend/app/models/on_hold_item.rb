@@ -9,4 +9,12 @@ class OnHoldItem < ApplicationRecord
 	def reject_req
 		update_attributes(approved: 'Denied')
 	end
+
+	def returned
+		update_attributes(approved: 'Returned')
+	end
+
+	def set_null
+		update_attributes(approved: nil)
+	end
 end

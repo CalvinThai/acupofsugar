@@ -5,7 +5,7 @@
     <%= hidden_field_tag "borrowed_item[item_id]", "#{OnHoldItem.find_by_id(params[:on_hold_item_id]).item_id}" %>
     <p>
       <%= form.label :specify_Return_Date %><br>
-      <%= form.date_field :due_date, :value => "#{OnHoldItem.find_by_id(params[:on_hold_item_id]).due_date}" %>
+      <%= form.date_field :due_date, :value => "#{OnHoldItem.find_by_id(params[:on_hold_item_id]).due_date.strftime("%Y-%m-%d")}" %>
     </p>
     <p>
       <%= form.submit "Confirm Borrower Has Picked Up Item"%>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_16_052209) do
+ActiveRecord::Schema.define(version: 2018_11_17_080118) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -59,6 +59,24 @@ ActiveRecord::Schema.define(version: 2018_11_16_052209) do
     t.datetime "updated_at"
     t.integer "blocker_id"
     t.integer "status"
+  end
+
+  create_table "item_transactions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "item_id"
+    t.datetime "returned_on"
+    t.datetime "pick_up"
+    t.datetime "due_date"
+    t.string "user_status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "other_user_id"
+    t.integer "review_borrower_id"
+    t.integer "review_lender_and_item_id"
+    t.index ["item_id"], name: "index_item_transactions_on_item_id"
+    t.index ["review_borrower_id"], name: "index_item_transactions_on_review_borrower_id"
+    t.index ["review_lender_and_item_id"], name: "index_item_transactions_on_review_lender_and_item_id"
+    t.index ["user_id"], name: "index_item_transactions_on_user_id"
   end
 
   create_table "items", force: :cascade do |t|
