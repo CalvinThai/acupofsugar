@@ -13,6 +13,7 @@
 		<%= form_tag user_friendship_path(@user,id:1), method: :delete,style:'display:inline-block;',data: { confirm: "Are you sure to block #{friend.fname} #{friend.lname}? This action will also do unfriending." },remote: true do %>
 		  <%= hidden_field_tag :friend_remover, @user.id%>
 		  <%= hidden_field_tag :friend_removee, friend.id %>
+		  <%= hidden_field_tag :blockee_id, friend.id %>
 		  <%= hidden_field_tag :decision, "block" %>
 		  <%= submit_tag 'Block Friend' %>
 		<% end %>

@@ -20,6 +20,7 @@
 			<% end %>
 			<%= form_tag user_friendship_path(@user,id:1), method: :put,style:'display:inline-block;', data: { confirm: "Are you sure to reject the friend request and block #{requirer.fname} #{requirer.lname}?" }, remote: true do %>
 			  <%= hidden_field_tag :friend_requirer, requirer.id %>
+			  <%= hidden_field_tag :blockee_id, requirer.id %>
 			  <%= hidden_field_tag :friend_requiree, @user.id %>
 			  <%= hidden_field_tag :decision, "block" %>
 			  <%= submit_tag 'Block' %>
