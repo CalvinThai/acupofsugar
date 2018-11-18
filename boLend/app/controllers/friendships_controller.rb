@@ -7,12 +7,7 @@ class FriendshipsController < ApplicationController
     @user = @friend_requirer
     @users = User.user_search(params[:name])
     
-    @blockee_users = []
-    @blockees = @user.blockees
-    for blockee in @blockees
-      blockee = User.find(blockee.blockee_id)
-      @blockee_users.push blockee
-    end
+    @blockee_users = Blockee.blockees_of_user(@user)
     
     respond_to do |format|
         format.js
@@ -31,12 +26,7 @@ class FriendshipsController < ApplicationController
       @blockee = @user.blockees.create(blockee_params)    
     end
     
-    @blockee_users = []
-    @blockees = @user.blockees
-    for blockee in @blockees
-      blockee = User.find(blockee.blockee_id)
-      @blockee_users.push blockee
-    end
+    @blockee_users = Blockee.blockees_of_user(@user)
     
     respond_to do |format|
         format.js 
@@ -59,12 +49,7 @@ class FriendshipsController < ApplicationController
       @blockee.destroy
     end
     
-    @blockee_users = []
-    @blockees = @user.blockees
-    for blockee in @blockees
-      blockee = User.find(blockee.blockee_id)
-      @blockee_users.push blockee
-    end
+    @blockee_users = Blockee.blockees_of_user(@user)
     
     respond_to do |format|
         format.js 

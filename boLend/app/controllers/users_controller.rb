@@ -3,12 +3,7 @@ class UsersController < ApplicationController
     @users = User.user_search(params[:name])
 		#@user = User.find(session[:user_id]) #for testing
     @user = User.find(1)
-    @blockee_users = []
-    @blockees = @user.blockees
-    for blockee in @blockees
-      blockee = User.find(blockee.blockee_id)
-      @blockee_users.push blockee
-    end
+    @blockee_users = Blockee.blockees_of_user(@user)
     @time = greetings_by_time
 	end
   def indexx
