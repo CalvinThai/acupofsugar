@@ -1,10 +1,14 @@
 class UsersController < ApplicationController
 	def index
     @users = User.user_search(params[:name])
-		@user = User.find(session[:user_id]) #for testing
-    #@user = User.find(1)
-    @blockee_users = Blockee.blockees_of_user(@user)
-    @time = greetings_by_time
+    if session[:user_id].nil?
+      redirect_to login_path
+    else
+		  @user = User.find(session[:user_id]) #for testing
+      #@user = User.find(1)
+      @blockee_users = Blockee.blockees_of_user(@user)
+      @time = greetings_by_time
+    end
 	end
   def indexx
     @users = User.all
