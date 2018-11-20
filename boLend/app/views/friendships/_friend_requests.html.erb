@@ -6,6 +6,8 @@
 	<% for requirer in request_list%>
 		<div>
 			<%= link_to "#{requirer.fname} #{requirer.lname}", user_path(requirer) %> 
+			<%= button_to 'Send Message', conversations_path(sender_id: current_user.id, recipient_id: requirer.id), form: {style:'display:inline-block;'}, method: :post %>
+
 			<%= form_tag user_friendship_path(@user,id:1), method: :put,style:'display:inline-block;',remote: true do %>
 			  <%= hidden_field_tag :friend_requirer, requirer.id %>
 			  <%= hidden_field_tag :friend_requiree, @user.id %>
