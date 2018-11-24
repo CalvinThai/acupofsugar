@@ -4,6 +4,7 @@ class FriendshipsController < ApplicationController
     @friend_requirer = User.find(params[:friend_requirer])
     @friend_requiree = User.find(params[:friend_requiree])
     @friend_requirer.friend_request(@friend_requiree)
+    UserMailer.new_friend_request(@friend_requirer,@friend_requiree).deliver_later
     @user = @friend_requirer
     @users = User.user_search(params[:name])
     
@@ -19,6 +20,7 @@ class FriendshipsController < ApplicationController
     @requirer = User.find(params[:friend_requirer])
     if params[:decision]=="true"
       @user.accept_request(@requirer)
+      UserMailer.accept_friend_request(@requirer,@user).deliver_later
     elsif params[:decision]=="false"
       @user.decline_request(@requirer)
     else
