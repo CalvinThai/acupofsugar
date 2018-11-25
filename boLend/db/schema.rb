@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_25_003016) do
+ActiveRecord::Schema.define(version: 2018_11_25_015213) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -110,6 +110,16 @@ ActiveRecord::Schema.define(version: 2018_11_25_003016) do
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "user_id"
+    t.boolean "i_due_alert", default: true
+    t.boolean "i_req_by_others", default: true
+    t.boolean "i_req_approval_alert", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
   create_table "on_hold_items", force: :cascade do |t|
