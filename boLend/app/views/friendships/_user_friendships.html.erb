@@ -3,8 +3,8 @@
 		<!--should be directed to user profile page later -->
 		<% if not @user.blocked_friends.include?(user)%>
 			<%= link_to "#{user.fname} #{user.lname}", user_path(user) %> 
-			<%= button_to 'Send Message', conversations_path(sender_id: current_user.id, recipient_id: user.id), form: {style:'display:inline-block;'}, method: :post %>
 			<% if user != @user%>
+				<%= button_to 'Send Message', conversations_path(sender_id: current_user.id, recipient_id: user.id), form: {style:'display:inline-block;'}, method: :post %>
 				<% if @user.friends.include?(user) %> 
 					<%= button_tag 'Friends', disabled: true %> 
 				<% elsif not @user.pending_friends.include?(user)%> 
