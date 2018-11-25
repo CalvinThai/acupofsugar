@@ -7,7 +7,7 @@
     <th>Description</th>
     <th>Due date</th>
     <th>Contact owner</th>
-    <th colspan="2"></th>
+    <th colspan="2">Action/Status</th>
   </tr>
 
   <% @borrowed_items.each do |item| %>
@@ -19,7 +19,11 @@
       <td><%= link_to "#{@owner.fname} #{@owner.lname}", conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post"%></td> <%# link to user profile OR invoke messanger %>
       <%if item.returned_on == nil%>
       <td><%= link_to 'Confirm return', new_user_review_lender_and_item_path(user_id: @user.id, item_id: item.item_id, lender_id: @owner.id)%></td>
-      <td><%= link_to 'send a due-date extension request' %></td>
+      <td>
+        <%if item.approved == nil %><%= link_to 'Send due date extension', edit_user_borrowed_item_path(user_id: @user.id, id: item.item_id)%>
+        <%elsif item.approved != "Approved" %> due date extension <%= item.approved.downcase %>
+        <%end%>
+        </td>
       <% else %>
         <td colspan="2">
           Lender has not confirmed your return yet

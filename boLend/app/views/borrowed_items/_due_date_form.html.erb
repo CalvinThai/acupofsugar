@@ -1,0 +1,9 @@
+   <%= form_for([ @user, @borrowed_item ]) do |form| %>
+    <p>
+      <%= form.label 'I would like to extend due date for this item until:' %><br>
+      <%= form.date_field(:temp_due_date) %>
+    </p>
+    <p>
+      <%= form.submit 'Send extension request' %>
+    </p>
+  <% end %>

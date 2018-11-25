@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_18_004249) do
+ActiveRecord::Schema.define(version: 2018_11_25_003016) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -49,6 +49,8 @@ ActiveRecord::Schema.define(version: 2018_11_18_004249) do
     t.datetime "updated_at", null: false
     t.datetime "due_date"
     t.datetime "returned_on"
+    t.datetime "temp_due_date"
+    t.string "approved"
     t.index ["item_id"], name: "index_borrowed_items_on_item_id"
     t.index ["user_id"], name: "index_borrowed_items_on_user_id"
   end

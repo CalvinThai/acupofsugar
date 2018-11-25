@@ -1,4 +1,4 @@
-<h1><%= @item.name %> <%= @item.id %> is here </h1>
+<h1><%= @item.name %> is here </h1>
 <% @owner = User.find(@item.user_id)%>
 <p>contact owner: <%= link_to "#{@owner.fname} #{@owner.lname}", conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post"%> </p> <!-- should link to message -->
 

@@ -37,7 +37,7 @@
       <th>Requested on</th>
       <th>Requested Return Date</th>
       <th>Approved Return Date</th>
-      <th colspan="1"></th>
+      <th colspan="2">Due extension/Ation</th>
     </tr>
     <% @approved_items.each do |item| %>
     <tr>
@@ -58,7 +58,14 @@
           </td>
           <% if borrowed_item.returned_on != nil%>
             <td><%= link_to 'Confirm return', new_user_review_borrower_path(:user_id => @user.id,:item_id => item.item_id, :borrower_id => borrowed_item.user_id) %></td>
-           <%#else%>
+           <%elsif borrowed_item.approved == "pending" %>
+             <td>
+               <%= borrowed_item.temp_due_date.strftime("%Y-%m-%d") %>
+             </td>
+              <td>
+            <%= button_to 'Approve extension', user_borrowed_item_update_ext_status_path(:borrowed_item_id => item.id, :result => "approved"), method: :put %>
+            <%= button_to 'Deny extension', user_borrowed_item_update_ext_status_path(:borrowed_item_id => item.id, :result => "denied"), method: :put  %>
+            <td>
            <% end %>
         <% end %>
     </tr>
