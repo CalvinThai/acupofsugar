@@ -66,6 +66,8 @@
             <%= button_to 'Approve extension', user_borrowed_item_update_ext_status_path(:borrowed_item_id => item.id, :result => "approved"), method: :put %>
             <%= button_to 'Deny extension', user_borrowed_item_update_ext_status_path(:borrowed_item_id => item.id, :result => "denied"), method: :put  %>
             <td>
+           <%else %>
+            <td colspan="2"><%=borrowed_item.approved%></td>
            <% end %>
         <% end %>
     </tr>

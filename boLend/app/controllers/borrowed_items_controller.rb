@@ -33,6 +33,13 @@ class BorrowedItemsController < ApplicationController
 
     if @borrowed_item.update(borrowed_item_params)
       @borrowed_item.set_status
+      #send extension request alert to lender
+      @notif = Notification.find_by_user_id(@item.user.id)
+      if @notif.i_req_by_others
+        lender = User.find(@item.user_id)
+        borrower = User.find(@borrowed_item.user_id)
+        UserMailer.new_extension_request(lender, borrower, @item).deliver_now
+      end
       redirect_to user_items_path(@user.id)
     else
       render 'edit'
@@ -42,15 +49,25 @@ class BorrowedItemsController < ApplicationController
   def update_ext_status
     @borrowed_item = BorrowedItem.find(params[:borrowed_item_id])
     @item = Item.find(@borrowed_item.item_id)
+    @notif = Notification.find_by_user_id(@borrowed_item.user_id)
+    lender = User.find(@item.user_id)
+    borrower = User.find(@borrowed_item.user_id)
     if params[:result] == "approved"
       @borrowed_item.approve_req
       @borrowed_item.update_due_date
       @borrowed_item.save
-      
+      #send extension status update to borrower
+      if @borrowed_item.save && @notif.i_req_approval_alert
+        UserMailer.accept_extension_request(lender, borrower, @item, params[:result]).deliver_now
+      end
       redirect_to  user_items_path(params[:user_id])
     elsif params[:result] == "denied"
-      @on_hold_item.reject_req
-      @on_hold_item.save
+      @borrowed_item.reject_req
+      @borrowed_item.save
+      #send extension status update to borrower
+      if @borrowed_item.save && @notif.i_req_approval_alert
+        UserMailer.accept_extension_request(lender, borrower, @item, params[:result]).deliver_now
+      end
       redirect_to  user_items_path(params[:user_id])
     end
   end

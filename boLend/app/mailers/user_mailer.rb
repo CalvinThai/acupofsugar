@@ -30,11 +30,12 @@ class UserMailer <ActionMailer::Base
   	mail to: @lender.email, subject: "Bolend: borrow request from #{@borrower.fname.capitalize} #{@borrower.lname.capitalize}"
   end
 
-  def accept_borrow_request(lender, borrower, item)
+  def accept_borrow_request(lender, borrower, item, status)
   	@lender = lender
   	@borrower = borrower
   	@item = item
-  	mail to: @borrower.email, subject: "Bolend: #{@lender.fname.capitalize} #{@lender.lname.capitalize} has accepted your borrow request"
+  	@status = status
+  	mail to: @borrower.email, subject: "Bolend: #{@lender.fname.capitalize} #{@lender.lname.capitalize} has #{@status.downcase} your borrow request"
   end
 
   def new_extension_request(lender, borrower, item)
@@ -44,11 +45,12 @@ class UserMailer <ActionMailer::Base
   	mail to: @lender.email, subject: "Bolend: due date extension request from #{@borrower.fname.capitalize} #{@borrower.lname.capitalize}"
   end  
 
-  def accept_extension_request(lender, borrower, item)
+  def accept_extension_request(lender, borrower, item, status)
   	@lender = lender
   	@borrower = borrower
   	@item = item
-  	mail to: @borrower.email, subject: "Bolend: #{@lender.fname.capitalize} #{@lender.lname.capitalize} has accepted your extension request"
+  	@status = status
+  	mail to: @borrower.email, subject: "Bolend: #{@lender.fname.capitalize} #{@lender.lname.capitalize} has #{@status.downcase} your extension request"
   end  
   
   def lender_due_date_alert(lender, borrower, item)
@@ -64,5 +66,13 @@ class UserMailer <ActionMailer::Base
   	@item = item
   	@days = days
   	mail to: @borrower.email, subject: "Bolend: #{@item.name.capitalize} is due in #{@days}. Please take an action"
+  end  
+
+  def confirm_pickup(alert_to, lender, borrower, item)
+  	@alert_to = alert_to
+  	@lender = lender
+  	@borrower = borrower
+  	@item = item
+  	mail to: @alert_to.email, subject: "Bolend: #{@item.name} - item pickup confirmation"
   end  
 end
