@@ -22,6 +22,7 @@ class SessionsController < ApplicationController
             redirect_to user #should login to the user page
           else 
             session[:auth] = nil
+            params[:auth] = nil
             redirect_to session.delete(:return_to)
           end
           # Log the user in and redirect to the user's show page.

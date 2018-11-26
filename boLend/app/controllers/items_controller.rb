@@ -120,16 +120,27 @@ class ItemsController < ApplicationController
 	 end
 
 	 def auth_and_redirect
-	 	#puts("in auth_redirect")
-	 	if(params[:auth] && params[:auth] == "login_required")
-			session[:auth] = params[:auth]
-			#if no session exist, prompt user to sign in
-			if(session[:user_id] == nil || session[:user_id] != params[:user_id])
+	 	#puts("@@@@@@@@@@@@@@@@in auth_redirect")
+	 	#puts("@@@@@@@@@@@@@@@@ session[:user_id] = #{session[:user_id]}")
+	 	#puts("@@@@@@@@@@@@@@@@ params[:user_id] = #{params[:user_id]}")
+	 	
+	 	#if no session exist, prompt user to sign in
+	 	if(session[:user_id] == nil || session[:user_id].to_i != params[:user_id].to_i)
+	 		puts(session[:user_id] == nil)
+	 		puts(session[:user_id].to_i != params[:user_id].to_i)
+		 	if(params[:auth] && params[:auth] == "login_required")
+				session[:auth] = params[:auth]			
 				#clear session
 				session[:user_id] = nil
-				return_addr = request.fullpath if request.get? 
-				#come back to current page after successful login, with removed param[:auth]
-				session[:return_to] ||= return_addr.slice(0..return_addr.index('?')-1)
+				url = request.fullpath if request.get? 
+				uri = URI.parse(url)
+				query = Rack::Utils.parse_query(uri.query)
+				# Replace auth to true upon login
+				query["auth"] = true
+				uri.query = Rack::Utils.build_query(query)
+				return_addr = uri.to_s
+				#come back to current page after successful login
+				session[:return_to] ||= return_addr
 				redirect_to login_path
 			end
 		end
