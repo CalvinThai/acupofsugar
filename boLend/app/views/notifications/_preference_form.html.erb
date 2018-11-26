@@ -1,0 +1,19 @@
+<p>I'd like to receive email notifications on...</p>
+
+<%= form_for([@user, @notification])  do |f| %>
+    <div class="field">
+        <%= f.label "Borrow / due date extension requests from others: " %>
+        <%= f.check_box :i_req_by_others %> <br />
+    </div>
+    <div class="field">
+        <%= f.label "Approval for borrow / due date extension requests you sent: " %> 
+        <%= f.check_box :i_req_approval_alert %> <br />
+    </div>
+    <div class="field">
+        <%= f.label "Early due date alert for an item on hold: " %> 
+        <%= f.check_box :i_due_alert %> <br />
+    </div>
+    <div class="actions">
+      <%= f.submit "Confirm" %>
+    </div>
+<% end %>

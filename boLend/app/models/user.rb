@@ -13,6 +13,7 @@ class User < ApplicationRecord
   has_many :review_lender_and_items, dependent: :destroy
   has_many :review_borrowers, dependent: :destroy
   has_many :item_transactions, dependent: :destroy
+  has_many :notifications, dependent: :destroy
   has_many :conversations, :foreign_key => :sender_id
   has_many :blockees
   has_one_attached :avatar

@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     resources :lend_items
     resources :review_lender_and_items
     resources :review_borrowers
+    resources :notifications
     member do
       get :confirm_email
     end

@@ -18,7 +18,12 @@ class SessionsController < ApplicationController
         if user.email_confirmed
           flash[:failure] = "suceess"
           session[:user_id] = user.id
-          redirect_to user #should login to the user page
+          if (!session[:auth])
+            redirect_to user #should login to the user page
+          else 
+            session[:auth] = nil
+            redirect_to session.delete(:return_to)
+          end
           # Log the user in and redirect to the user's show page.
           
           #redirect_to profile_path #save for later use, redirect user to /profile page rather than /user/:id - by jiehao

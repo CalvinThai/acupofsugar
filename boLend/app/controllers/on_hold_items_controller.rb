@@ -10,6 +10,14 @@ class OnHoldItemsController < ApplicationController
 	end
 	def create
 		@on_hold_item = @user.on_hold_items.create(on_hold_item_params)
+		#send borrow request notification if preference is set
+		@notif = Notification.find_by_user_id(@user.id)
+		if @on_hold_item.save && @notif.i_req_by_others
+			item = Item.find(@on_hold_item.item_id)
+			lender = User.find(item.user_id)
+			borrower = User.find(@on_hold_item.user_id)
+			UserMailer.new_borrow_request(lender, borrower, item).deliver_now
+		end
    		#back_to_prev_path
    		#defining locals 
    		set_locals_render_partial

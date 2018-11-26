@@ -36,6 +36,7 @@ class ItemsController < ApplicationController
 
 	def index
 		#find user if view is for /users/:id/items
+		auth_and_redirect
 		if(params[:user_id])
 			@user = User.find(params[:user_id])
 			get_manageable_items
@@ -68,6 +69,7 @@ class ItemsController < ApplicationController
 	end
 
 	def show #can be invoked from many URI; use the item_path if applicable
+		#auth_and_redirect
 		@user;
 		if(session[:user_id])
 		  	@user = User.find(session[:user_id])
@@ -115,8 +117,21 @@ class ItemsController < ApplicationController
 		@transaction_items = ItemTransaction.joins(:item, :user).select("item_transactions.*").where('item_transactions.user_id = ?', params[:user_id])
 		@trans_lent = @transaction_items.where(user_status: 'Lender')
 		@trans_borrow = @transaction_items.where(user_status: 'Borrower')
-		#@returend_items = @lend_items.where(approved: 'returned')
 	 end
 
-
+	 def auth_and_redirect
+	 	#puts("in auth_redirect")
+	 	if(params[:auth] && params[:auth] == "login_required")
+			session[:auth] = params[:auth]
+			#if no session exist, prompt user to sign in
+			if(session[:user_id] == nil || session[:user_id] != params[:user_id])
+				#clear session
+				session[:user_id] = nil
+				return_addr = request.fullpath if request.get? 
+				#come back to current page after successful login, with removed param[:auth]
+				session[:return_to] ||= return_addr.slice(0..return_addr.index('?')-1)
+				redirect_to login_path
+			end
+		end
+	 end
 end

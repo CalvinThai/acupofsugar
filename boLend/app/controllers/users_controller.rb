@@ -16,6 +16,12 @@ class UsersController < ApplicationController
 	def show
 		#@user = User.find(params[:id])
     @user = User.find(session[:user_id])
+
+    #temporary fix for creating notification preferences if doesn't exist yet
+    @notification = Notification.find_by_user_id(@user.id)
+    if(!@notification)
+      @notification = Notification.create(:user_id => @user.id)
+    end
     #@user = User.find(1)
 
 	end
@@ -38,6 +44,7 @@ class UsersController < ApplicationController
     if @user.save
       UserMailer.registration_confirmation(@user).deliver_now
       #UserMailer.with(user: @user).welcome_email.deliver
+      Notification.create(:user_id => @user.id);
       flash[:registration_msg] = "Registration successful! Please verify your email address."
       redirect_to users_new_url
 
