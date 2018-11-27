@@ -1,14 +1,28 @@
 <h1><%= @user.fname %>'s personal page</h1>
 
-<p>
-<%= link_to 'Manage items >', user_items_path(@user) %>
-</p>
-<p>
-<%= link_to 'Manage notification preferences >', user_notification_path(@user.id, @notification.id)%>
-</p>
-<p>
-<%= link_to 'Edit user information', edit_user_path(@user)%>
-</p>
-<p>
-<%= link_to "Your Messages", conversations_path %>
-</p>
+<% if @user == @logged_in_user %>
+	<p> Name: <%= @user.fname %> <%= @user.lname %> </p>
+	<p> Email Address: <%= @user.email %> </p>
+	<p> Address: <%= @user.address %> </p>
+	<p> Telephone number: <%= @user.phonenum %> </p>
+	<p>
+	<%= link_to 'Manage items >', user_items_path(@user) %>
+	</p>
+	<p>
+	<%= link_to 'Manage notification preferences >', user_notification_path(@user.id, @notification.id)%>
+	</p>
+	<p>
+	<%= link_to 'Edit user information', edit_user_path(@user)%>
+	</p>
+	<p>
+	<%= link_to "Your Messages", conversations_path %>
+	</p>
+<% else %> 
+	<p> Name: <%= @user.fname %> <%= @user.lname %> </p>
+	<p> Email Address: <%= @user.email %> </p>
+	<p> Address: <%= @user.address %> </p>
+	<p> Telephone number: <%= @user.phonenum %> </p>
+	<p>
+	<%= link_to 'View items >', user_item_path(@user) %>
+	</p>
+<% end %>
