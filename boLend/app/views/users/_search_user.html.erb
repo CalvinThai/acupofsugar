@@ -1,7 +1,4 @@
-<%= form_tag(users_path, method: :get) do %>
-    <%= text_field_tag :name, params[:name], placeholder: "Search user name" %>
-    <%= submit_tag 'Search ', name: nil %>
-<% end %>
+<div class="container">
 <% if not @users.present? %>
 	<% if params[:name].present? and @users.blank?%>
 		<div>
@@ -14,5 +11,6 @@
 		<%= render "friendships/user_friendships" , collection: @users, name: params[:name]%>
 	</div>
 <% end %>
+</div>
 
 

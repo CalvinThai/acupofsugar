@@ -1,26 +1,39 @@
-<h1>
-	<%= @time %>
-	<%=@user.fname.capitalize%>
-</h1>
+<div class="container">
+	<div class="row">
+	<!-- <div class="row">
+		<div class="col-sm-12 text-center">
+			<h1 class="test">
+				<%= @time %>
+				<%=@user.fname.capitalize%>
+			</h1>
+		</div>
+	</div>
+	<br/> -->
+	<br/>
 
-<div id="search_user_list">
-	<%= render  "users/search_user" %>
+	<div class="col-lg-4">
+		<div id="friend_request_list" >
+			<%= render  "friendships/friend_requests"%>
+		</div>
+		<br/>
+
+		<div id="friend_list">
+			<%= render  "friendships/friends"%>
+		</div>
+		<br/>
+
+		<div id="block_list">
+			<%= render  "friendships/blocks"%>
+		</div>
+		
+		<%= link_to 'Go to your personal page', user_path(@user) %> <!-- login should bring user to this path -->
+	</div>
+	<br/>
+	<div id="search_user_list" class="col-lg-4">
+			<%= render  "users/search_user" %>
+	</div>
+	
+	<div class="col-lg-4">
+	</div>
 </div>
-<br/>
-
-<div id="friend_request_list">
-	<%= render  "friendships/friend_requests"%>
 </div>
-<br/>
-
-<div id="friend_list">
-	<%= render  "friendships/friends"%>
-</div>
-<br/>
-
-<div id="block_list">
-	<%= render  "friendships/blocks"%>
-</div>
-<br/>
-
-<%= link_to 'Go to your personal page', user_path(@user) %> <!-- login should bring user to this path -->
