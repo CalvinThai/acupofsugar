@@ -10,7 +10,7 @@ def new
 end
 
 def create
-	@user = User.find(params[:review_lender_and_item][:user_id])
+	  @user = User.find(params[:review_lender_and_item][:user_id])
     @item = Item.find(params[:review_lender_and_item][:item_id])
     @review_lender = @user.review_lender_and_items.create(review_params)
     @lender_id = params[:review_lender_and_item][:lender_id]
@@ -21,6 +21,10 @@ def create
       @borrowed_item = @user.borrowed_items.find_by_item_id(@item.id)
       @borrowed_item.set_returned_date
       ItemTransaction.create( :user_id => @user.id, :item_id => @item.id, :returned_on => @borrowed_item.returned_on, :due_date => @borrowed_item.due_date, :user_status => 'Borrower', :other_user_id => @lender_id, :review_lender_and_item_id => @review_lender.id)      
+
+      lender = User.find(@item.user_id)
+      #send return confirmation email to borrower
+      UserMailer.confirm_return(lender, @item).deliver_later     
 
       redirect_to user_items_path(@user)
     else

@@ -23,11 +23,13 @@ def create
       #create transaction entry
       ItemTransaction.create(:user_id => @user.id, :item_id => @item.id, :returned_on => @borrowed_item.returned_on, :due_date => @borrowed_item.due_date, :user_status => 'Lender' , :other_user_id => @borrower_id, :review_borrower_id => @review_borrower.id)
       
+      borrower = User.find(@borrowed_item.user_id)
+      #send return confirmation email to borrower
+      UserMailer.confirm_return(borrower, @item).deliver_later        
 
-      #clear on_hold_item & borrowed_item entries
+        #clear on_hold_item & borrowed_item entries
        @on_hold_item.destroy
        @borrowed_item.destroy
-
       redirect_to user_items_path(@user)
     else
       flash[:alert] = "Information did not meet requirements"

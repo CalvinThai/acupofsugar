@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  #fixes email linkes/sidekiq host error
+  default_url_options :host => "localhost:3000"
+
+  #monitoring scheduled mailer queue
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
   get 'admin/index'
   get 'welcome/index'
   root 'welcome#index'

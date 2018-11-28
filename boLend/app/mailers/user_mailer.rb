@@ -52,27 +52,29 @@ class UserMailer <ActionMailer::Base
   	@status = status
   	mail to: @borrower.email, subject: "Bolend: #{@lender.fname.capitalize} #{@lender.lname.capitalize} has #{@status.downcase} your extension request"
   end  
-  
-  def lender_due_date_alert(lender, borrower, item)
-  	@lender = lender
-  	@borrower = borrower
-  	@item = item
-  	mail to: @lender.email, subject: "Bolend: Your #{@item.name} is due. Please take an action"
-  end  
 
-  def borrower_due_date_alert(lender, borrower, item, days)
-  	@lender = lender
+  def smart_due_date_alert(borrower, item, days)
   	@borrower = borrower
   	@item = item
   	@days = days
   	mail to: @borrower.email, subject: "Bolend: #{@item.name.capitalize} is due in #{@days}. Please take an action"
   end  
 
-  def confirm_pickup(alert_to, lender, borrower, item)
+  def due_date_alert(alert_to, item)
   	@alert_to = alert_to
-  	@lender = lender
-  	@borrower = borrower
+  	@item = item
+  	mail to: @alert_to.email, subject: "Bolend: #{@item.name} - item is DUE. Please take an action"
+  end  
+
+  def confirm_pickup(alert_to, item)
+  	@alert_to = alert_to
   	@item = item
   	mail to: @alert_to.email, subject: "Bolend: #{@item.name} - item pickup confirmation"
+  end  
+
+  def confirm_return(alert_to, item)
+  	@alert_to = alert_to
+  	@item = item
+  	mail to: @alert_to.email, subject: "Bolend: #{@item.name} - item return confirmation"
   end  
 end

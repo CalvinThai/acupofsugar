@@ -16,7 +16,10 @@ class OnHoldItemsController < ApplicationController
 			item = Item.find(@on_hold_item.item_id)
 			lender = User.find(item.user_id)
 			borrower = User.find(@on_hold_item.user_id)
-			UserMailer.new_borrow_request(lender, borrower, item).deliver_now
+			UserMailer.new_borrow_request(lender, borrower, item).deliver_later
+		elsif !@on_hold_item.save
+			flash[:alert] = "Information did not meet requirements"
+      		#render :new
 		end
    		#back_to_prev_path
    		#defining locals 
@@ -38,19 +41,17 @@ class OnHoldItemsController < ApplicationController
 		borrower = User.find(@on_hold_item.user_id)
 		if params[:result] == "approved"
 			@on_hold_item.approve_req
-			@on_hold_item.save
 			#send borrower status update
 			if @on_hold_item.save && @notif.i_req_approval_alert
-				UserMailer.accept_borrow_request(lender, borrower, @item, params[:result]).deliver_now
+				UserMailer.accept_borrow_request(lender, borrower, @item, params[:result]).deliver_later
 			end
 			#@item.lent_out <-- will do this when borrowed item is created
 			redirect_to  user_items_path(params[:user_id])
 		elsif params[:result] == "denied"
 			@on_hold_item.reject_req
-			@on_hold_item.save
 			#send borrower status update
 			if @on_hold_item.save && @notif.i_req_approval_alert
-				UserMailer.accept_borrow_request(lender, borrower, @item, params[:result]).deliver_now
+				UserMailer.accept_borrow_request(lender, borrower, @item, params[:result]).deliver_later
 			end
 			redirect_to  user_items_path(params[:user_id])
 		end
