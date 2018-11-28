@@ -82,3 +82,5 @@ gem 'figaro'
 gem 'omniauth-facebook'
 
 gem "pg"
+
+gem "font-awesome-rails"
