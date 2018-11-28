@@ -2,13 +2,13 @@
  	<div>
 		<!--should be directed to user profile page later -->
 		<% if not @user.blocked_friends.include?(user)%>
-			<%= link_to "#{user.fname} #{user.lname}", user_path(user) %> 
+			<%= link_to "#{user.fname.capitalize} #{user.lname.capitalize}", user_path(user),style:"padding-right:1em" %>
 			<% if user != @user%>
-				<%= button_to 'Send Message', conversations_path(sender_id: current_user.id, recipient_id: user.id), form: {style:'display:inline-block;'}, method: :post %>
+				<%= button_to 'Send Message', conversations_path(sender_id: current_user.id, recipient_id: user.id), form: {style:'display:inline-block;'}, method: :post,class:'cta' %>
 				<% if @user.friends.include?(user) %> 
 					<%= button_tag 'Friends', disabled: true %> 
 				<% elsif not @user.pending_friends.include?(user)%> 
-					<%= button_to 'Add Friend', user_friendships_path(@user,friend_requirer: @user, friend_requiree:user,name: params[:name]), form: {style:'display:inline-block;'}, remote: true%> 
+					<%= button_to 'Add Friend', user_friendships_path(@user,friend_requirer: @user, friend_requiree:user,name: params[:name]), form: {style:'display:inline-block;'}, class:'cta',remote: true%> 
 				<% else%> 
 					<%= button_tag 'Friend Request Sent', disabled: true %>
 

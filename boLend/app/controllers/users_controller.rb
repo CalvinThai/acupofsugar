@@ -14,8 +14,9 @@ class UsersController < ApplicationController
     @users = User.all
   end
 	def show
-		#@user = User.find(params[:id])
-    @user = User.find(session[:user_id])
+		@user = User.find(params[:id])
+    @logged_in_user = User.find(session[:user_id])
+    #@user = User.find(session[:user_id])
 
     #temporary fix for creating notification preferences if doesn't exist yet
     @notification = Notification.find_by_user_id(@user.id)

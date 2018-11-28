@@ -1,0 +1,25 @@
+// Custom css
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.cta{
+    font-size: 15px;
+    display: inline-block;
+    color: #0099e5;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+    height: 40px;
+    padding: 0 15px;
+    border: 2px solid #0099e5;
+    line-height: 34px;
+    font-weight: bold;
+    text-shadow: none;
+    cursor: pointer;
+    background-color: transparent;
+    -webkit-transition: 0.1s ease-in-out;
+    -moz-transition: 0.1s ease-in-out;
+    transition: 0.1s ease-in-out;
+}
+
+a{
+	font-size: 18px;
+}

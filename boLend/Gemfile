@@ -84,3 +84,5 @@ gem 'omniauth-facebook'
 gem "pg"
 
 gem "sidekiq"
+
+gem "font-awesome-rails"
