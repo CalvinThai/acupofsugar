@@ -16,9 +16,13 @@
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
 					<ul class="list-inline">
 				  	 	<li class="list-inline-item"> <%= link_to '<i class="fa fa-home" aria-hidden="true"></i> Home'.html_safe, root_path%></li>
-				  		<li class="list-inline-item"> <%= link_to "Login", login_path %></li>
-				  		<li class="list-inline-item"> <%= link_to "Signup", new_user_path %></li>
-				  	  	<li class="list-inline-item"> <%= link_to "Logout", logout_path %> </li>
+						<% if session[:user_id].nil?%>
+				  			<li class="list-inline-item"> <%= link_to "Login", login_path %></li>
+							<li class="list-inline-item"> <%= link_to "Signup", new_user_path %></li>
+						<% end %>
+						<% if not session[:user_id].nil?%>
+				  	  		<li class="list-inline-item"> <%= link_to "Logout", logout_path %> </li>
+						<% end %>
 					</ul>
 				</div>
 				
