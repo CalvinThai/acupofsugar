@@ -1,9 +1,11 @@
 class SessionsController < ApplicationController
 
   def new
+    @user = current_user
   	
   end
   def create
+    @user = current_user
   if (session[:user_id] != nil)
     flash[:failure] = "Already logged in"
     redirect_to login_url

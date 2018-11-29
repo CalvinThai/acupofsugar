@@ -35,6 +35,7 @@ class ItemsController < ApplicationController
 
 
 	def index
+		@user = User.find(params[:user_id])
 		#find user if view is for /users/:id/items
 		auth_and_redirect
 		if(params[:user_id])
