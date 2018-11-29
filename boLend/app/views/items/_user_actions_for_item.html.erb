@@ -1,30 +1,33 @@
-<%if @user && @user.id != @owner_id%>
-	<%if !@user.wish_lists.find_by_item_id(@item.id) %>
-	<div onclick="ajax_user_action(<%=@user.id %>,<%= @item.id%>,'', 'itemIndex', 2, 'POST', '#user_actions', '')">Wish list this item<%#= link_to 'Wish list this item' , user_wish_lists_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), method: :post%></div>
-	<%else%>
-		<div onclick="ajax_user_action(<%=@user.id %>,<%= @item.id%>,'', 'itemIndex', 3, 'DELETE', '#user_actions', '')">Remove from wish list<%#= link_to 'remove from wish list' , user_wish_list_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), method: :delete%></div>
-	<%end%>
-
-	<% bi = @user.borrowed_items.find_by_item_id(@item.id)%>
-	<%if bi %>
-	<div><%= link_to 'Return this item', new_user_review_lender_and_item_path(user_id: @user.id, item_id: @item.id, lender_id: @owner_id)%></div>
-	<div>
-		<%if bi.approved == nil%>
-		<%= link_to 'Send due date extension', edit_user_borrowed_item_path(user_id: @user.id, id: @item.id)%>
+<div class="container">
+	<div class="flex justify-content-center">
+	<%if @user && @user.id != @owner_id%>
+		<%if !@user.wish_lists.find_by_item_id(@item.id) %>
+		<button onclick="ajax_user_action(<%=@user.id %>,<%= @item.id%>,'', 'itemIndex', 2, 'POST', '#user_actions', '')" class="btn btn-primary" >Wish list this item<%#= link_to 'Wish list this item' , user_wish_lists_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), method: :post%></button>
+		<%else%>
+			<button onclick="ajax_user_action(<%=@user.id %>,<%= @item.id%>,'', 'itemIndex', 3, 'DELETE', '#user_actions', '')" class="btn btn-primary">Remove from wish list<%#= link_to 'remove from wish list' , user_wish_list_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), method: :delete%></button>
 		<%end%>
-	</div>
-	<%end%>
 
-	<% ohi = @user.on_hold_items.find_by_item_id(@item.id)%>
-	<%if !ohi %>
-	<!--<div id="send_b_req" onclick="ajax_user_action(<%=@user.id %>,<%= @item.id%>,<%#= Time.now.strftime("%m/%d/%Y") %>, 'itemIndex', 0, 'POST', '#user_actions','')">Send borrow request<%#= link_to 'Send borrow request' , user_on_hold_items_path(user_id: @user.id, item_id: @item.id, req_on: Time.now.strftime("%m/%d/%Y"), from: 'itemIndex'), method: :post%></div>
-		<%#= render "items/duration_form" %> -->
-		<div><%= link_to 'Interested in this item?', new_user_on_hold_item_path(user_id: @user.id, item_id: @item.id), remote: true%></div>
-		<div id="render_duration_form"></div>
-	<%elsif ohi && ohi.approved != "Approved"%>
-		<div onclick="ajax_user_action(<%=@user.id %>,<%= @item.id%>,'', 'itemIndex',1,'DELETE', '#user_actions', '')">Cancel borrow request<%#= link_to 'Cancel borrow request' , user_on_hold_item_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), method: :delete %></div>
+		<% bi = @user.borrowed_items.find_by_item_id(@item.id)%>
+		<%if bi %>
+		<div><%= link_to 'Return this item', new_user_review_lender_and_item_path(user_id: @user.id, item_id: @item.id, lender_id: @owner_id), class: "btn btn-primary" %></div>
+		<div>
+			<%if bi.approved == nil%>
+			<%= link_to 'Send due date extension', edit_user_borrowed_item_path(user_id: @user.id, id: @item.id), class: "btn btn-primary"%>
+			<%end%>
+		</div>
+		<%end%>
+		<% ohi = @user.on_hold_items.find_by_item_id(@item.id)%>
+		<%if !ohi %>
+		<!--<div id="send_b_req" onclick="ajax_user_action(<%=@user.id %>,<%= @item.id%>,<%#= Time.now.strftime("%m/%d/%Y") %>, 'itemIndex', 0, 'POST', '#user_actions','')">Send borrow request<%#= link_to 'Send borrow request' , user_on_hold_items_path(user_id: @user.id, item_id: @item.id, req_on: Time.now.strftime("%m/%d/%Y"), from: 'itemIndex'), method: :post%></div>
+			<%#= render "items/duration_form" %> -->
+			<div><%= link_to 'Interested in this item?', new_user_on_hold_item_path(user_id: @user.id, item_id: @item.id), remote: true, class: "button btn btn-primary"%></div>
+			<div id="render_duration_form"></div>
+		<%elsif ohi && ohi.approved != "Approved"%>
+			<button onclick="ajax_user_action(<%=@user.id %>,<%= @item.id%>,'', 'itemIndex',1,'DELETE', '#user_actions', '')" class="btn btn-primary">Cancel borrow request<%#= link_to 'Cancel borrow request' , user_on_hold_item_path(user_id: @user.id, item_id: @item.id, from: 'itemIndex'), method: :delete %></button>
+		<%end%>
+	<!-- not logged in - prompt user to login/sign up -->
+	<%elsif @user == nil %>
+		<div>Interested in this item? <%=link_to 'Please login/sign up', login_path, method: :get,  class: "btn btn-primary" %></div>
 	<%end%>
-<!-- not logged in - prompt user to login/sign up -->
-<%elsif @user == nil %>
-	<div>Interested in this item? <%=link_to 'Please login/sign up', login_path, method: :get %></div>
-<%end%>
+	</div>
+</div>

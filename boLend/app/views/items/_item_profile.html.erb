@@ -1,6 +1,13 @@
-<% @item.images.each do |image| %>
-<p>
-	<%= image_tag(image) %>
-</p>
+<div class= "center-block">
+	<div class="swipe_images">
+<% if @item.images.length > 0%>
+	<% @item.images.each do |image| %>
+		<%= image_tag(image, class: "img-responsive") %>
+	<%end%>
+<%else%>
+	<%= image_tag("No_Image_Available.jpg", class: "img-responsive") %>
 <% end %>
-<p>Description: <%= @item.descr %></p>
+</div>
+</div>
+<p><string>DESCRIPTION:</string> <%= @item.descr %></p>
+

@@ -1,28 +1,41 @@
-<h1><%= @item.name %> is here </h1>
-<% @owner = User.find(@item.user_id)%>
-<p>contact owner: <%= link_to "#{@owner.fname} #{@owner.lname}", conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post"%> </p> <!-- should link to message -->
+<!DOCTYPE html>
+<html>
+	<body>
+		<div class="container">
 
-<!-- item profile here -->
-<div id="item_profile">
-	<%= render partial: 'item_profile' %>
-</div>
+		<h1><%= @item.name %></h1>
+		<% @owner = User.find(@item.user_id)%>
+		<p>
+			<div><string>OWNER:</string> <%= "#{@owner.fname} #{@owner.lname}" %> <%= link_to "[contact]" ,conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post"%> </div>
+			<div id="rating"><%= @ratings.to_i %></div>
+		</p> <!-- should link to message -->
 
-
-<!-- debugging purposes -->
-<%if !@user.errors %>
-<div>
-	<p>DB Error msg: </p>
-	<%= @user.errors.full_messages%>
-</div>
-<%end%>
-
-<!-- only allow other users to wishlist/send borrow request -->
-<div id="user_actions">
-	<%= render partial: 'user_actions_for_item' %>
-</div>
+		<!-- item profile here -->
+		<div id="item_profile">
+			<%= render partial: 'item_profile' %>
+		</div>
 
 
-<p><%= link_to '< To search items', items_path %></p>
-<%if session[:user_id] && session[:user_id] == @user.id%>
-<p><%= link_to '< To manage items' , user_items_path(@user.id)%></p>
-<%end%>
+		<!-- debugging purposes -->
+		<%if !@user.errors %>
+		<div>
+			<p>DB Error msg: </p>
+			<%= @user.errors.full_messages%>
+		</div>
+		<%end%>
+
+		<!-- only allow other users to wishlist/send borrow request -->
+		<div id="user_actions">
+			<%= render partial: 'user_actions_for_item' %>
+		</div>
+		<!-- show all reviews for this item from borrower -->
+		<div id="review_sections" >
+			<%= render partial: 'review_lender_and_items/item_reviews_from_borrower' %>
+		</div>
+		<p><%= link_to '< To search items', items_path, class: "btn btn-default" %></p>
+		<%if session[:user_id] && session[:user_id] == @user.id%>
+		<p><%= link_to '< To manage items' , user_items_path(@user.id), class: "btn btn-default"%></p>
+		<%end%>
+		</div>
+	</body>
+</html>

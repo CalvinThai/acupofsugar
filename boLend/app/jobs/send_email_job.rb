@@ -3,7 +3,10 @@ require 'sidekiq/api'
 class SendEmailJob < ApplicationJob
   queue_as :default
 
-  discard_on ActiveJob::DeserializationError
+  rescue_from(ActiveRecord::RecordNotFound) do |exception|
+    # ignore
+    puts exception
+  end
 
   def perform(lender_id, borrower_id, item_id, to_which)
   	if(!destroy_on_change)
