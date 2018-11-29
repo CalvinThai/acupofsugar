@@ -1,29 +1,42 @@
-<% if flash[:registration_msg] %>
-    <div class="notice"><%= flash[:registration_msg] %></div>
-<% end %>
-<h1>Sign up</h1>
+<div class="containter margin-top-5">
+	<div class="row">
+		<div class="col-lg-4 col-sm-4 col-xs-3"></div>
+		<div class="col-lg-4 col-sm-4 col-xs-6 login-border-style margin-bot-5">
+			<p class="text-center margin-bot-1 margin-top-2 font-18"> Sign up with <%= link_to "Facebook","/auth/facebook"%> </p>
+			<div class=" unified_signup__divider">
+				<div class="line"></div>
+				<div class="text font-18">or</div>
+				<div class="line"></div>
+			</div>
+    		<%= form_for :user, url: users_path do |f| %>
+				<% if flash[:registration_msg] %>
+			   	 	<div class="alert alert-danger"><%= flash[:registration_msg] %></div>
+				<% end %>
+				
+      	  		<%= f.label :fname %>
+      	  		<%= f.text_field :fname, :placeholder => "John",class: 'form-control margin-bot-1' %>
+	  	
+     	   		<%= f.label :lname %>
+      	 		<%= f.text_field :lname, :placeholder => "Smith",class: 'form-control margin-bot-1' %>
 
-    <%= form_for :user, url: users_path do |f| %>
-      <%= f.label :fname %>
-      <%= f.text_field :fname, :placeholder => "John" %>
+      	  		<%= f.label :email %>
+      	  		<%= f.email_field :email, :placeholder => "johnsmith55@gmail.com",class: 'form-control margin-bot-1' %>
 
-      <%= f.label :lname %>
-      <%= f.text_field :lname, :placeholder => "Smith" %>
+      	  		<%= f.label :password %>
+      	  		<%= f.password_field :password,class: 'form-control margin-bot-1' %>
 
-      <%= f.label :email %>
-      <%= f.email_field :email, :placeholder => "johnsmith55@gmail.com" %>
+      	  		<%= f.label :password_confirmation, "Confirmation" %>
+      	  		<%= f.password_field :password_confirmation,class: 'form-control margin-bot-1' %>
 
-      <%= f.label :password %>
-      <%= f.password_field :password %>
+     	   		<%= f.label :phonenum, "Phone Number" %>
+      	  		<%= f.text_field :phonenum, :placeholder => "416-754-7275",class: 'form-control margin-bot-1' %>
 
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation %>
+      	  		<%= f.label :address %>
+      	  		<%= f.text_field :address, :placeholder => "171 Silver Springs Blvd",class: 'form-control margin-bot-1' %>
 
-      <%= f.label :phonenum, "Phone Number" %>
-      <%= f.text_field :phonenum, :placeholder => "416-754-7275" %>
-
-      <%= f.label :address %>
-      <%= f.text_field :address, :placeholder => "171 Silver Springs Blvd" %>
-
-      <%= f.submit "Create my account" %>
-    <% end %>
+     	   		<%= f.submit "Create my account",class: "btn btn-info margin-bot-2 margin-top-1", style:"width:100%;" %>
+    		<% end %>
+		</div>
+		<div class="col-lg-4 col-sm-4 col-xs-3"></div>
+	</div>
+</div>
