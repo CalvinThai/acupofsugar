@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
           redirect_to login_url
         end
       else
-        flash[:failure] = "rekt"
+       flash[:failure] = "The emaill address or password you entered is incorrect. "
         redirect_to login_url
       end
     end

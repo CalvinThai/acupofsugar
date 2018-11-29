@@ -10,6 +10,7 @@
   </head>
 
   <body>
+	 <%if not session[:user_id].nil?%>
 	<nav class="navbar" style="border-radius:0px;border-bottom: 1px solid rgba(0,0,0,0.2);margin:0px;">
 		<div class="container" style="margin-top:1em;" >
 			<div class="row">
@@ -46,6 +47,7 @@
 			</div>
 		</div>
 	</nav>
+	<% end%>
     <%= yield %>
 	
   </body>
