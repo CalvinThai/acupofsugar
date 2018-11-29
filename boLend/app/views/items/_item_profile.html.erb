@@ -4,3 +4,11 @@
 </p>
 <% end %>
 <p>Description: <%= @item.descr %></p>
+
+<header><h1 class="display-4"><%= @item.name %></h1></header>
+
+<p>Address: <%= @item.address %></p>
+<p>Coordinates: <%= @item.latitude %> <%= @item.longitude %></p>
+
+<%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@item.latitude},#{@item.longitude}&markers=#{@item.latitude},#{@item.longitude}&zoom=7&size=640x400&key=AIzaSyB8VOIlsN2jBMd3C1NcWJPDId1OW64R3mQ",
+              class: 'img-fluid img-rounded', alt: "#{@item.name} on the map"%>
