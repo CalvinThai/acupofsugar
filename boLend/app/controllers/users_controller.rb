@@ -46,12 +46,12 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
       UserMailer.registration_confirmation(@user).deliver_now
       #UserMailer.with(user: @user).welcome_email.deliver
       Notification.create(:user_id => @user.id);
-      flash[:registration_msg] = "Registration successful! Please verify your email address."
+      flash[:success_msg] = "Registration successful! Please verify your email address."
       redirect_to users_new_url
 
     else
-      flash[:registration_msg] = "Registration Failure"
-      redirect_to users_new_url
+      flash[:failure_msg] = "Registration failed"
+      render 'new'
     end
   end
 
