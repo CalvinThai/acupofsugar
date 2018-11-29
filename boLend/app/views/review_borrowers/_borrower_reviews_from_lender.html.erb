@@ -1,0 +1,17 @@
+<div class="container">
+  <h2>Reviews for this item: </h2>
+  <%if @reviews.length > 0 %>       
+  <table class="table">
+    <tbody>
+      <% @reviews.each do |reviewer| %>
+      <tr>
+        <td><%= "#{reviewer.fname reviewer.lname}"%></td> <!-- link to view user profile?-->
+        <td><%= reviewer.ratings %></td>
+        <td><%= reviewer.comments %></td>
+      </tr>
+      <%end%>
+    </tbody>
+    <% end %>
+  </table>
+  <%end%>
+</div>

@@ -35,6 +35,7 @@ class ItemsController < ApplicationController
 
 
 	def index
+		@user = User.find(params[:user_id])
 		#find user if view is for /users/:id/items
 		auth_and_redirect
 		if(params[:user_id])
@@ -77,6 +78,10 @@ class ItemsController < ApplicationController
 		#find user if not passed by params, required for user-specific actions
 		@item = Item.find(params[:id])
 		@owner_id = @item.user_id
+
+		#for review section
+		@reviews = ReviewLenderAndItem.joins(:user).select("review_lender_and_items.*, users.*").where("review_lender_and_items.item_id = ?", @item.id)
+		@ratings = @reviews.average(:rating)
 	end
 	def edit
 		@user = User.find(params[:user_id])

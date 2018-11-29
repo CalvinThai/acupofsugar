@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   #fixes email linkes/sidekiq host error
-  default_url_options :host => "localhost:3000"
-
+  #default_url_options :host => "localhost:3000"
+  default_url_options :host => "acupofsugar.herokuapp.com"
   #monitoring scheduled mailer queue
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
