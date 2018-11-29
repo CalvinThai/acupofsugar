@@ -26,27 +26,20 @@ class BorrowedItemsController < ApplicationController
       #add due date smart alerts for borrower to the delay queue 
       #email will be sent 1 week before, 3 days before and the day before due date
       duration = ((@borrowed_item.due_date.to_i - Time.now.to_i) / 1.day)
-      # puts "@@@@@@@@@@@@@@@@@@@@@ duration = #{duration} days"
       if @notif.i_due_alert
         if duration-7 > 0
-          #puts "@@@@@@@@@@@@@@@@@adding 1 week pre-notification"
-          SendEmailJob.set(wait: (duration-7).minutes).perform_later(lender.id, borrower.id, @item.id, "smart_alert")
+          SendEmailJob.set(wait: (duration-7).days).perform_later(lender.id, borrower.id, @item.id, "smart_alert")
         end
         if duration-3 > 0
-          #puts "@@@@@@@@@@@@@@@@@adding 3 days pre-notification"
-          SendEmailJob.set(wait: (duration-3).minutes).perform_later(lender.id, borrower.id, @item.id, "smart_alert")
+          SendEmailJob.set(wait: (duration-3).days).perform_later(lender.id, borrower.id, @item.id, "smart_alert")
         end
         if duration-1 > 0
-          #puts "@@@@@@@@@@@@@@@@@adding 1 day pre-notification"
-          SendEmailJob.set(wait: (duration-1).minutes).perform_later(lender.id, borrower.id, @item.id, "smart_alert")
+          SendEmailJob.set(wait: (duration-1).days).perform_later(lender.id, borrower.id, @item.id, "smart_alert")
         end
       end
       #unconditional mailer to be delivered to both lender/borrower on due date
-      #puts "@@@@@@@@@@@@@@@@@adding due notification for borrower"
-      SendEmailJob.set(wait: duration.minutes).perform_later(lender.id, borrower.id, @item.id, "Borrower")
-      #puts "@@@@@@@@@@@@@@@@@adding due notification for lender"
-      SendEmailJob.set(wait: duration.minutes).perform_later(lender.id, borrower.id, @item.id, "Lender")
-      #pick up confirmation email to both users - send instantly
+      SendEmailJob.set(wait: duration.days).perform_later(lender.id, borrower.id, @item.id, "Borrower")
+      SendEmailJob.set(wait: duration.days).perform_later(lender.id, borrower.id, @item.id, "Lender")
       UserMailer.confirm_pickup(borrower, @item).deliver_later 
       UserMailer.confirm_pickup(lender, @item).deliver_later 
       
@@ -92,29 +85,26 @@ class BorrowedItemsController < ApplicationController
           if @notif.i_req_approval_alert
             UserMailer.accept_extension_request(lender, borrower, @item, params[:result]).deliver_later
           end
+          #delete all pre-scheduled job for this item
+          SendEmailJob.delete_prev_entries(@item.id)
+
           #add new due date smart alerts for borrower to the delay queue 
           #email will be sent 1 week before, 3 days before and the day before due date
           duration = ((@borrowed_item.due_date.to_i - Time.now.to_i) / 1.day)
-          #puts "@@@@@@@@@@@@@@@@@@@@@ duration = #{duration} days"
           if @notif.i_due_alert
             if duration-7 > 0
-              #puts "@@@@@@@@@@@@@@@@@adding 1 week pre-notification"
-              SendEmailJob.set(wait: (duration-7).minutes).perform_later(lender.id, borrower.id, @item.id, "smart_alert")
+              SendEmailJob.set(wait: (duration-7).days).perform_later(lender.id, borrower.id, @item.id, "smart_alert")
             end
             if duration-3 > 0
-              #puts "@@@@@@@@@@@@@@@@@adding 3 days pre-notification"
-              SendEmailJob.set(wait: (duration-3).minutes).perform_later(lender.id, borrower.id, @item.id, "smart_alert")
+              SendEmailJob.set(wait: (duration-3).days).perform_later(lender.id, borrower.id, @item.id, "smart_alert")
             end
             if duration-1 > 0
-             # puts "@@@@@@@@@@@@@@@@@adding 1 day pre-notification"
-              SendEmailJob.set(wait: (duration-1).minutes).perform_later(lender.id, borrower.id, @item.id, "smart_alert")
+              SendEmailJob.set(wait: (duration-1).days).perform_later(lender.id, borrower.id, @item.id, "smart_alert")
             end
           end
           #unconditional mailer to be delivered to both lender/borrower on due date
-          #puts "@@@@@@@@@@@@@@@@@adding due notification for borrower"
-          SendEmailJob.set(wait: duration.minutes).perform_later(lender.id, borrower.id, @item.id, "Borrower")
-          #puts "@@@@@@@@@@@@@@@@@adding due notification for lender"
-          SendEmailJob.set(wait: duration.minutes).perform_later(lender.id, borrower.id, @item.id, "Lender")
+          SendEmailJob.set(wait: duration.days).perform_later(lender.id, borrower.id, @item.id, "Borrower")
+          SendEmailJob.set(wait: duration.days).perform_later(lender.id, borrower.id, @item.id, "Lender")
       redirect_to  user_items_path(params[:user_id])
     elsif params[:result] == "denied"
       @borrowed_item.reject_req

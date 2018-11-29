@@ -7,4 +7,6 @@
 <!-- user specific view for /users/:id/items -->
 <%if @user && session[:user_id] && session[:user_id] == @user.id%>
 	<div id="user_items"><%= render  "items/manage_items_view" %></div>
+<%else%>
+	<div id="items"><%= render "items/user_item_public_view" %></div>
 <%end%>

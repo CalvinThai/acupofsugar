@@ -57,7 +57,7 @@ class UserMailer <ActionMailer::Base
   	@borrower = borrower
   	@item = item
   	@days = days
-  	mail to: @borrower.email, subject: "Bolend: #{@item.name.capitalize} is due in #{@days}. Please take an action"
+  	mail to: @borrower.email, subject: "Bolend: #{@item.name.capitalize} is due in #{@days} day(s). Please take an action"
   end  
 
   def due_date_alert(alert_to, item)
