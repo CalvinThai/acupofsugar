@@ -1,9 +1,11 @@
 class SessionsController < ApplicationController
 
   def new
+    @user = current_user
   	
   end
   def create
+    @user = current_user
   if (session[:user_id] != nil)
     flash[:failure] = "Already logged in"
     redirect_to login_url
@@ -33,7 +35,7 @@ class SessionsController < ApplicationController
           redirect_to login_url
         end
       else
-        flash[:failure] = "rekt"
+       flash[:failure] = "The emaill address or password you entered is incorrect. "
         redirect_to login_url
       end
     end
