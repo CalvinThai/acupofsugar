@@ -1,9 +1,9 @@
 class SessionsController < ApplicationController
 skip_before_action :require_login
   def new
-    @user = current_user
-  	
+    @user = current_user	
   end
+  
   def create
     @user = current_user
   if (session[:user_id] != nil)

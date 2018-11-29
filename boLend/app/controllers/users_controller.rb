@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :update]
 	def index
     @users = User.user_search(params[:name])
     if session[:user_id].nil?
