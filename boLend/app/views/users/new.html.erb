@@ -46,7 +46,10 @@
   				<%= f.label :address %>
   				<%= f.text_field :address, :placeholder => "171 Silver Springs Blvd",class: 'form-control margin-bot-1' %>
 
-   				<%= f.submit "Create my account",class: "btn btn-info margin-bot-1 margin-top-1", style:"width:100%;" %>
+   				<%= f.submit "Create my account",class: "btn btn-info margin-top-1", style:"width:100%;" %>
+				<hr class="hr-color"/>
+				<div class="text-center font-14">By signing up, you agree to our <%= link_to 'Terms of Service', page_path('tos'), class:"font-14" %></div>
+				<div class="text-center font-14 margin-bot-2">Already have an account? <%= link_to "Log in", login_url, class:"font-14" %></div>
       	  	</div>
       		<div class="col-lg-4 col-sm-4 col-xs-3"></div>
    		</div>
