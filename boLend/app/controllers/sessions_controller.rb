@@ -19,13 +19,7 @@ skip_before_action :require_login
         if user.email_confirmed
           #flash[:failure] = "suceess"
           session[:user_id] = user.id
-          if (!session[:auth])
-            redirect_to user #should login to the user page
-          else 
-            session[:auth] = nil
-            params[:auth] = nil
-            redirect_to session.delete(:return_to)
-          end
+          redirect_to user #should login to the user page
           # Log the user in and redirect to the user's show page.
           
           #redirect_to profile_path #save for later use, redirect user to /profile page rather than /user/:id - by jiehao

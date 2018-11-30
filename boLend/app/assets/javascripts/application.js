@@ -13,12 +13,13 @@
 //= require rails-ujs
 //= require activestorage
 //= require turbolinks
-//= require_tree .
 
 //= require jquery
 //= require jquery_ujs
 
 //= require filterrific/filterrific-jquery
+
+//= require_tree .
 
 //ajax refresh for item profile user action buttons 
 
@@ -48,3 +49,21 @@ function ajax_user_action( user_id, item_id, req_on, from,url_index, url_method,
     },
   });
 }
+
+//rating display with stars
+$('document').ready(function(){
+  $('.rating-display').raty({
+    readOnly: true,
+
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+
+  $('.rating-form').raty({
+    readOnly: true,
+    path: '/assets/',
+    scoreName: 'review[rating]'
+  });
+});

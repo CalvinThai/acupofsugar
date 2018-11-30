@@ -1,6 +1,8 @@
 class ReviewBorrowersController < ApplicationController
 def index
-
+    @user = User.find(params[:user_id]);
+    @reviews = ReviewBorrower.joins(:user).select("review_borrowers.*, review_borrowers.rating as r_rating, users.*").where("review_borrowers.borrower_id = ?", @user.id)
+    @reviews_by_borrower = ReviewLenderAndItem.joins(:user).select("review_lender_and_items.*, review_lender_and_items.rating as r_rating, users.*").where("review_lender_and_items.lender_id = ?", @user.id)
 end
 def new
 	@user = User.find(params[:user_id])

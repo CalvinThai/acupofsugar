@@ -1,0 +1,7 @@
+
+<div class="container">
+	<h1><%="Reviews for #{@user.fname} #{@user.lname}"%></h1>
+	<p class="img-responsive rating-display" data-score="<%= @user.rating %>"></p>
+	<%= render partial: 'reviews_from_lender' %>
+	<%= render partial: 'reviews_from_borrower' %>
+</div>

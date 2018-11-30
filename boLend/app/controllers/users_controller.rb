@@ -24,6 +24,13 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
     if(!@notification)
       @notification = Notification.create(:user_id => @user.id)
     end
+    #temporary fix for rating
+    @rating = @user.rating
+    if(!@rating)
+      puts "@@@@@@@@@@@@@@@@@@@@@@@ no rating yet"
+      ReviewLenderAndItem.update_user_rating(@user.id)
+      ReviewBorrower.update_user_rating(@user.id)
+    end
     #@user = User.find(1)
 
 	end

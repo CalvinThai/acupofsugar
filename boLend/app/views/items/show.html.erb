@@ -1,21 +1,6 @@
 <!DOCTYPE html>
 <html>
 	<body>
-		<div class="container">
-
-		<h1><%= @item.name %></h1>
-		<% @owner = User.find(@item.user_id)%>
-		<p>
-			<div><string>OWNER:</string> <%= "#{@owner.fname} #{@owner.lname}" %> <%= link_to "[contact]" ,conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post"%> </div>
-			<div id="rating"><%= @ratings.to_i %></div>
-		</p> <!-- should link to message -->
-
-		<!-- item profile here -->
-		<div id="item_profile">
-			<%= render partial: 'item_profile' %>
-		</div>
-
-
 		<!-- debugging purposes -->
 		<%if !@user.errors %>
 		<div>
@@ -23,6 +8,19 @@
 			<%= @user.errors.full_messages%>
 		</div>
 		<%end%>
+
+		<div class="container">
+		<% @owner = User.find(@item.user_id)%>
+		<h1><%= @item.name %></h1> <span class="img-responsive rating-display" data-score="<%= @reviews.average(:rating) %>"></span>
+		<p>
+			<div><string>Owner:</string> <%= "#{@owner.fname} #{@owner.lname}" %> <%= link_to "[contact]" ,conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post"%> </div>
+
+		</p> <!-- should link to message -->
+
+		<!-- item profile here -->
+		<div id="item_profile">
+			<%= render partial: 'item_profile' %>
+		</div>
 
 		<!-- only allow other users to wishlist/send borrow request -->
 		<div id="user_actions">

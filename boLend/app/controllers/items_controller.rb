@@ -35,9 +35,10 @@ class ItemsController < ApplicationController
 
 
 	def index
-		@user = User.find(params[:user_id])
+		#@user = User.find(params[:user_id])
 		#find user if view is for /users/:id/items
-		auth_and_redirect
+		#auth_and_redirect
+		@user = nil
 		if(params[:user_id])
 			@user = User.find(params[:user_id])
 			get_manageable_items
@@ -125,10 +126,6 @@ class ItemsController < ApplicationController
 	 end
 
 	 def auth_and_redirect
-	 	#puts("@@@@@@@@@@@@@@@@in auth_redirect")
-	 	#puts("@@@@@@@@@@@@@@@@ session[:user_id] = #{session[:user_id]}")
-	 	#puts("@@@@@@@@@@@@@@@@ params[:user_id] = #{params[:user_id]}")
-
 	 	#if no session exist, prompt user to sign in
 	 	if(session[:user_id] == nil || session[:user_id].to_i != params[:user_id].to_i)
 	 		puts(session[:user_id] == nil)

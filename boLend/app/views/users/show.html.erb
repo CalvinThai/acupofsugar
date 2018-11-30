@@ -17,6 +17,9 @@
 	<p>
 	<%= link_to "Your Messages", conversations_path %>
 	</p>
+	<p>
+	<%= link_to "Reviews from others", user_review_borrowers_path(@user.id) %>
+	</p>
 <% else %> 
 	<p> Name: <%= @user.fname %> <%= @user.lname %> </p>
 	<p> Email Address: <%= @user.email %> </p>
@@ -24,5 +27,8 @@
 	<p> Telephone number: <%= @user.phonenum %> </p>
 	<p>
 	<%= link_to 'View items >', user_items_path(@user) %>
+	</p>
+	<p>
+	<%= link_to "View reviews >", user_review_borrowers_path(@user.id) %>
 	</p>
 <% end %>
