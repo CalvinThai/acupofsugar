@@ -18,21 +18,7 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
 	def show
 		@user = User.find(params[:id])
     @logged_in_user = User.find(session[:user_id])
-
-    #temporary fix for creating notification preferences if doesn't exist yet
     @notification = Notification.find_by_user_id(@user.id)
-    if(!@notification)
-      @notification = Notification.create(:user_id => @user.id)
-    end
-    #temporary fix for rating
-    @rating = @user.rating
-    if(!@rating)
-      puts "@@@@@@@@@@@@@@@@@@@@@@@ no rating yet"
-      ReviewLenderAndItem.update_user_rating(@user.id)
-      ReviewBorrower.update_user_rating(@user.id)
-    end
-    #@user = User.find(1)
-
 	end
   def new
     @user = User.new

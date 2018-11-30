@@ -11,7 +11,7 @@
 
 		<div class="container">
 		<% @owner = User.find(@item.user_id)%>
-		<h1><%= @item.name %></h1> <span class="img-responsive rating-display" data-score="<%= @reviews.average(:rating) %>"></span>
+		<h1><%= @item.name %></h1> <span class="img-responsive rating-display" data-score="<%= @reviews.average(:rating).to_i %>"></span>
 		<p>
 			<div><string>Owner:</string> <%= "#{@owner.fname} #{@owner.lname}" %> <%= link_to "[contact]" ,conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post"%> </div>
 

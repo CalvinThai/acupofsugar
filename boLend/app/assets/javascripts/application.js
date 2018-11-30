@@ -50,20 +50,24 @@ function ajax_user_action( user_id, item_id, req_on, from,url_index, url_method,
   });
 }
 
-//rating display with stars
+//rating display with stars; runs after images are loaded
 $('document').ready(function(){
   $('.rating-display').raty({
-    readOnly: true,
-
-    score: function() {
-      return $(this).attr('data-score');
-    },
-    path: '/assets/'
-  });
-
-  $('.rating-form').raty({
-    readOnly: true,
-    path: '/assets/',
-    scoreName: 'review[rating]'
-  });
+      readOnly: true,
+      score: function() {
+        return $(this).attr('data-score');
+      },
+      path: '/assets/',
+      size: 24
+    });
+  $('.rating-form-ild').raty({
+      path: '/assets/',
+      scoreName: 'review_lender_and_item[rating]',
+      size: 24
+    });
+  $('.rating-form-brw').raty({
+      path: '/assets/',
+      scoreName: 'review_borrower[rating]',
+      size: 24
+    });
 });

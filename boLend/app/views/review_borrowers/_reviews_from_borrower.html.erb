@@ -3,7 +3,7 @@
   <%if @reviews_by_borrower.length > 0 %>   
   <table class="table">
     <tbody>
-      <% @reviews.each do |reviewer| %>
+      <% @reviews_by_borrower.each do |reviewer| %>
       <tr>
         <td><%= "#{reviewer.fname} #{reviewer.lname}"%></td> <!-- link to view user profile?-->
         <td><div class="img-responsive rating-display" data-score="<%= reviewer.r_rating %>"></div></td>

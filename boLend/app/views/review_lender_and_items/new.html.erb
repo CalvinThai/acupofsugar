@@ -28,8 +28,11 @@
      <%= form.hidden_field(:item_id , :value => @item.id) %>
      <%= form.hidden_field(:lender_id , :value => @item.user_id) %>
     <p>
-      <%= form.label 'Rate item/lender: ' %><br>
-      <%= form.number_field :rating %>
+      <div class="rating-form-ild">
+      <%#= form.label 'Rate item/lender: ' %>
+      <%#= form.number_field :rating %>
+      <label>Rate item/lender</label>
+      </div>
     </p>
     <p>
       <%= form.label 'Leave comment: ' %><br>

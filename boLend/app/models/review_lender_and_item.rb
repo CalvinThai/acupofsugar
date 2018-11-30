@@ -6,8 +6,8 @@ class ReviewLenderAndItem < ApplicationRecord
 
 	after_save :update_user_rating
 
-	def self.update_user_rating(target_user = nil)
-		target_user ||=self.other_user_id
+	def update_user_rating(target_user = nil)
+		target_user ||=self.lender_id
 		user = User.find(target_user)
 		all_ratings = ReviewLenderAndItem.select("review_lender_and_items.rating").where("review_lender_and_items.lender_id = ?", target_user)
 		rating_avg = all_ratings.average(:rating)
