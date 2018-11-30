@@ -8,6 +8,9 @@ class Item < ApplicationRecord
 	has_many_attached :images
 	validates :name, presence: true #{ message: "Name must be given." }
 	validates :descr, presence: true #{ message: "Brief description must be given." }
+	geocoded_by :address
+	after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
+
 
 	self.per_page = 5
 	scope :with_category, -> (category) { where('category = ?', category)}

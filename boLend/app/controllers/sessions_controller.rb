@@ -1,15 +1,14 @@
 class SessionsController < ApplicationController
 skip_before_action :require_login
   def new
-    @user = current_user	
+    # a logged in user should not see login page again until they log out
+    if current_user
+      redirect_to user_path(current_user)
+    end	
   end
   
   def create
     @user = current_user
-  if (session[:user_id] != nil)
-    flash[:failure] = "Already logged in"
-    redirect_to login_url
-  else
     if request.env['omniauth.auth']
       user = User.create_with_omniauth(request.env['omniauth.auth'])
       session[:user_id] = user.id    
@@ -18,7 +17,7 @@ skip_before_action :require_login
       user = User.find_by(email: params[:session][:email].downcase)
       if user && user.authenticate(params[:session][:password_digest])
         if user.email_confirmed
-          flash[:failure] = "suceess"
+          #flash[:failure] = "suceess"
           session[:user_id] = user.id
           if (!session[:auth])
             redirect_to user #should login to the user page
@@ -31,14 +30,13 @@ skip_before_action :require_login
           
           #redirect_to profile_path #save for later use, redirect user to /profile page rather than /user/:id - by jiehao
         else 
-          flash[:failure] =  'Please verify your email address.'
+          flash[:verification] =  'Please verify your email address first.'
           redirect_to login_url
         end
       else
-       flash[:failure] = "The emaill address or password you entered is incorrect. "
+       flash[:failure] = "The email address or password you entered is incorrect. "
         redirect_to login_url
       end
-    end
   end
 end
 =begin
@@ -66,7 +64,6 @@ end
 
 
   def destroy
-    flash[:failure] = "successfully logged out"
     session[:user_id] = nil
     redirect_to login_url
   end

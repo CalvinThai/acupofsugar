@@ -105,12 +105,12 @@ class ItemsController < ApplicationController
 	end
 	private
  	 def item_params
- 		 params.require(:item).permit(:name, :descr, :status, :category, images: [])
+ 		 params.require(:item).permit(:name, :descr, :status, :category, :address, images: [])
 	 end
  	 #get all items of interest by this user
  	 def get_manageable_items
  	 	@user_items = Item.where("items.user_id = ?",params[:user_id])
-	 	@borrowed_items = BorrowedItem.joins(:item).select("items.user_id as i_uid, items.*, borrowed_items.*").where('borrowed_items.user_id = ?', params[:user_id])		
+	 	@borrowed_items = BorrowedItem.joins(:item).select("items.user_id as i_uid, items.*, borrowed_items.*").where('borrowed_items.user_id = ?', params[:user_id])
 		@wish_items = WishList.joins(:item).select("items.user_id as i_uid, items.*, wish_lists.*").where('wish_lists.user_id = ?', params[:user_id]) #all items that have been wishlisted by this user
 		@on_hold_items = OnHoldItem.joins(:item).select("items.*, on_hold_items.*").where('on_hold_items.user_id = ?', params[:user_id])
 		@lend_items = OnHoldItem.joins(:item, :user).select("items.*, on_hold_items.*, users.email").where("items.user_id = ?", params[:user_id])
@@ -128,16 +128,16 @@ class ItemsController < ApplicationController
 	 	#puts("@@@@@@@@@@@@@@@@in auth_redirect")
 	 	#puts("@@@@@@@@@@@@@@@@ session[:user_id] = #{session[:user_id]}")
 	 	#puts("@@@@@@@@@@@@@@@@ params[:user_id] = #{params[:user_id]}")
-	 	
+
 	 	#if no session exist, prompt user to sign in
 	 	if(session[:user_id] == nil || session[:user_id].to_i != params[:user_id].to_i)
 	 		puts(session[:user_id] == nil)
 	 		puts(session[:user_id].to_i != params[:user_id].to_i)
 		 	if(params[:auth] && params[:auth] == "login_required")
-				session[:auth] = params[:auth]			
+				session[:auth] = params[:auth]
 				#clear session
 				session[:user_id] = nil
-				url = request.fullpath if request.get? 
+				url = request.fullpath if request.get?
 				uri = URI.parse(url)
 				query = Rack::Utils.parse_query(uri.query)
 				# Replace auth to true upon login
