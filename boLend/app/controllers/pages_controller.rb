@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
   include HighVoltage::StaticPage
-  layout :false
+  layout 'static'
   skip_before_action :require_login
 end
