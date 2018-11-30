@@ -27,6 +27,7 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
 
 	end
   def new
+    @user = User.new
   end
   def confirm_email
     user = User.find_by_confirm_token(params[:id])
