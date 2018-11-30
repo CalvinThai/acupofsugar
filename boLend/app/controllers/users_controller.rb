@@ -12,6 +12,7 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
     end
 	end
   def indexx
+    @user = current_user
     @users = User.all
   end
 	def show
