@@ -92,3 +92,6 @@ gem "font-awesome-rails"
 gem "google-cloud-storage", "~> 1.8", require: false
 
 gem 'jquery-raty-rails', github: 'bmc/jquery-raty-rails'
+
+#should fix using method - put/delete
+gem 'rails_12factor', group: :production

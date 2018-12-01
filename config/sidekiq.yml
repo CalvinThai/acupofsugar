@@ -1,5 +1,5 @@
   :verbose: true
-  :concurrency: 25
+  :concurrency: 7
   :queues:
-    - [mailers, 7]
-    - [default, 5]
+    - mailers
+    - default
