@@ -17,6 +17,8 @@ class User < ApplicationRecord
   has_many :notifications, dependent: :destroy
   has_many :conversations, :foreign_key => :sender_id
   has_many :blockees
+  #has_many :reports, as: :reportable               
+  #has_many :report_users
   has_one_attached :avatar
 
 

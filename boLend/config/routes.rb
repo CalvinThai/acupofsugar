@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'items/index'
   get 'items/show'
   resources :password_resets
+  resources :report_users
 
   resources :users do
   	resources :items do
@@ -52,6 +53,7 @@ Rails.application.routes.draw do
 end
 
 
+
   #save for later use, redirect user to /profile page rather than /user/:id - by jiehao
   #get 'profile', to: 'users#show'
 
@@ -60,4 +62,5 @@ end
  end
 
 get "*id" => 'pages#show', as: :page, format: false
+
 end
