@@ -10,19 +10,21 @@ class WishListsController < ApplicationController
       else
         flash[:failure_msg] = "Something went wrong!"
       end
-      set_locals_render_partial
+      #set_locals_render_partial
+      redirect_to user_items_path(params[:user_id])
 	end
 	def update
 	end
 	def destroy
    		@wish_item = @user.wish_lists.find_by_item_id(@item_id)
       item = Item.find(@wish_item.item_id).name
-    	@wish_item.destroy
-    	#back_to_prev_path
-      if(!@wish_item)
+      if(@wish_item.destroy)
         flash[:success_msg] = "Item [#{item}] has been deleted from your wish list!"
+      else
+        flash[:failure_msg] = "Something went wrong!"
       end
-      set_locals_render_partial
+      #set_locals_render_partial
+      redirect_to user_items_path(params[:user_id])
 	end
 	private
  	 def wish_item_params
