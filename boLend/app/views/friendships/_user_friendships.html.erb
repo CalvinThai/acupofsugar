@@ -14,10 +14,10 @@
 					<%= button_tag '<i class="fas fa-check"></i> Friends'.html_safe, class:'cta cta-background hidden-lg',disabled: true %>
 					<%= button_tag '<i class="fas fa-user-friends"></i>'.html_safe, class:'cta cta-background hidden-xs hidden-sm hidden-md',title:"Friends",disabled: true %>  
 				<% elsif not @user.pending_friends.include?(user)%> 
-					<%= button_to user_friendships_path(@user,friend_requirer: @user, friend_requiree:user,name: params[:name]), form: {style:'display:inline-block;'}, class:'cta',remote: true do%>
-					Add Friend <i class="fas fa-user-plus"></i>
+					<%= button_to user_friendships_path(@user,friend_requirer: @user, friend_requiree:user,name: params[:name]), form: {style:'display:inline-block;'}, class:'cta hidden-xs hidden-sm hidden-md',remote: true do%>
+					<i class="fas fa-user-plus"></i> Add Friend 
 					<%end%>
-					<%= button_to user_friendships_path(@user,friend_requirer: @user, friend_requiree:user,name: params[:name]), form: {style:'display:inline-block;'}, class:'cta',remote: true,title:"Add Friend" do%>
+					<%= button_to user_friendships_path(@user,friend_requirer: @user, friend_requiree:user,name: params[:name]), form: {style:'display:inline-block;'}, class:'cta hidden-lg',remote: true,title:"Add Friend" do%>
 					<i class="fas fa-user-plus"></i>
 					<%end%>
 						 
