@@ -1,0 +1,28 @@
+<h1>Listing users</h1>
+ 
+<table>
+  <tr>
+    <th>EMAIL</th>
+    <th>PASSWORD</th>
+    <th> FNAME </th>
+    <th> LNAME </th>
+    <th> email confirmed</th>
+    <th> phone </th>
+    <th> address</th>
+    <th></th>
+  </tr>
+ 
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%= user.password_digest %></td>
+      <td><%= user.fname %></td>
+      <td><%= user.lname %></td>
+      <td><%= user.email_confirmed %></td>
+      <td><%= user.confirm_token %></td>
+      <td><%= user.phonenum %></td>
+      <td><%= user.address %></td>
+
+    </tr>
+  <% end %>
+</table>
