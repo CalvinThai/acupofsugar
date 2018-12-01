@@ -18,7 +18,7 @@
 		<%end%>
 		<% ohi = @user.on_hold_items.find_by_item_id(@item.id)%>
 		<%if !ohi %>
-			<div><%= link_to 'Interested in this item?', new_user_on_hold_item_path(user_id: @user.id, item_id: @item.id), remote: true, class: "button btn btn-primary"%></div>
+			<div><%= link_to 'Interested in this item?', new_user_on_hold_item_path(user_id: @user.id, item_id: @item.id, :format => "js"), remote: true, class: "btn btn-primary"%></div>
 			<div id="render_duration_form"></div>
 		<%elsif ohi && ohi.approved != "Approved"%>
 			<button onclick="ajax_user_action(<%=@user.id %>,<%= @item.id%>,'', 'itemIndex',1,'DELETE', '#user_actions', '')", class="btn btn-primary">Cancel borrow request</button>
