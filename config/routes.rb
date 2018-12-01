@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   get 'users/new'
   get 'items/index'
   get 'items/show'
+  match 'auth/:provider/callback', to: 'sessions#create'
   resources :password_resets
   resources :report_users
 
@@ -48,10 +49,10 @@ Rails.application.routes.draw do
     get 'logout' => :destroy
   end
     Rails.application.routes.draw do
-  get 'auth/:provider /callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
   get 'me', to: 'me#show', as: 'me'
 end
+
 
 
 
