@@ -34,6 +34,7 @@ skip_before_action :require_login
        flash[:failure] = "The email address or password you entered is incorrect. "
         redirect_to login_url
       end
+  redirect_to login_url
   end
 end
   def destroy
