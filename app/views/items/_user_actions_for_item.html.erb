@@ -9,10 +9,10 @@
 
 		<% bi = @user.borrowed_items.find_by_item_id(@item.id)%>
 		<%if bi %>
-		<div><%= link_to 'Return this item', new_user_review_lender_and_item_path(user_id: @user.id, item_id: @item.id, lender_id: @owner_id), class: "btn btn-primary" %></div>
+		<div><%= link_to 'Return this item', new_user_review_lender_and_item_path(user_id: @user.id, item_id: @item.id, lender_id: @owner_id)class: "btn btn-primary" %></div>
 		<div>
 			<%if bi.approved == nil%>
-			<%= link_to 'Send due date extension', edit_user_borrowed_item_path(user_id: @user.id, id: @item.id), class: "btn btn-primary"%>
+			<%= link_to 'Send due date extension', edit_user_borrowed_item_path(user_id: @user.id, id: @item.id)class: "btn btn-primary"%>
 			<%end%>
 		</div>
 		<%end%>

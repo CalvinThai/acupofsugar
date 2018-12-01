@@ -21,7 +21,7 @@
       <td><%= item.due_date.strftime("%Y-%m-%d") %></td>
       <td><%= item.returned_on.strftime("%Y-%m-%d") %></td>
       <td><%= "#{borrower.fname} #{borrower.lname}" %></td> <%# link to user profile? %>
-      <td><%= link_to 'view review', user_review_borrower_path(user_id: @user.id, id: item.item_id, review_id: item.review_borrower_id), class: "btn btn-primary" %></td> 
+      <td><%= link_to 'view review', user_review_borrower_path(user_id: @user.id, id: item.item_id, review_id: item.review_borrower_id)class: "btn btn-primary" %></td> 
     </tr>
   <% end %>
   </tbody> 
@@ -48,7 +48,7 @@
       <td><%= item.due_date.strftime("%Y-%m-%d") %></td>
       <td><%= item.returned_on.strftime("%Y-%m-%d") %></td>
       <td><%= "#{lender.fname} #{lender.lname}" %></td> <%# link to user profile? %>
-      <td><%= link_to 'view review', user_review_lender_and_item_path(user_id: @user.id, id: item.item_id, review_id: item.review_lender_and_item_id), class: "btn btn-primary" %></td> 
+      <td><%= link_to 'view review', user_review_lender_and_item_path(user_id: @user.id, id: item.item_id, review_id: item.review_lender_and_item_id)class: "btn btn-primary" %></td> 
     </tr>
   <% end %>
   </tbody> 

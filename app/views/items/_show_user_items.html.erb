@@ -18,9 +18,9 @@
       <td><%= item.descr %></td>
       <td><%= item.status %></td>
       <td><%= item.category %></td>
-      <td><%= link_to 'edit', edit_user_item_path(@user.id, item.id), class: "btn btn-primary" %> 
+      <td><%= link_to 'edit', edit_user_item_path(@user.id, item.id)class: "btn btn-primary" %> 
       <%= link_to 'delete', user_item_delete_item_path(@user.id, item.id), method: :put,
-            data: { confirm: 'Are you sure?'}, class: "btn btn-primary" %></td> 
+            data: { confirm: 'Are you sure?'}class: "btn btn-primary" %></td> 
     </tr>
   <% end %>
   </tbody>
@@ -29,4 +29,4 @@
   <p>You don't own any items</p>
 <%end%>
 </div>
-<div><%= link_to 'Add a new item', new_user_item_path(@user.id), class: "btn btn-primary"%></div>
+<div><%= link_to 'Add a new item', new_user_item_path(@user.id)class: "btn btn-primary"%></div>

@@ -27,7 +27,7 @@
       <td>
         <%if item.approved != "Approved"%>
         <%= link_to 'Cancel request', user_on_hold_item_path(item.user_id, item.item_id), method: :delete,
-              data: { confirm: 'Are you sure?' } , class: "btn btn-primary"%>         
+              data: { confirm: 'Are you sure?' } class: "btn btn-primary"%>         
         <%end%>        
       </td>  <!-- item will be deleted from the list -->
     </tr>
