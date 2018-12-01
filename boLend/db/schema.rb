@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_29_171849) do
+ActiveRecord::Schema.define(version: 2018_11_30_011746) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -101,6 +101,9 @@ ActiveRecord::Schema.define(version: 2018_11_29_171849) do
     t.text "address"
     t.float "latitude"
     t.float "longitude"
+    t.string "country"
+    t.string "city"
+    t.string "street"
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
@@ -168,7 +171,7 @@ ActiveRecord::Schema.define(version: 2018_11_29_171849) do
     t.string "lname", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "email_confirmed", default: true
+    t.boolean "email_confirmed", default: false
     t.string "confirm_token"
     t.string "category"
     t.string "password_reset_token"

@@ -22,16 +22,15 @@
 							<li class="list-inline-item"> <%= link_to "Signup", new_user_path %></li>
 						<% end %>
 						<% if not session[:user_id].nil?%>
-							<li class="list-inline-item"> <%= link_to "My Profile", user_path(@user) %></li>
 				  	  		<li class="list-inline-item"> <%= link_to "Logout", logout_path %> </li>
 						<% end %>
 					</ul>
 				</div>
-				
+
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 text-center" style="font-style: italic;">
 					Bolend
 				</div>
-				
+
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="margin-top:-0.5em">
 					<div class="input-group text-center pull-right">
 						<%= form_tag(users_path, method: :get) do %>
@@ -49,6 +48,6 @@
 	</nav>
 	<% end%>
     <%= yield %>
-	
+
   </body>
 </html>

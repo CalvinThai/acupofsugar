@@ -11,6 +11,9 @@ class Item < ApplicationRecord
 	geocoded_by :address
 	after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
 
+	def address
+	[street, city, country].compact.join(', ')
+	end
 
 	self.per_page = 5
 	scope :with_category, -> (category) { where('category = ?', category)}

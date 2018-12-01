@@ -105,7 +105,7 @@ class ItemsController < ApplicationController
 	end
 	private
  	 def item_params
- 		 params.require(:item).permit(:name, :descr, :status, :category, :address, images: [])
+ 		 params.require(:item).permit(:name, :descr, :status, :category, :latitude, :longitude, :address, :country, :street, :city, images: [])
 	 end
  	 #get all items of interest by this user
  	 def get_manageable_items
@@ -150,4 +150,8 @@ class ItemsController < ApplicationController
 			end
 		end
 	 end
+end
+
+def address
+[street, city, country].compact.join(', ')
 end
