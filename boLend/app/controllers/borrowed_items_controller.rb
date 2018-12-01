@@ -42,7 +42,7 @@ class BorrowedItemsController < ApplicationController
       UserMailer.confirm_pickup(borrower, @item).deliver_later 
       UserMailer.confirm_pickup(lender, @item).deliver_later 
       
-      flash[:success_msg] = "You have confirmed that item {@item.name} has been lent out. Due date reminders have been scheduled for #{borrower.fname} at your convenience!"
+      flash[:success_msg] = "You have confirmed that item [#{@item.name}] has been lent out. Due date reminders have been scheduled for [#{borrower.fname}] at your convenience!"
       redirect_to user_items_path(@curr_user)
     else
       flash[:failure_msg] = "Something went wrong!"
@@ -65,7 +65,7 @@ class BorrowedItemsController < ApplicationController
       if @notif.i_req_by_others  
         UserMailer.new_extension_request(lender, borrower, @item).deliver_later       
       end
-      flash[:success_msg] = "Due date extension request for #{@item.name} has been sent to #{lender.fname}!"
+      flash[:success_msg] = "Due date extension request for [#{@item.name}] has been sent to [#{lender.fname}]!"
       redirect_to user_items_path(@user.id)
     else
       flash[:failure_msg] = "Something went wrong!"
@@ -107,7 +107,7 @@ class BorrowedItemsController < ApplicationController
           #unconditional mailer to be delivered to both lender/borrower on due date
           SendEmailJob.set(wait: duration.days).perform_later(lender.id, borrower.id, @item.id, "Borrower")
           SendEmailJob.set(wait: duration.days).perform_later(lender.id, borrower.id, @item.id, "Lender")
-          flash[:success_msg] = "Due date extension request for item {@item.name} has been granted. New due date reminders have been scheduled for #{borrower.fname} at your convenience!"
+          flash[:success_msg] = "Due date extension request for item [#{@item.name}] has been granted. New due date reminders have been scheduled for [#{borrower.fname}] at your convenience!"
       redirect_to  user_items_path(params[:user_id])
     elsif params[:result] == "denied"
       @borrowed_item.reject_req
@@ -116,7 +116,7 @@ class BorrowedItemsController < ApplicationController
       if @notif.i_req_approval_alert
         UserMailer.accept_extension_request(lender, borrower, @item, params[:result]).deliver_later
       end
-      flash[:success_msg] = "Due date extension request for item {@item.name} has been rejected!"
+      flash[:success_msg] = "Due date extension request for item [#{@item.name}] has been rejected!"
       redirect_to  user_items_path(params[:user_id])
     end
   end

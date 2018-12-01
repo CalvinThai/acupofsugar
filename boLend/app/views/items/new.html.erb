@@ -3,9 +3,11 @@
 
 <% if flash[:failure_msg]%>
   <div class="alert alert-danger">
-    <% @item.errors.each do |error| %>
-      <p class="text-center"><%= error %></p>
-    <% end %>
+  	<% if @item%>
+	    <% @item.errors.each do |attr,error| %>
+	      <p class="text-center"><%= error %></p>
+	    <% end %>
+    <%end%>
   </div>
 <% end %>
 

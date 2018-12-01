@@ -6,9 +6,10 @@ class WishListsController < ApplicationController
    		@wish_item = @user.wish_lists.create(wish_item_params)
    		if @wish_item.save
         item = Item.find(@wish_item.item_id).name
-        flash[:success_msg] = "Item #{item} has been added to your wish list!"
+        flash[:success_msg] = "Item [#{item}] has been added to your wish list!"
       else
         flash[:failure_msg] = "Something went wrong!"
+      end
       set_locals_render_partial
 	end
 	def update
@@ -19,7 +20,7 @@ class WishListsController < ApplicationController
     	@wish_item.destroy
     	#back_to_prev_path
       if(!@wish_item)
-        flash[:success_msg] = "Item #{item} has been deleted from your wish list!"
+        flash[:success_msg] = "Item [#{item}] has been deleted from your wish list!"
       end
       set_locals_render_partial
 	end
@@ -40,17 +41,12 @@ class WishListsController < ApplicationController
    def set_locals_render_partial
     puts params.inspect
     if(params[:from] && params[:from] == "itemIndex")
-      #render 'items#show'
-      #puts params.inspect
       @user = User.find(params[:user_id])
       @item = Item.find(params[:item_id])
       @owner_id = @item.user_id
-        #ItemsController.show
       render(:partial => "items/user_actions_for_item" , :locals => {user: @user, item: @item, owner_id: @owner_id})
     else
-      #render 'items#index'
      redirect_to user_items_path(params[:user_id])
     end
-
   end 
 end

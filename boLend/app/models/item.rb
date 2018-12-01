@@ -153,12 +153,4 @@ def available
 	update_attributes(status: 'available')
 end
 
-#flag for deleted item
-def disable
-	update_attributes(disable: true)
-	update_attributes(status: 'No longer available')
-	update_attributes(approved: 'No longer available')
-end
-
-
 end

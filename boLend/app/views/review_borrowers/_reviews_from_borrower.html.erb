@@ -4,10 +4,11 @@
   <table class="table">
     <tbody>
       <% @reviews_by_borrower.each do |reviewer| %>
+       <% item = Item.find(reviewer.item_id)%>
       <tr>
         <td><%= "#{reviewer.fname} #{reviewer.lname}"%></td> <!-- link to view user profile?-->
         <td><div class="img-responsive rating-display" data-score="<%= reviewer.r_rating %>"></div></td>
-        <td><%= "item name here" %></td>
+        <td><%= item.name %></td>
         <td><%= reviewer.comment %></td>
       </tr>
       <%end%>

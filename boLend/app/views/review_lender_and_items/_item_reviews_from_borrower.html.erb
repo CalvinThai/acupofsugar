@@ -6,7 +6,7 @@
       <% @reviews.each do |reviewer| %>
       <tr>
         <td><%= "#{reviewer.fname} #{reviewer.lname}"%></td> <!-- link to view user profile?-->
-        <td><div class="img-responsive rating-display" data-score="<%= reviewer.rating %>"></div></td>
+        <td><div class="img-responsive rating-display" data-score="<%= reviewer.r_rating %>"></div></td>
         <td><%= reviewer.comment %></td>
       </tr>
       <%end%>

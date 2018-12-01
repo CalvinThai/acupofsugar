@@ -6,7 +6,8 @@
   <tr>
     <th>Item name</th>
     <th>Description</th>
-    <th colspan="2"></th>
+    <th>Status</th>
+    <th>Manage</th>
   </tr>
 </thead>
 <tbody>
@@ -14,13 +15,9 @@
     <tr>
       <td><%= link_to item.name, item_path(item.item_id)%></td>
       <td><%= item.descr %></td>
-      <td>
-        <% if @on_hold_items.length == 0 || @user.on_hold_items.find_by_item_id(item.item_id) == false %> 
-          <%#= link_to 'Send a borrow request' , user_on_hold_items_path(user_id: @user.id, item_id: item.item_id, req_on: Time.now.strftime("%d/%m/%Y")), method: :post%>
-        <%end%>
-      </td>
+      <td><%= item.status %></td>
       <td><%= link_to 'Delete', user_wish_list_path(item.user_id, item.item_id), method: :delete,
-              data: { confirm: 'Are you sure?' }%></td>  <!-- item will be deleted from the list -->
+              data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %></td>  <!-- item will be deleted from the list -->
     </tr>
   <% end %>
   </tbody>

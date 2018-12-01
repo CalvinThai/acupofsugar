@@ -9,7 +9,7 @@ class ItemsController < ApplicationController
 		    @item = @user.items.create(item_params)
 			#	@item.status = "available"
 				if @item.save
-					flash[:success_msg] = "Item successfully added!"
+					flash[:success_msg] = "Item [#{@item.name}] has been created!"
 					redirect_to user_items_path(@user)
 				else
 					flash[:failure_msg] = "Information did not meet requirements"
@@ -81,7 +81,7 @@ class ItemsController < ApplicationController
 		@owner_id = @item.user_id
 
 		#for review section
-		@reviews = ReviewLenderAndItem.joins(:user).select("review_lender_and_items.*, users.*").where("review_lender_and_items.item_id = ?", @item.id)
+		@reviews = ReviewLenderAndItem.joins(:user).select("review_lender_and_items.*, review_lender_and_items.rating as r_rating, users.*").where("review_lender_and_items.item_id = ?", @item.id)
 		@ratings = @reviews.average(:rating)
 	end
 	def edit
@@ -94,22 +94,34 @@ class ItemsController < ApplicationController
 		#@item = Item.find(params[:id])
 	    @item = @user.items.find_by_id(params[:id])
 	    if @item.update(item_params)
-	      flash[:success_msg] = "Item #{@item.name} successfully updated!"
+	      flash[:success_msg] = "Item [#{@item.name}] has been updated!"
 	      redirect_to user_items_path(@user.id)
 	    else
 	      flash[:failure_msg] = "Something went wrong!"
 	      render 'edit'
 	    end
 	end
+
 	def delete_item
 		puts "delete item"
 		@user = User.find(params[:user_id])
-		@item = @user.items.find_by_id(params[:id])
-    	@item.disable
-    	if(@item.save)
-    		flash[:success_msg] = "Item #{@item.name} successfully deleted!"
-    	else
-    		flash[:failure_msg] = "Something went wrong!"
+		@item = @user.items.find_by_id(params[:item_id])
+		@borrowed = BorrowedItem.find_by_item_id(@item.id)
+		if(@borrowed)
+			flash[:alert] = "Item [#{@item.name}] is currently lent out. Please try later."
+		else
+			@item.disable = true
+			@item.status = "No longer available"
+			@on_hold_items = OnHoldItem.find_by_item_id(@item.id)
+	    	if(@item.save)
+	    		if(@on_hold_items)
+					@on_hold_items.approved = "No longer available"
+					@on_hold_items.save
+				end
+	    		flash[:success_msg] = "Item [#{@item.name}] has been deleted!"
+	    	else
+	    		flash[:failure_msg] = "Something went wrong!"
+	    	end
     	end
     	redirect_to user_items_path(@user.id)
 	end
@@ -133,28 +145,5 @@ class ItemsController < ApplicationController
 		@transaction_items = ItemTransaction.joins(:item, :user).select("item_transactions.*").where('item_transactions.user_id = ?', params[:user_id])
 		@trans_lent = @transaction_items.where(user_status: 'Lender')
 		@trans_borrow = @transaction_items.where(user_status: 'Borrower')
-	 end
-
-	 def auth_and_redirect
-	 	#if no session exist, prompt user to sign in
-	 	if(session[:user_id] == nil || session[:user_id].to_i != params[:user_id].to_i)
-	 		puts(session[:user_id] == nil)
-	 		puts(session[:user_id].to_i != params[:user_id].to_i)
-		 	if(params[:auth] && params[:auth] == "login_required")
-				session[:auth] = params[:auth]
-				#clear session
-				session[:user_id] = nil
-				url = request.fullpath if request.get?
-				uri = URI.parse(url)
-				query = Rack::Utils.parse_query(uri.query)
-				# Replace auth to true upon login
-				query["auth"] = true
-				uri.query = Rack::Utils.build_query(query)
-				return_addr = uri.to_s
-				#come back to current page after successful login
-				session[:return_to] ||= return_addr
-				redirect_to login_path
-			end
-		end
 	 end
 end

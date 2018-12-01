@@ -16,31 +16,31 @@
 	<%= render partial: 'items/item_profile' %>
 </div>
 
-<p>Please fill out this review form after receiving the item.</p>
+<p>Note: please fill out this review form after receiving the item.</p>
 <div>
   <%= form_with(model: [@user, @review_borrower], local: true) do |form| %>
      <%= form.hidden_field(:user_id, :value => @user.id) %>
      <%= form.hidden_field(:item_id , :value => @item.id) %>
      <%= form.hidden_field(:borrower_id , :value => @borrower.id) %>
-    <p>
-      <%#= form.label 'Rate borrower: ' %>
-      <%#= form.number_field :rating %>
+    <div class="form-group">
+      <label>Rate borrower: </label>
       <div class="rating-form-brw">
-        <label>Rate borrower: </label>
+      <%#= form.label 'Rate item/lender: ' %>
+      <%#= form.number_field :rating %>
       </div>
-    </p>
-    <p>
+    </div>
+    <div class="form-group">
       <%= form.label 'Leave comment: ' %><br>
-      <%= form.text_area :comment %>
-    </p>
-    <p>
-      <%= form.submit "Submit review"%>
-    </p>
+      <%= form.text_area :comment , class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= form.submit "Submit review" , class: "btn btn-primary"%>
+    </div>
   <% end %>
 </div>
 
 <div>
-  <%= link_to "cancel", user_items_path(@user.id) %>
+  <%= link_to "Cancel", user_items_path(@user.id) , class: "btn btn-default" %>
 </div>
 
 <script>

@@ -1,3 +1,4 @@
+<div class="container">
 <h1><%= @user.fname %>'s personal page</h1>
 
 <% if @user == @logged_in_user %>
@@ -32,3 +33,4 @@
 	<%= link_to "View reviews >", user_review_borrowers_path(@user.id) %>
 	</p>
 <% end %>
+</div>
