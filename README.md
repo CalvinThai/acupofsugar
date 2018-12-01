@@ -1,22 +1,47 @@
-# csc444
+# README
 
-** Please make sure to check the current DB tables here before you make any related changes 
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-## Current DB tables
-![items](https://user-images.githubusercontent.com/43587783/47886899-1ef64100-de13-11e8-9285-0902340a003a.jpeg)
+Things you may want to cover:
 
-![users](https://user-images.githubusercontent.com/43587783/47886915-303f4d80-de13-11e8-941b-deaf4f363ab4.jpeg)
+* Ruby version 2.5.3/ Rails 5.2 +
 
-![wish_lists](https://user-images.githubusercontent.com/43587783/47899308-803c0580-de4f-11e8-88cb-4d8f049ae90f.jpg)
+* System dependencies - Windows OS
 
-![on_hold_items](https://user-images.githubusercontent.com/43587783/47945390-013edf80-ded8-11e8-8e15-7e7edafb10d4.jpg)
---> Added one more column here: "add_column :on_hold_items, :approved, :string, default: 'pending', null: false"
+First run "bundle install"
+if any error on gem installation for sqlite3, try commenting out the ", git: "https://github.com/larskanis/sqlite3-ruby", branch: "add-gemspec" part
 
-![borrowed_items](https://user-images.githubusercontent.com/43587783/47945391-0308a300-ded8-11e8-9d8a-09aab21bc577.jpg)
+TIPS for accessing DB:
+
+#opens up sqlite3 through rails
+> rails db 
+
+#turn headers on and show database data in column mode, for readability
+
+sqlite >.headers on 
+
+sqlite >.mode columns
+
+#see table structure
+
+sqlite >pragma table_info(your_table); 
 
 
-![messages](https://user-images.githubusercontent.com/31141615/48387335-6b6b3780-e6c3-11e8-8173-f490d8213231.png)
+DROP & CREATE db: (update db changes)
+
+>rake db:drop:all >rake db:create:all >rake db:migrate
+
+If you use Rails version < 4.1, don't forget to prepare test database:
+
+>rake db:test:prepare
+
+If you get permission denied error, just delete development.sqlite3 & schema.rb files and run rake db:migrate command
+
+tutorial on saving images: https://www.youtube.com/watch?v=fVtGy3QL9xg
 
 
-![conversations](https://user-images.githubusercontent.com/31141615/48387353-7d4cda80-e6c3-11e8-86be-7a02f0d30122.png)
+HAPPY CODING!
+
+
 

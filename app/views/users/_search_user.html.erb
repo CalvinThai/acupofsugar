@@ -1,0 +1,16 @@
+<div class="container">
+<% if not @users.present? %>
+	<% if params[:name].present? and @users.blank?%>
+		<div>
+			We couldn't find any user name for 
+			<span>	<%=params[:name] %> </span>
+		</div>
+	<% end %>
+<% else %>
+	<div id="user_list">
+		<%= render "friendships/user_friendships" , collection: @users, name: params[:name]%>
+	</div>
+<% end %>
+</div>
+
+
