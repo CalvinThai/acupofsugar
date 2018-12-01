@@ -1,18 +1,13 @@
 <h1>Review the borrower</h1>
 
-<% if @review_borrower.errors.any? %>
-    <div class="error_explanation">
-      <h2>
-        <%= pluralize(@review_borrower.errors.count, "error") %> prohibited
-        this review from being saved:
-      </h2>
-      <ul>
-        <% @review_borrower.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+
+<% if flash[:failure_msg]%>
+  <div class="alert alert-danger">
+    <% @review_borrower.errors.each do |error| %>
+      <p class="text-center"><%= error %></p>
+    <% end %>
+  </div>
+<% end %>
 
 <div id="item_profile">
   <% borrower = User.find(@borrower.id)%>
@@ -47,3 +42,11 @@
 <div>
   <%= link_to "cancel", user_items_path(@user.id) %>
 </div>
+
+<script>
+  $('.rating-form-brw').raty({
+      //path: '/assets/',
+      scoreName: 'review_borrower[rating]',
+      size: 24
+    });   
+</script>

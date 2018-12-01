@@ -1,9 +1,11 @@
 <h2>Your Items others have requested to borrow</h2>
 
+<div class="table-responsive">
 <% if @lend_items.length > 0 %>
   <% if @pending_items.length > 0 %>
     <h3>Pending Requests</h3>
-    <table>
+    <table class="table">
+      <thead>
       <tr>
         <th>Item name</th>
         <th>Description</th>
@@ -12,6 +14,8 @@
         <th>Requested Return Date</th>
         <th colspan="2">Approval</th>
       </tr>
+     </thead>
+     <tbody>
       <% @pending_items.each do |item| %>
         <tr>
           <td><%= link_to item.name %></td>
@@ -25,11 +29,13 @@
           <td>
         </tr>
     <% end %>
+    </tbody>
     </table>
   <% end %>
   <% if @approved_items.length > 0 %>
   <h3>Approved Requests/ On Loan</h3>
-  <table>
+  <table class="table">
+    <thead>
     <tr>
       <th>Item name</th>
       <th>Description</th>
@@ -39,6 +45,8 @@
       <th>Approved Return Date</th>
       <th colspan="2">Due extension/Ation</th>
     </tr>
+    </thead>
+    <tbody>
     <% @approved_items.each do |item| %>
     <tr>
       <td><%= link_to item.name %></td>
@@ -72,8 +80,10 @@
         <% end %>
     </tr>
     <% end %>
+    </tbody>
   </table>
 <% end %>
 <% else %>
   <p>There are no items that require your attention</p>
 <% end %>
+</div>

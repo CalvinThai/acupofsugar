@@ -1,18 +1,12 @@
 <h1>Review the item and lender</h1>
 
-<% if @review_lender.errors.any? %>
-    <div class="error_explanation">
-      <h2>
-        <%= pluralize(@review_lender.errors.count, "error") %> prohibited
-        this review from being saved:
-      </h2>
-      <ul>
-        <% @review_lender.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<% if flash[:failure_msg]%>
+  <div class="alert alert-danger">
+    <% @review_lender.errors.each do |error| %>
+      <p class="text-center"><%= error %></p>
+    <% end %>
+  </div>
+<% end %>
 
 <div id="item_profile">
 	<% owner = User.find(@item.user_id)%>
@@ -47,3 +41,7 @@
 <div>
   <%= link_to "cancel", user_items_path(@user.id) %>
 </div>
+
+<script>
+  $('.rating-form-ild').raty('reload');   
+</script>

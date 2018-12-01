@@ -9,7 +9,7 @@
 <% end %>
 
 <p>Description: <%= @item.descr %></p>
-<%if @item.address %>
+<%if @item.address != nil %>
 <p>Address: <%= @item.address %></p>
 <p>Coordinates: <%= @item.latitude %> <%= @item.longitude %></p>
 

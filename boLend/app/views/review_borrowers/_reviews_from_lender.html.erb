@@ -6,8 +6,8 @@
       <% @reviews.each do |reviewer| %>
       <tr>
         <td><%= "#{reviewer.fname} #{reviewer.lname}"%></td> <!-- link to view user profile?-->
-        <td><%= "item name here" %></td>
         <td><div class="img-responsive rating-display" data-score="<%= reviewer.r_rating %>"></div></td>
+        <td><%= "item name here" %></td>
         <td><%= reviewer.comment %></td>
       </tr>
       <%end%>
@@ -17,3 +17,14 @@
     <p>There's no review from lenders</p>
   <%end%>
 </div>
+
+<script>
+  $('.rating-display').raty({
+      readOnly: true,
+      score: function() {
+        return $(this).attr('data-score');
+      },
+      //path: '/assets/',
+      size: 24
+    });   
+</script>

@@ -5,3 +5,14 @@
 	<%= render partial: 'reviews_from_lender' %>
 	<%= render partial: 'reviews_from_borrower' %>
 </div>
+
+<script>
+  $('.rating-display').raty({
+      readOnly: true,
+      score: function() {
+        return $(this).attr('data-score');
+      },
+      //path: '/assets/',
+      size: 24
+    });   
+</script>

@@ -1,7 +1,7 @@
 class ReviewBorrower < ApplicationRecord
 	belongs_to :item
 	belongs_to :user
-	validates :rating, numericality: { greater_than: 0, less_than: 6 }
+	validates :rating,  presence: {message: "Please provide rating"}, numericality: { greater_than: 0, less_than: 6 }
 
 	after_save :update_user_rating
 

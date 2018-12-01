@@ -1,8 +1,9 @@
 <h2>Item transactions</h2>
-
+<div class= "table-responsive">
 <% if @trans_lent.length > 0 %>
 <h3>Lent history</h3>
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th>Item name</th>
     <th>Due date</th>
@@ -10,7 +11,8 @@
     <th>Borrower</th>
     <th>Review</th>
   </tr>
-
+</thead>
+<tbody>
   <% @trans_lent.each do |item| %>
     <% borrower = User.find(item.other_user_id) %>
     <% this_item = Item.find(item.item_id) %>
@@ -21,12 +23,14 @@
       <td><%= "#{borrower.fname} #{borrower.lname}" %></td> <%# link to user profile? %>
       <td><%= link_to 'view review', user_review_borrower_path(user_id: @user.id, id: item.item_id, review_id: item.review_borrower_id) %></td> 
     </tr>
-  <% end %> 
+  <% end %>
+  </tbody> 
 </table>
 <% end %>
 <% if @trans_borrow.length > 0 %>
 <h3>Borrow history</h3>
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th>Item name</th>
     <th>Due date</th>
@@ -34,7 +38,8 @@
     <th>Lender</th>
     <th>Review</th>
   </tr>
-
+  </thead>
+  <tbody>
   <% @trans_borrow.each do |item| %>
     <% lender = User.find(item.other_user_id) %>
     <% this_item = Item.find(item.item_id) %>
@@ -45,10 +50,11 @@
       <td><%= "#{lender.fname} #{lender.lname}" %></td> <%# link to user profile? %>
       <td><%= link_to 'view review', user_review_lender_and_item_path(user_id: @user.id, id: item.item_id, review_id: item.review_lender_and_item_id) %></td> 
     </tr>
-  <% end %> 
+  <% end %>
+  </tbody> 
 </table>
 <% end %>
-
+</div>
 <% if @transaction_items.length == 0 %>
   <p>You don't have any item transaction history</p>
 <%end%>

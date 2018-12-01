@@ -1,7 +1,8 @@
 <h2>Items you've requested to borrow</h2>
-
+<div class="table-responsive">
 <% if @on_hold_items.length > 0 %>
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th>Item name</th>
     <th>Description</th>
@@ -11,7 +12,8 @@
     <th>Approval status</th>
     <th colspan="2"></th>
   </tr>
-
+  </thead>
+  <tbody>
   <% @on_hold_items.each do |item| %>
     <%# bi = BorrowedItem.find_by_item_id(item.item_id)%>
     <%#if bi && bi.approved != "Approved"%>
@@ -31,7 +33,9 @@
     </tr>
     <%#end%>
   <% end %>
+  </tbody>
 </table>
 <%else%>
   <p>You don't have any on-hold requests</p>
 <%end%>
+</div>

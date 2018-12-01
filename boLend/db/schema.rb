@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_30_031741) do
+ActiveRecord::Schema.define(version: 2018_11_30_233448) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 2018_11_30_031741) do
     t.text "address"
     t.float "latitude"
     t.float "longitude"
+    t.boolean "disable", default: false
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
@@ -178,6 +179,7 @@ ActiveRecord::Schema.define(version: 2018_11_30_031741) do
     t.string "provider"
     t.string "uid"
     t.float "rating"
+    t.boolean "disable", default: false
   end
 
   create_table "wish_lists", force: :cascade do |t|

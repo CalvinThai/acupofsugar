@@ -9,10 +9,10 @@ class ItemsController < ApplicationController
 		    @item = @user.items.create(item_params)
 			#	@item.status = "available"
 				if @item.save
-					flash[:success] = "Item successfully added!"
+					flash[:success_msg] = "Item successfully added!"
 					redirect_to user_items_path(@user)
 				else
-					flash[:alert] = "Information did not meet requirements"
+					flash[:failure_msg] = "Information did not meet requirements"
 					render :new
 				end
 		    #redirect_to user_items_path(@user)#user_item_path(@user,@item)
@@ -49,7 +49,7 @@ class ItemsController < ApplicationController
 			Item,
 			params[:filterrific],
 			select_options: {
-      sorted_by: Item.options_for_sorted_by,
+      		sorted_by: Item.options_for_sorted_by,
 			with_category: Item.options_for_category
 
     }
@@ -89,35 +89,45 @@ class ItemsController < ApplicationController
 		@item = @user.items.find_by_id(params[:id])
 	end
 	def update
+		puts "edit item"
 		@user = User.find(params[:user_id])
 		#@item = Item.find(params[:id])
 	    @item = @user.items.find_by_id(params[:id])
 	    if @item.update(item_params)
+	      flash[:success_msg] = "Item #{@item.name} successfully updated!"
 	      redirect_to user_items_path(@user.id)
 	    else
+	      flash[:failure_msg] = "Something went wrong!"
 	      render 'edit'
 	    end
 	end
-	def destroy
+	def delete_item
+		puts "delete item"
 		@user = User.find(params[:user_id])
 		@item = @user.items.find_by_id(params[:id])
-    	@item.destroy
+    	@item.disable
+    	if(@item.save)
+    		flash[:success_msg] = "Item #{@item.name} successfully deleted!"
+    	else
+    		flash[:failure_msg] = "Something went wrong!"
+    	end
     	redirect_to user_items_path(@user.id)
 	end
+
 	private
  	 def item_params
  		 params.require(:item).permit(:name, :descr, :status, :category, :address, images: [])
 	 end
  	 #get all items of interest by this user
  	 def get_manageable_items
- 	 	@user_items = Item.where("items.user_id = ?",params[:user_id])
-	 	@borrowed_items = BorrowedItem.joins(:item).select("items.user_id as i_uid, items.*, borrowed_items.*").where('borrowed_items.user_id = ?', params[:user_id])
+ 	 	@user_items = Item.where("items.user_id = ? and items.disable = false",params[:user_id])
+	 	@borrowed_items = BorrowedItem.joins(:item).select("items.user_id as i_uid, items.*, borrowed_items.*").where('borrowed_items.user_id = ? and items.disable = false', params[:user_id])
 		@wish_items = WishList.joins(:item).select("items.user_id as i_uid, items.*, wish_lists.*").where('wish_lists.user_id = ?', params[:user_id]) #all items that have been wishlisted by this user
 		@on_hold_items = OnHoldItem.joins(:item).select("items.*, on_hold_items.*").where('on_hold_items.user_id = ?', params[:user_id])
-		@lend_items = OnHoldItem.joins(:item, :user).select("items.*, on_hold_items.*, users.email").where("items.user_id = ?", params[:user_id])
+		@lend_items = OnHoldItem.joins(:item, :user).select("items.*, on_hold_items.*, users.email").where("items.user_id = ? and items.disable = false", params[:user_id])
 		@pending_items = @lend_items.where(approved: 'pending')
 		@approved_items = @lend_items.where(approved: 'Approved')
-		extension= BorrowedItem.joins(:item).select("items.*,borrowed_items.*").where('items.user_id = ?', params[:user_id])
+		extension= BorrowedItem.joins(:item).select("items.*,borrowed_items.*").where('items.user_id = ? and items.disable = false', params[:user_id])
 	 	@ext_pending = extension.where(approved: 'pending')
 
 		@transaction_items = ItemTransaction.joins(:item, :user).select("item_transactions.*").where('item_transactions.user_id = ?', params[:user_id])

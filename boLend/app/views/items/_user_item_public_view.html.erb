@@ -1,14 +1,16 @@
 <h2>Items belong to this user</h2>
-
+<div class="table-responsive">
 <% if @user_items.length > 0 %>
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th>Item name</th>
     <th>Description</th>
     <th>Status</th>
     <th>Category</th>
     </tr>
-
+  </thead>
+  <tbody>
   <% @user_items.each do |item| %>
     <tr>
       <td><%= link_to item.name, item_path(item) %></td>
@@ -18,8 +20,10 @@
       <!--add item.return_date column to db for lentout items-->
     </tr>
   <% end %>
+  </tbody>
 </table>
 <%else%>
   <p>No items registered yet</p>
 <%end%>
-<div><%= link_to '< Back', user_path(@user.id)%></div>
+</div>
+<div><%= link_to '< Back', user_path(@user.id), class: "btn btn-default"%></div>

@@ -17,19 +17,18 @@ class OnHoldItemsController < ApplicationController
 			lender = User.find(item.user_id)
 			borrower = User.find(@on_hold_item.user_id)
 			UserMailer.new_borrow_request(lender, borrower, item).deliver_later
+			flash[:success_msg] = "Item #{item.name} has been put on hold!"
 		elsif !@on_hold_item.save
-			flash[:alert] = "Information did not meet requirements"
-      		#render :new
+			flash[:failure_msg] = "Information did not meet requirements"
 		end
-   		#back_to_prev_path
-   		#defining locals 
    		set_locals_render_partial
 	end
 	def destroy
    		@on_hold_item = @user.on_hold_items.find_by_item_id(@item_id)
+    	item = Item.find(@on_hold_item.item_id).name
     	@on_hold_item.destroy
-    	#back_to_prev_path
-    	#render(:partial => "items/user_actions_for_item" , :locals => {:user => params[:], @item})
+    	if(!@on_hold_item)
+    		flash[:success_msg] = "Item #{item.name} has been removed from hold list"
     	set_locals_render_partial
 	end
 
@@ -43,6 +42,7 @@ class OnHoldItemsController < ApplicationController
 			@on_hold_item.approve_req
 			#send borrower status update
 			if @on_hold_item.save && @notif.i_req_approval_alert
+				flash[:success_msg] = "You have approved borrow request for item #{@item.name} from #{borrower.fname}!"
 				UserMailer.accept_borrow_request(lender, borrower, @item, params[:result]).deliver_later
 			end
 			#@item.lent_out <-- will do this when borrowed item is created
@@ -51,6 +51,7 @@ class OnHoldItemsController < ApplicationController
 			@on_hold_item.reject_req
 			#send borrower status update
 			if @on_hold_item.save && @notif.i_req_approval_alert
+				flash[:success_msg] = "You have rejected borrow request for item #{@item.name} from #{borrower.fname}!"
 				UserMailer.accept_borrow_request(lender, borrower, @item, params[:result]).deliver_later
 			end
 			redirect_to  user_items_path(params[:user_id])
@@ -70,13 +71,6 @@ class OnHoldItemsController < ApplicationController
 		end
  	 end
 
- 	 def back_to_prev_path
- 	 	if(params[:from] && params[:from] == 'itemIndex')
-    		redirect_to item_path(@item_id)
-    	else
-    		redirect_to user_items_path(@user)
-    	end
- 	 end
  	def set_locals_render_partial
  		puts params.inspect
  		if(params[:from] && params[:from] == "itemIndex")

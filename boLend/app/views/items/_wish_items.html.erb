@@ -1,13 +1,15 @@
 <h2>Items you've wishlisted</h2>
-
+<div class="table-responsive">
 <% if @wish_items.length > 0 %>
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th>Item name</th>
     <th>Description</th>
     <th colspan="2"></th>
   </tr>
-
+</thead>
+<tbody>
   <% @wish_items.each do |item| %>
     <tr>
       <td><%= link_to item.name, item_path(item.item_id)%></td>
@@ -21,7 +23,9 @@
               data: { confirm: 'Are you sure?' }%></td>  <!-- item will be deleted from the list -->
     </tr>
   <% end %>
+  </tbody>
 </table>
 <%else%>
   <p>You don't have any wish lists</p>
 <%end%>
+</div>
