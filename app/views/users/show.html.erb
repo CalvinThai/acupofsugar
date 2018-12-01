@@ -37,14 +37,14 @@
 		</div>
 		</div>
 		
-		<div class="col-xs-12 col-md-4 margin-bot-2" style="min-height:460px;overflow-y:scroll;">
-			<div class="sticky-note" style="min-height:460px">
+		<div class="col-xs-12 col-md-4 margin-bot-2">
+			<div class="sticky-note" style="max-height:460px;overflow-y: scroll;">
 			For all items? or just friend items?
 			</div>
 		</div>
 	<div class="col-xs-12 col-md-4 margin-bot-2">
 		<% if @user == @logged_in_user %>
-		<div id="friend_request_list" class="sticky-note"style="max-height:140px;overflow-y: scroll;">
+		<div id="friend_request_list" class="sticky-note" style="max-height:140px;overflow-y: scroll;">
 			<%= render  "friendships/friend_requests"%>
 		</div>
 		<br>
