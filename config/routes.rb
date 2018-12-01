@@ -48,8 +48,9 @@ Rails.application.routes.draw do
     get 'logout' => :destroy
   end
     Rails.application.routes.draw do
-  get 'auth/facebook/callback', to: 'sessions#create'
+  get 'auth/:provider /callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
+  get 'me', to: 'me#show', as: 'me'
 end
 
 
