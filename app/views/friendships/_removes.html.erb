@@ -1,0 +1,30 @@
+			<div >
+				<!--desktop view -->
+				<%= form_tag user_friendship_path(@logged_in_user,id:1), method: :delete,style:'display:inline-block;',data: { confirm: "Are you sure to unfriend with #{@user.fname} #{@user.lname}?" },class:"hidden-md hidden-sm hidden-xs",remote: true do %>
+				  <%= hidden_field_tag :friend_remover, @logged_in_user.id%>
+				  <%= hidden_field_tag :friend_removee, @user.id %>
+				  <%= hidden_field_tag :decision, "unfriend" %>
+				  <%= button_tag 'Remove Friend',class:'cta' %>
+				<% end %>
+				<%= form_tag user_friendship_path(@logged_in_user,id:1), method: :delete,style:'display:inline-block;',data: { confirm: "Are you sure to block #{@user.fname} #{@user.lname}? This action will also do unfriending." },class:"hidden-md hidden-sm hidden-xs",remote: true do %>
+				  <%= hidden_field_tag :friend_remover, @logged_in_user.id%>
+				  <%= hidden_field_tag :friend_removee, @user.id %>
+				  <%= hidden_field_tag :blockee_id, @user.id %>
+				  <%= hidden_field_tag :decision, "block" %>
+				  <%= button_tag 'Block Friend',class:'cta' %>
+				<% end %>
+				<!--mobile view -->
+				<%= form_tag user_friendship_path(@logged_in_user,id:1), method: :delete,style:'display:inline-block;',data: { confirm: "Are you sure to unfriend with #{@user.fname} #{@user.lname}?" },class:"hidden-lg",remote: true do %>
+				  <%= hidden_field_tag :friend_remover, @logged_in_user.id%>
+				  <%= hidden_field_tag :friend_removee, @user.id %>
+				  <%= hidden_field_tag :decision, "unfriend" %>
+				  <%= button_tag '<i class="fas fa-user-times"></i>'.html_safe,class:'cta',title:'Remove Friend' %>
+				<% end %>
+				<%= form_tag user_friendship_path(@logged_in_user,id:1), method: :delete,style:'display:inline-block;',data: { confirm: "Are you sure to block #{@user.fname} #{@user.lname}? This action will also do unfriending." },class:"hidden-lg",remote: true do %>
+				  <%= hidden_field_tag :friend_remover, @logged_in_user.id%>
+				  <%= hidden_field_tag :friend_removee, @user.id %>
+				  <%= hidden_field_tag :blockee_id, @user.id %>
+				  <%= hidden_field_tag :decision, "block" %>
+				  <%= button_tag '<i class="fas fa-user-slash"></i>'.html_safe,class:'cta',title:'Block Friend' %>
+				<% end %>
+		</div>
