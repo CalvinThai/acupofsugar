@@ -16,7 +16,6 @@
 //= require turbolinks
 
 //= require jquery
-//= require jquery_ujs
 //= require jquery.raty
 
 //= require filterrific/filterrific-jquery

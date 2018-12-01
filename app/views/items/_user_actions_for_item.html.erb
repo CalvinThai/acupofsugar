@@ -1,5 +1,6 @@
 <div class="container">
 	<div class="flex justify-content-center">
+		<% token_tag(nil) %>
 	<%if @user && @user.id != @owner_id%>
 		<%if !@user.wish_lists.find_by_item_id(@item.id) %>
 		<%= link_to 'Add to wish list', user_wish_lists_path(user_id: @user.id, item_id: @item.id), method: :post, class: "btn btn-primary" %>
