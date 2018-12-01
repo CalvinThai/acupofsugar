@@ -55,7 +55,7 @@ class User < ApplicationRecord
   user = find_or_create_by(uid: auth['uid'], provider:  auth['provider'])
   user.email = "#{auth['uid']}@#{auth[‘provider’]}.com"
   user.password = auth['uid']
-  user.fname = auth[‘info’]['fname']
+  user.fname = auth['info']['fname']
   if User.exists?(user)
     user
   else
@@ -71,8 +71,11 @@ end
       user.fname = auth.info.first_name
       user.lname = auth.info.last_name
       user.email = auth.info.email
+      user.email_confirmed = true
+      user.confirm_token = nil
       #user.picture = auth.info.image
       user.save!
+
     end
   end
 

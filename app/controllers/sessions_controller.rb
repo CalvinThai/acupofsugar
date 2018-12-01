@@ -10,10 +10,10 @@ skip_before_action :require_login
   def create
     if request.env['omniauth.auth']
       #@user = User.create_with_omniauth(request.env['omniauth.auth'])
-      @user = User.find_or_create_from_auth_hash(env["omniauth.auth"])
-      session[:user_id] = @user.id    
-      #redirect_to user_path(@user.id)
-      redirect_to page_path('faq')
+      user = User.find_or_create_from_auth_hash(env["omniauth.auth"])
+      session[:user_id] = user.id    
+      flash[:failure] = "Facebook login failed "
+      redirect_to user
     else
       user = User.find_by(email: params[:session][:email].downcase)
       if user && user.authenticate(params[:session][:password_digest])
