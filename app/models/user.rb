@@ -57,6 +57,9 @@ class User < ApplicationRecord
   user.email = "#{auth['uid']}@#{auth[‘provider’]}.com"
   user.password = auth['uid']
   user.fname = auth['info']['fname']
+  user.lname = auth['info']['lname']
+  user.email_confirmed = true
+  user.confirm_token = nil
   if User.exists?(user)
     user
   else
@@ -64,21 +67,6 @@ class User < ApplicationRecord
     user
   end
 end
-
-  def self.find_or_create_from_auth_hash(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
-      user.provider = auth.provider
-      user.id = auth.uid
-      user.fname = auth.info.first_name
-      user.lname = auth.info.last_name
-      user.email = auth.info.email
-      user.email_confirmed = true
-      user.confirm_token = nil
-      #user.picture = auth.info.image
-      user.save!
-
-    end
-  end
 
 
   before_save { self.email = email.downcase }
