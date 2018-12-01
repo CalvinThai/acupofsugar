@@ -10,7 +10,6 @@
 <% end %>
 
 <div id="item_profile">
-  <% borrower = User.find(@borrower.id)%>
   <p>Borrower: <%= borrower.fname %> <%= borrower.lname %></p> <!-- should go to user profile page -->
 	<p>Item: <%= @item.name %></p>
 	<%= render partial: 'items/item_profile' %>
@@ -55,5 +54,5 @@
       //path: '/assets/',
       scoreName: 'review_borrower[rating]',
       size: 24
-    });   
+    });
 </script>

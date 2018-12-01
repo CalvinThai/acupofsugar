@@ -1,13 +1,16 @@
 <div class="container">
 	<div class="row">
-		<div class="col-xs-12 col-md-4">
+		<div class="col-xs-12 col-md-4 margin-bot-2">
+			<div class="sticky-note">
 			<p style="font-size:21px"><%= @user.fname.capitalize %> <%= @user.lname.capitalize %></p>
 			<div style="font-size:14px;color: #657786;"><i class="fa fa-calendar" aria-hidden="true"></i> <%= @user.created_at.strftime("Joined %B %Y")%></div>
+			</div>
 			<br>
+			<div class="sticky-note">
 			<% if @user != @logged_in_user %>
 			<div><%= button_to 'Send Message', conversations_path(sender_id: @logged_in_user.id, recipient_id: @user.id), method: :post,class:'cta ProfileMessagingActions' %></div>
 			<% end %>
-			
+			<div style="font-size:21px" class="margin-bot-1"><i class="fas fa-user-cog"></i> Management </div>
 		<% if @user == @logged_in_user %>
 			<p>
 			<%= link_to 'Manage items >', user_items_path(@user) %>
@@ -32,13 +35,16 @@
 			</p>
 		<% end %>
 		</div>
+		</div>
 		
-		<div class="col-xs-12 col-md-4">
+		<div class="col-xs-12 col-md-4 margin-bot-2">
+			<div class="sticky-note" style="max-height:460px;overflow-y: scroll;">
 			For all items? or just friend items?
+			</div>
 		</div>
 	<div class="col-xs-12 col-md-4 margin-bot-2">
 		<% if @user == @logged_in_user %>
-		<div id="friend_request_list" class="sticky-note"style="max-height:140px;overflow-y: scroll;">
+		<div id="friend_request_list" class="sticky-note" style="max-height:140px;overflow-y: scroll;">
 			<%= render  "friendships/friend_requests"%>
 		</div>
 		<br>
