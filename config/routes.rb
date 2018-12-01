@@ -13,8 +13,6 @@ Rails.application.routes.draw do
   get 'users/indexx'
   get 'users/new'
   get 'items/index'
-  get 'items/show'
-  match 'auth/:provider/callback', to: 'sessions#create'
   resources :password_resets
   resources :report_users
 
