@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 2018_11_30_011746) do
-=======
 ActiveRecord::Schema.define(version: 2018_11_30_233448) do
->>>>>>> edf07ef88179dbeb2e063849810d5a66fb3b49d5
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -105,13 +101,10 @@ ActiveRecord::Schema.define(version: 2018_11_30_233448) do
     t.text "address"
     t.float "latitude"
     t.float "longitude"
-<<<<<<< HEAD
     t.string "country"
     t.string "city"
     t.string "street"
-=======
     t.boolean "disable", default: false
->>>>>>> edf07ef88179dbeb2e063849810d5a66fb3b49d5
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
@@ -146,6 +139,13 @@ ActiveRecord::Schema.define(version: 2018_11_30_233448) do
     t.datetime "due_date"
     t.index ["item_id"], name: "index_on_hold_items_on_item_id"
     t.index ["user_id"], name: "index_on_hold_items_on_user_id"
+  end
+
+  create_table "report_users", force: :cascade do |t|
+    t.integer "reporter_id"
+    t.integer "reportee_id"
+    t.text "reason"
+    t.text "comment"
   end
 
   create_table "review_borrowers", force: :cascade do |t|

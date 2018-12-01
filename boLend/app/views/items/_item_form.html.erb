@@ -11,10 +11,7 @@
       <%= form.label :description %><br>
       <%= form.text_area :descr, class: "form-control" %>
    </div>
-   <div class="form-group">
-      <%= form.label :status %><br>
-      <%= form.text_area :status, class: "form-control" %>
-  </div>
+
   <div class="form-group">
       <%= form.label :category %><br>
 
@@ -47,6 +44,6 @@
 
 
     <p>
-      <%= form.submit,class: "btn btn-primary" %>
+      <%= form.submit "Post My Item",class: "btn btn-primary" %>
     </p>
   <% end %>
