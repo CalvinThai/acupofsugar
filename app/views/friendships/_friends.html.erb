@@ -1,10 +1,10 @@
 <% friends = @user.friends %>
-<div style="font-size:21px" class="margin-bot-1"><i class="fas fa-user-friends"></i> Friend List </div>
+<div style="font-size:21px" class="margin-bot-1"><i class="fas fa-user-friends"></i> Friend List <%="(#{friends.length})"if friends.length>0%></div>
 <% if friends.empty?%><div>You don't have any friends yet! Please start by searching for users through the search bar above.</div><% end %>
 <% for friend in friends%>
 	<div >
 		<!--desktop view -->
-		<%= link_to "#{friend.fname} #{friend.lname}", user_path(friend) %>
+		<%= link_to "#{friend.fname.capitalize} #{friend.lname.capitalize}", user_path(friend) %>
 		<%= form_tag user_friendship_path(@user,id:1), method: :delete,style:'display:inline-block;',data: { confirm: "Are you sure to unfriend with #{friend.fname} #{friend.lname}?" },class:"hidden-md hidden-sm hidden-xs",remote: true do %>
 		  <%= hidden_field_tag :friend_remover, @user.id%>
 		  <%= hidden_field_tag :friend_removee, friend.id %>
@@ -33,5 +33,6 @@
 		  <%= button_tag '<i class="fas fa-user-slash"></i>'.html_safe,class:'cta',title:'Block Friend' %>
 		<% end %>
 	</div>
+	<hr style="border-top: 1px solid #7A7E81;">
 <%end%>
 <br/>

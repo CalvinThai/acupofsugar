@@ -8,8 +8,6 @@ skip_before_action :require_login
   end
   
   def create
-    flash[:failure] = "Facebook login failed"
-    flash[:verification] =  'xd whats wrong'
     if request.env['omniauth.auth']
       #@user = User.create_with_omniauth(request.env['omniauth.auth'])
       user = User.create_with_omniauth(request.env['omniauth.auth'])
@@ -34,7 +32,6 @@ skip_before_action :require_login
        flash[:failure] = "The email address or password you entered is incorrect. "
         redirect_to login_url
       end
-  redirect_to login_url
   end
 end
   def destroy
