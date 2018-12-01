@@ -8,6 +8,8 @@ skip_before_action :require_login
   end
   
   def create
+    flash[:failure] = "Facebook login failed"
+    flash[:verification] =  'xd whats wrong'
     if request.env['omniauth.auth']
       #@user = User.create_with_omniauth(request.env['omniauth.auth'])
       user = User.create_with_omniauth(request.env['omniauth.auth'])
