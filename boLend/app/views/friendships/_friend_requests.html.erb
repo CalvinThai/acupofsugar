@@ -1,3 +1,4 @@
+<div style="font-size:21px" class="margin-bot-1"><i class="fas fa-bell"></i> Friend Requests </div>
 <% request_num = @user.requested_friends.length %>
 <% if request_num>0 %>
 	<% request_list = @user.requested_friends %>
@@ -29,4 +30,6 @@
 			<% end %>
 		</div>
 	<% end %>
+<% else %>
+<div>There is no friend request.</div>
 <% end %>
