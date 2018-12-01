@@ -3,6 +3,7 @@
 <% if friends.empty?%><div>You don't have any friends yet! Please start by searching for users through the search bar above.</div><% end %>
 <% for friend in friends%>
 	<div >
+		<!--desktop view -->
 		<%= link_to "#{friend.fname} #{friend.lname}", user_path(friend) %>
 		<%= form_tag user_friendship_path(@user,id:1), method: :delete,style:'display:inline-block;',data: { confirm: "Are you sure to unfriend with #{friend.fname} #{friend.lname}?" },class:"hidden-md hidden-sm hidden-xs",remote: true do %>
 		  <%= hidden_field_tag :friend_remover, @user.id%>
@@ -17,6 +18,7 @@
 		  <%= hidden_field_tag :decision, "block" %>
 		  <%= button_tag 'Block Friend',class:'cta' %>
 		<% end %>
+		<!--mobile view -->
 		<%= form_tag user_friendship_path(@user,id:1), method: :delete,style:'display:inline-block;',data: { confirm: "Are you sure to unfriend with #{friend.fname} #{friend.lname}?" },class:"hidden-lg",remote: true do %>
 		  <%= hidden_field_tag :friend_remover, @user.id%>
 		  <%= hidden_field_tag :friend_removee, friend.id %>
