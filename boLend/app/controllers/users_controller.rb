@@ -19,6 +19,7 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
 		@user = User.find(params[:id])
     @logged_in_user = User.find(session[:user_id])
     @notification = Notification.find_by_user_id(@user.id)
+    @blockee_users = Blockee.blockees_of_user(@user)
 	end
   def new
     @user = User.new
