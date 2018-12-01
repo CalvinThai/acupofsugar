@@ -1,18 +1,13 @@
 <h1>Review the borrower</h1>
 
-<% if @review_borrower.errors.any? %>
-    <div class="error_explanation">
-      <h2>
-        <%= pluralize(@review_borrower.errors.count, "error") %> prohibited
-        this review from being saved:
-      </h2>
-      <ul>
-        <% @review_borrower.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+
+<% if flash[:failure_msg]%>
+  <div class="alert alert-danger">
+    <% @review_borrower.errors.each do |error| %>
+      <p class="text-center"><%= error %></p>
+    <% end %>
+  </div>
+<% end %>
 
 <div id="item_profile">
   <% borrower = User.find(@borrower.id)%>
@@ -21,26 +16,37 @@
 	<%= render partial: 'items/item_profile' %>
 </div>
 
-<p>Please fill out this review form after receiving the item.</p>
+<p>Note: please fill out this review form after receiving the item.</p>
 <div>
   <%= form_with(model: [@user, @review_borrower], local: true) do |form| %>
      <%= form.hidden_field(:user_id, :value => @user.id) %>
      <%= form.hidden_field(:item_id , :value => @item.id) %>
      <%= form.hidden_field(:borrower_id , :value => @borrower.id) %>
-    <p>
-      <%= form.label 'Rate borrower: ' %><br>
-      <%= form.number_field :rating %>
-    </p>
-    <p>
+    <div class="form-group">
+      <label>Rate borrower: </label>
+      <div class="rating-form-brw">
+      <%#= form.label 'Rate item/lender: ' %>
+      <%#= form.number_field :rating %>
+      </div>
+    </div>
+    <div class="form-group">
       <%= form.label 'Leave comment: ' %><br>
-      <%= form.text_area :comment %>
-    </p>
-    <p>
-      <%= form.submit "Submit review"%>
-    </p>
+      <%= form.text_area :comment , class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= form.submit "Submit review" , class: "btn btn-primary"%>
+    </div>
   <% end %>
 </div>
 
 <div>
-  <%= link_to "cancel", user_items_path(@user.id) %>
+  <%= link_to "Cancel", user_items_path(@user.id) , class: "btn btn-default" %>
 </div>
+
+<script>
+  $('.rating-form-brw').raty({
+      //path: '/assets/',
+      scoreName: 'review_borrower[rating]',
+      size: 24
+    });   
+</script>

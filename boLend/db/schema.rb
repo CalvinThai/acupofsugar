@@ -10,7 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2018_11_30_011746) do
+=======
+ActiveRecord::Schema.define(version: 2018_11_30_233448) do
+>>>>>>> edf07ef88179dbeb2e063849810d5a66fb3b49d5
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -101,9 +105,13 @@ ActiveRecord::Schema.define(version: 2018_11_30_011746) do
     t.text "address"
     t.float "latitude"
     t.float "longitude"
+<<<<<<< HEAD
     t.string "country"
     t.string "city"
     t.string "street"
+=======
+    t.boolean "disable", default: false
+>>>>>>> edf07ef88179dbeb2e063849810d5a66fb3b49d5
     t.index ["user_id"], name: "index_items_on_user_id"
   end
 
@@ -180,6 +188,8 @@ ActiveRecord::Schema.define(version: 2018_11_30_011746) do
     t.string "address"
     t.string "provider"
     t.string "uid"
+    t.float "rating"
+    t.boolean "disable", default: false
   end
 
   create_table "wish_lists", force: :cascade do |t|

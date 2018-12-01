@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :users do
   	resources :items do
       put 'lent_out'
+      put 'delete_item'
     end
   	resources :on_hold_items do
       put 'update_request_status'
@@ -58,5 +59,5 @@ end
   resources :messages
  end
 
-
+get "*id" => 'pages#show', as: :page, format: false
 end

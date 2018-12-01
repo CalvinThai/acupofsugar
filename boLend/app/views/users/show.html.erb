@@ -1,10 +1,14 @@
-<h1><%= @user.fname %>'s personal page</h1>
-
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12 col-md-4">
+			<p style="font-size:21px"><%= @user.fname.capitalize %> <%= @user.lname.capitalize %></p>
+			<div style="font-size:14px;color: #657786;"><i class="fa fa-calendar" aria-hidden="true"></i> <%= @user.created_at.strftime("Joined %B %Y")%></div>
+			<% if @user != @logged_in_user %>
+			<div><%= button_to 'Send Message', conversations_path(sender_id: @logged_in_user.id, recipient_id: @user.id), method: :post,class:'cta ProfileMessagingActions' %></div>
+			<% end %>
+		</div>
+		<div class="col-xs-12 col-md-4">
 <% if @user == @logged_in_user %>
-	<p> Name: <%= @user.fname %> <%= @user.lname %> </p>
-	<p> Email Address: <%= @user.email %> </p>
-	<p> Address: <%= @user.address %> </p>
-	<p> Telephone number: <%= @user.phonenum %> </p>
 	<p>
 	<%= link_to 'Manage items >', user_items_path(@user) %>
 	</p>
@@ -17,6 +21,9 @@
 	<p>
 	<%= link_to "Your Messages", conversations_path %>
 	</p>
+	<p>
+	<%= link_to "Reviews from others", user_review_borrowers_path(@user.id) %>
+	</p>
 <% else %> 
 	<p> Name: <%= @user.fname %> <%= @user.lname %> </p>
 	<p> Email Address: <%= @user.email %> </p>
@@ -25,4 +32,24 @@
 	<p>
 	<%= link_to 'View items >', user_items_path(@user) %>
 	</p>
+	<p>
+	<%= link_to "View reviews >", user_review_borrowers_path(@user.id) %>
+	</p>
 <% end %>
+</div>
+	<div class="col-xs-12 col-md-4">
+		<% if @user == @logged_in_user %>
+		<div id="friend_request_list" >
+			<%= render  "friendships/friend_requests"%>
+		</div>
+		<div id="friend_list" style="max-height:150px;overflow-y: scroll;">
+			<%= render  "friendships/friends"%>
+		</div>
+		<div id="block_list" style="max-height:150px;overflow-y: scroll;">
+			<%= render  "friendships/blocks"%>
+		</div>
+		<%end%>
+		
+	</div>
+</div>
+</div>

@@ -10,8 +10,10 @@ class NotificationsController < ApplicationController
 	    @notification = Notification.find(params[:id])
 
 	    if @notification.update(notification_params)
+	      flash[:success_msg] = "Email notification preferences are successfully updated!"
 	      redirect_to user_notification_path(@user.id, @notification.id)
 	    else
+	      flash[:failure_msg] = "Something went wrong!"
 	      render 'edit'
 	    end
 	end

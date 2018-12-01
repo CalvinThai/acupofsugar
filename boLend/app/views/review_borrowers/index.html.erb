@@ -1,0 +1,18 @@
+
+<div class="container">
+	<h1><%="Reviews for #{@user.fname} #{@user.lname}"%></h1>
+	<p class="img-responsive rating-display" data-score="<%= @user.rating.to_i %>"></p>
+	<%= render partial: 'reviews_from_lender' %>
+	<%= render partial: 'reviews_from_borrower' %>
+</div>
+
+<script>
+  $('.rating-display').raty({
+      readOnly: true,
+      score: function() {
+        return $(this).attr('data-score');
+      },
+      //path: '/assets/',
+      size: 24
+    });   
+</script>

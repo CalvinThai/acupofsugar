@@ -1,18 +1,12 @@
 <h1>Review the item and lender</h1>
 
-<% if @review_lender.errors.any? %>
-    <div class="error_explanation">
-      <h2>
-        <%= pluralize(@review_lender.errors.count, "error") %> prohibited
-        this review from being saved:
-      </h2>
-      <ul>
-        <% @review_lender.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<% if flash[:failure_msg]%>
+  <div class="alert alert-danger">
+    <% @review_lender.errors.each do |error| %>
+      <p class="text-center"><%= error %></p>
+    <% end %>
+  </div>
+<% end %>
 
 <div id="item_profile">
 	<% owner = User.find(@item.user_id)%>
@@ -21,26 +15,37 @@
 	<%= render partial: 'items/item_profile' %>
 </div>
 
-<p>Please fill out this review form after returning the item.</p>
+<p>Note: please fill out this review form after returning the item.</p>
 <div>
   <%= form_with(model: [@user, @review_lender], local: true) do |form| %>
      <%= form.hidden_field(:user_id, :value => @user.id) %>
      <%= form.hidden_field(:item_id , :value => @item.id) %>
      <%= form.hidden_field(:lender_id , :value => @item.user_id) %>
-    <p>
-      <%= form.label 'Rate item/lender: ' %><br>
-      <%= form.number_field :rating %>
-    </p>
-    <p>
+    <div class="form-group">
+      <label>Rate item/lender</label>
+      <div class="rating-form-ild">
+      <%#= form.label 'Rate item/lender: ' %>
+      <%#= form.number_field :rating %>
+      </div>
+    </div>
+    <div class="form-group">
       <%= form.label 'Leave comment: ' %><br>
-      <%= form.text_area :comment %>
-    </p>
-    <p>
-      <%= form.submit "Submit review"%>
-    </p>
+      <%= form.text_area :comment , class: "form-control" %>
+   </div>
+     <div class="form-group">
+      <%= form.submit "Submit review", class: "btn btn-primary"%>
+    </div>
   <% end %>
 </div>
 
 <div>
-  <%= link_to "cancel", user_items_path(@user.id) %>
+  <%= link_to "Cancel", user_items_path(@user.id), class: "btn btn-default"%>
 </div>
+
+<script>
+  $('.rating-form-ild').raty({
+      //path: '/assets/',
+      scoreName: 'review_lender_and_item[rating]',
+      size: 24
+    });
+</script>

@@ -5,7 +5,18 @@
 	<%= render partial: 'items/item_profile' %>
 </div>
 <div id="review">
-	<p>raiting: <%= @review_borrower.rating%></p>
+	<p>raiting: <div class="img-responsive rating-display" data-score="<%= @review_borrower.rating%>"></div></p>
 	<p>comment: <%= @review_borrower.comment%></p>
 </div>
-<%= link_to '< Back to items', user_items_path(@user.id)%>
+<%= link_to '< Back to items', user_items_path(@user.id),class: "btn btn-default"%>
+
+<script>
+  $('.rating-display').raty({
+      readOnly: true,
+      score: function() {
+        return $(this).attr('data-score');
+      },
+      //path: '/assets/',
+      size: 24
+    });
+</script>

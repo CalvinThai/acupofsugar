@@ -1,19 +1,21 @@
-<div class="container table-responsive">
-  <h3>Reviews for this item: </h3>
-  <%if @reviews.length > 0 %>       
+<div class=" table-responsive">
+  <h2>From borrowers: </h2>   
+  <%if @reviews_by_borrower.length > 0 %>   
   <table class="table">
     <tbody>
-      <% @reviews.each do |reviewer| %>
+      <% @reviews_by_borrower.each do |reviewer| %>
+       <% item = Item.find(reviewer.item_id)%>
       <tr>
         <td><%= "#{reviewer.fname} #{reviewer.lname}"%></td> <!-- link to view user profile?-->
         <td><div class="img-responsive rating-display" data-score="<%= reviewer.r_rating %>"></div></td>
+        <td><%= item.name %></td>
         <td><%= reviewer.comment %></td>
       </tr>
       <%end%>
     </tbody>
   </table>
-  <% else %>
-    There are no reviews yet
+  <%else%>
+    <p>There's no review from borrowers</p>
   <%end%>
 </div>
 
@@ -25,5 +27,5 @@
       },
       //path: '/assets/',
       size: 24
-    });
+    });   
 </script>

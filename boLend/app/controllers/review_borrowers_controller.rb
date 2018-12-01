@@ -1,6 +1,8 @@
 class ReviewBorrowersController < ApplicationController
 def index
-
+    @user = User.find(params[:user_id]);
+    @reviews = ReviewBorrower.joins(:user).select("review_borrowers.*, review_borrowers.rating as r_rating, users.*").where("review_borrowers.borrower_id = ?", @user.id)
+    @reviews_by_borrower = ReviewLenderAndItem.joins(:user).select("review_lender_and_items.*, review_lender_and_items.rating as r_rating, users.*").where("review_lender_and_items.lender_id = ?", @user.id)
 end
 def new
 	@user = User.find(params[:user_id])
@@ -15,7 +17,7 @@ def create
     @borrower_id = params[:review_borrower][:borrower_id]
     @review_borrower = @user.review_borrowers.create(review_params)
     if @review_borrower.save
-      flash[:success] = "Review successfully saved!"
+      flash[:success_msg] = "Review successfully saved!"
       @item.available
       @on_hold_item = OnHoldItem.find_by_item_id(@item.id)
       @borrowed_item = BorrowedItem.find_by_item_id(@item.id)
@@ -32,13 +34,9 @@ def create
        @borrowed_item.destroy
       redirect_to user_items_path(@user)
     else
-      flash[:alert] = "Information did not meet requirements"
+      flash[:failure_msg] = "Information did not meet requirements"
       render :new
     end
-end
-
-def destroy
-
 end
 
 def show

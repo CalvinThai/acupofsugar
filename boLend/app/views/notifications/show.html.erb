@@ -1,12 +1,12 @@
+<div class="container"> 
 <h1>You are receiving email notifications on...</h1>
+    <% if flash[:success_msg] %>
+        <div class="alert alert-success"><%= flash[:success_msg] %></div>
+    <%end%>
+    <li> Borrow / due date extension requests from others: <stong><%= @notification.i_req_by_others%></stong></li> <br />
+    <li> Approval for borrow / due date extension requests you sent: <stong><%= @notification.i_req_approval_alert%> </stong> </li> <br />
+     <li> Early due date alert for an item on hold: <stong><%= @notification.i_due_alert%></stong></li><br />
 
-    <div class=""> <li> Borrow / due date extension requests from others: <stong><%= @notification.i_req_by_others%></stong></li> <br />
-    </div>
-    <div class=""> <li> Approval for borrow / due date extension requests you sent: <stong><%= @notification.i_req_approval_alert%> </stong> </li> <br />
-    </div>
-    <div class=""> <li> Early due date alert for an item on hold: <stong><%= @notification.i_due_alert%></stong></li><br />
-    </div>
-    <div class="">
-      <%= link_to "Change preferences", edit_user_notification_path(params[:user_id], params[:id])%><br />
-      <%= link_to "< Back", user_path(params[:user_id])%>
-    </div>
+  <%= link_to "Change preferences", edit_user_notification_path(params[:user_id], params[:id]), class: "btn btn-primary"%><br />
+  <%= link_to "< Back", user_path(params[:user_id]), class: "btn btn-default"%>
+</div>

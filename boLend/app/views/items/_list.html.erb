@@ -1,24 +1,30 @@
-<div id="filterrific_results">
+<div id="filterrific_results" class="table-responsive">
 
   <div>
     <%= page_entries_info items %>
   </div>
 
-  <table>
+  <table class="table">
+    <thead>
     <tr>
       <th>Name</th>
       <th>Description</th>
       <th>Category</th>
       <th>Registered at</th>
     </tr>
+  </thead>
+  <tbody>
     <% items.each do |item| %>
+    <% if !item.disable %>
       <tr>
         <td><%= link_to item.name, item_path(item) %></td>
         <td><%= item.descr %></td>
         <td><%= item.category %></td>
-        <td><%= item.created_at %></td>
+        <td><%= item.created_at.strftime("%Y-%m-%d") %></td>
       </tr>
+     <% end %> 
     <% end %>
+  </tbody>
   </table>
 </div>
 

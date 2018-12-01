@@ -1,9 +1,11 @@
 <h2>Your Items others have requested to borrow</h2>
 
+<div class="table-responsive">
 <% if @lend_items.length > 0 %>
   <% if @pending_items.length > 0 %>
     <h3>Pending Requests</h3>
-    <table>
+    <table class="table">
+      <thead>
       <tr>
         <th>Item name</th>
         <th>Description</th>
@@ -12,6 +14,8 @@
         <th>Requested Return Date</th>
         <th colspan="2">Approval</th>
       </tr>
+     </thead>
+     <tbody>
       <% @pending_items.each do |item| %>
         <tr>
           <td><%= link_to item.name %></td>
@@ -20,16 +24,18 @@
           <td><%= item.req_on.strftime("%Y-%m-%d") %></td>
           <td><%= item.due_date.strftime("%Y-%m-%d")%></td>
           <td>
-            <%= button_to 'Approve Request', user_on_hold_item_update_request_status_path(:on_hold_item_id => item.id, :result => "approved"), method: :put %>
-            <%= button_to 'Deny Request', user_on_hold_item_update_request_status_path(:on_hold_item_id => item.id, :result => "denied"), method: :put  %>
+            <%= button_to 'Approve Request', user_on_hold_item_update_request_status_path(:on_hold_item_id => item.id, :result => "approved"), method: :put , class: "btn btn-primary" %>
+            <%= button_to 'Deny Request', user_on_hold_item_update_request_status_path(:on_hold_item_id => item.id, :result => "denied"), method: :put , class: "btn btn-primary" %>
           <td>
         </tr>
     <% end %>
+    </tbody>
     </table>
   <% end %>
   <% if @approved_items.length > 0 %>
   <h3>Approved Requests/ On Loan</h3>
-  <table>
+  <table class="table">
+    <thead>
     <tr>
       <th>Item name</th>
       <th>Description</th>
@@ -39,6 +45,8 @@
       <th>Approved Return Date</th>
       <th colspan="2">Due extension/Ation</th>
     </tr>
+    </thead>
+    <tbody>
     <% @approved_items.each do |item| %>
     <tr>
       <td><%= link_to item.name %></td>
@@ -50,21 +58,21 @@
         <% if borrowed_item == nil %>
           <td>
             <!-- add confirm return button here -->
-               <%= link_to 'Confirm Pickup', new_user_borrowed_item_path(:user_id => item.user_id,:on_hold_item_id => item.id) %>
+               <%= link_to 'Confirm Pickup', new_user_borrowed_item_path(:user_id => item.user_id,:on_hold_item_id => item.id) , class: "btn btn-primary" %>
           </td>
         <% else %>
            <td>
             <%= borrowed_item.due_date.strftime("%Y-%m-%d") %>
           </td>
           <% if borrowed_item.returned_on != nil%>
-            <td><%= link_to 'Confirm return', new_user_review_borrower_path(:user_id => @user.id,:item_id => item.item_id, :borrower_id => borrowed_item.user_id) %></td>
+            <td><%= link_to 'Confirm return', new_user_review_borrower_path(:user_id => @user.id,:item_id => item.item_id, :borrower_id => borrowed_item.user_id) , class: "btn btn-primary" %></td>
            <%elsif borrowed_item.approved == "pending" %>
              <td>
                <%= borrowed_item.temp_due_date.strftime("%Y-%m-%d") %>
              </td>
               <td>
-            <%= button_to 'Approve extension', user_borrowed_item_update_ext_status_path(:borrowed_item_id => item.id, :result => "approved"), method: :put %>
-            <%= button_to 'Deny extension', user_borrowed_item_update_ext_status_path(:borrowed_item_id => item.id, :result => "denied"), method: :put  %>
+            <%= button_to 'Approve extension', user_borrowed_item_update_ext_status_path(:borrowed_item_id => item.id, :result => "approved"), method: :put , class: "btn btn-primary"%>
+            <%= button_to 'Deny extension', user_borrowed_item_update_ext_status_path(:borrowed_item_id => item.id, :result => "denied"), method: :put , class: "btn btn-primary" %>
             <td>
            <%else %>
             <td colspan="2"><%=borrowed_item.approved%></td>
@@ -72,8 +80,10 @@
         <% end %>
     </tr>
     <% end %>
+    </tbody>
   </table>
 <% end %>
 <% else %>
   <p>There are no items that require your attention</p>
 <% end %>
+</div>

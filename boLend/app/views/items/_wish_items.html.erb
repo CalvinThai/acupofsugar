@@ -1,27 +1,28 @@
 <h2>Items you've wishlisted</h2>
-
+<div class="table-responsive">
 <% if @wish_items.length > 0 %>
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th>Item name</th>
     <th>Description</th>
-    <th colspan="2"></th>
+    <th>Status</th>
+    <th>Manage</th>
   </tr>
-
+</thead>
+<tbody>
   <% @wish_items.each do |item| %>
     <tr>
       <td><%= link_to item.name, item_path(item.item_id)%></td>
       <td><%= item.descr %></td>
-      <td>
-        <% if @on_hold_items.length == 0 || @user.on_hold_items.find_by_item_id(item.item_id) == false %> 
-          <%#= link_to 'Send a borrow request' , user_on_hold_items_path(user_id: @user.id, item_id: item.item_id, req_on: Time.now.strftime("%d/%m/%Y")), method: :post%>
-        <%end%>
-      </td>
+      <td><%= item.status %></td>
       <td><%= link_to 'Delete', user_wish_list_path(item.user_id, item.item_id), method: :delete,
-              data: { confirm: 'Are you sure?' }%></td>  <!-- item will be deleted from the list -->
+              data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %></td>  <!-- item will be deleted from the list -->
     </tr>
   <% end %>
+  </tbody>
 </table>
 <%else%>
   <p>You don't have any wish lists</p>
 <%end%>
+</div>

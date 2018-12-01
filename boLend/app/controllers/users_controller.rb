@@ -12,19 +12,14 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
     end
 	end
   def indexx
+    @user = current_user
     @users = User.all
   end
 	def show
 		@user = User.find(params[:id])
     @logged_in_user = User.find(session[:user_id])
-
-    #temporary fix for creating notification preferences if doesn't exist yet
     @notification = Notification.find_by_user_id(@user.id)
-    if(!@notification)
-      @notification = Notification.create(:user_id => @user.id)
-    end
-    #@user = User.find(1)
-
+    @blockee_users = Blockee.blockees_of_user(@user)
 	end
   def new
     @user = User.new
@@ -48,7 +43,7 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
       #UserMailer.with(user: @user).welcome_email.deliver
       Notification.create(:user_id => @user.id);
       flash[:success_msg] = "Registration successful! Please verify your email address."
-      redirect_to users_new_url
+      redirect_to login_path
 
     else
       flash[:failure_msg] = "Registration failed"

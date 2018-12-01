@@ -1,5 +1,15 @@
+<div class="container">
 <h1>Update preferences</h1>
+
+<% if flash[:failure_msg]%>
+  <div class="alert alert-danger">
+    <% @notification.errors.each do |attr,error| %>
+      <p class="text-center"><%= error %></p>
+    <% end %>
+  </div>	   
+<% end %>
 
 <%= render 'preference_form' %>
 
-<%= link_to 'Cancel', user_path(@user.id) %>
+<%= link_to 'Cancel', user_path(@user.id), class: "btn btn-default" %>
+</div>

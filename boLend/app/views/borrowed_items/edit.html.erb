@@ -1,7 +1,4 @@
-<!DOCTYPE html>
-<html>
-<body>
-
+<div class="container">
 	<h1>Update due date</h1>
 
 	<div id="item_profile">
@@ -13,7 +10,5 @@
 
 	<%= render 'due_date_form' %>
 
-	<%= link_to '< To manage items', user_items_path(@user) %>
-
-</body>
-</html>
+	<%= link_to '< To manage items', user_items_path(@user), class: "btn btn-default"%>
+</div>

@@ -6,8 +6,8 @@ class Item < ApplicationRecord
 	has_many :borrowed_items, dependent: :destroy
 	has_many :on_hold_items, dependent: :destroy
 	has_many_attached :images
-	validates :name, presence: true #{ message: "Name must be given." }
-	validates :descr, presence: true #{ message: "Brief description must be given." }
+	validates :name, presence: {message: "Please provide name for your item"}
+	validates :descr, presence: {message: "Please describe your item"}
 	geocoded_by :address
 	after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
 
@@ -155,6 +155,5 @@ end
 def available
 	update_attributes(status: 'available')
 end
-
 
 end

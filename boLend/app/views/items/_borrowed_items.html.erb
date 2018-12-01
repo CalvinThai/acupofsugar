@@ -1,7 +1,8 @@
 <h2>Items you've borrowed</h2>
-
+<div class="table-responsive">
 <% if @borrowed_items.length > 0 %>
-<table>
+<table class="table">
+  <thead>
   <tr>
     <th>Item name</th>
     <th>Description</th>
@@ -9,7 +10,8 @@
     <th>Contact owner</th>
     <th colspan="2">Action/Status</th>
   </tr>
-
+</thead>
+<tbody>
   <% @borrowed_items.each do |item| %>
     <% @owner = User.find(item.i_uid) %>
     <tr>
@@ -18,9 +20,9 @@
       <td><%= item.due_date.strftime("%Y-%m-%d") %></td>
       <td><%= link_to "#{@owner.fname} #{@owner.lname}", conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post"%></td> <%# link to user profile OR invoke messanger %>
       <%if item.returned_on == nil%>
-      <td><%= link_to 'Confirm return', new_user_review_lender_and_item_path(user_id: @user.id, item_id: item.item_id, lender_id: @owner.id)%></td>
       <td>
-        <%if item.approved == nil %><%= link_to 'Send due date extension', edit_user_borrowed_item_path(user_id: @user.id, id: item.item_id)%>
+        <%= link_to 'Confirm return', new_user_review_lender_and_item_path(user_id: @user.id, item_id: item.item_id, lender_id: @owner.id), class: "btn btn-primary"%><br/>
+        <%if item.approved == nil %><%= link_to 'Send due date extension', edit_user_borrowed_item_path(user_id: @user.id, id: item.item_id), class: "btn btn-primary"%>
         <%elsif item.approved != "Approved" %> due date extension <%= item.approved.downcase %>
         <%end%>
         </td>
@@ -30,8 +32,10 @@
         </td>
       <%end%>
     </tr>
-  <% end %> 
+  <% end %>
+  </tbody> 
 </table>
 <% else %>
   <p>You don't have any borrowed items</p>
 <%end%>
+</div>

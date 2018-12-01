@@ -1,23 +1,21 @@
-<div>
   <%= form_with(model: [ @user, @item ], local: true) do |form| %>
-    <p>
+    <div class="form-group">
       <%= form.label :name %><br>
-      <%= form.text_field :name %>
-    </p>
-    <p>
+      <%= form.text_field :name, class: "form-control"%>
+    </div>
+    <div class="form-group">
       <%= form.label :images %><br>
-      <%= form.file_field :images, multiple: true  %>
-    </p>
-    <p>
+      <%= form.file_field :images, multiple: true, class: "form-control"  %>
+   </div>
+   <div class="form-group">
       <%= form.label :description %><br>
-      <%= form.text_area :descr %>
-    </p>
-    <p>
+      <%= form.text_area :descr, class: "form-control" %>
+   </div>
+   <div class="form-group">
       <%= form.label :status %><br>
-      <%= form.text_area :status %>
-    </p>
-
-    <p>
+      <%= form.text_area :status, class: "form-control" %>
+  </div>
+  <div class="form-group">
       <%= form.label :category %><br>
 
       <%= form.select :category, [['Accessories', 'Accesories'],['Art', 'Art'],['Bath & Beauty', 'Bath & Beauty'], ['Books, Films & Music', 'Books, Films & Music'],
@@ -29,12 +27,12 @@
     <p>
       <%= form.label :country %><br>
 
-      <%= form.text_area :address %>
+      <%= form.text_area :address, class: "form-control" %>
     </p>
     <p>
       <%= form.label :city %><br>
 
-      <%= form.text_area :city %>
+      <%= form.text_area :city, class: "form-control" %>
     </p>
 
 
@@ -42,14 +40,13 @@
     <p>
       <%= form.label :street %><br>
 
-      <%= form.text_area :street %>
+      <%= form.text_area :street, class: "form-control" %>
     </p>
 
 
 
 
     <p>
-      <%= form.submit %>
+      <%= form.submit,class: "btn btn-primary" %>
     </p>
   <% end %>
-</div>

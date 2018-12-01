@@ -4,14 +4,26 @@
 		<% if not @user.blocked_friends.include?(user)%>
 			<%= link_to "#{user.fname.capitalize} #{user.lname.capitalize}", user_path(user),style:"padding-right:1em" %>
 			<% if user != @user%>
-				<%= button_to 'Send Message', conversations_path(sender_id: current_user.id, recipient_id: user.id), form: {style:'display:inline-block;'}, method: :post,class:'cta' %>
+				<%= button_to conversations_path(sender_id: current_user.id, recipient_id: user.id), form: {style:'display:inline-block;'}, method: :post,class:'cta hidden-xs hidden-sm hidden-md' do%>
+				<i class="fas fa-comment"></i> Send Message
+				<%end%>
+				<%= button_to conversations_path(sender_id: current_user.id, recipient_id: user.id), form: {style:'display:inline-block;'}, method: :post,class:'cta hidden-lg',title:'Send Message' do %>
+				<i class="fas fa-comment"></i>
+				<% end %>
 				<% if @user.friends.include?(user) %> 
-					<%= button_tag 'Friends', disabled: true %> 
+					<%= button_tag '<i class="fas fa-check"></i> Friends'.html_safe, class:'cta cta-background hidden-lg',disabled: true %>
+					<%= button_tag '<i class="fas fa-user-friends"></i>'.html_safe, class:'cta cta-background hidden-xs hidden-sm hidden-md',title:"Friends",disabled: true %>  
 				<% elsif not @user.pending_friends.include?(user)%> 
-					<%= button_to 'Add Friend', user_friendships_path(@user,friend_requirer: @user, friend_requiree:user,name: params[:name]), form: {style:'display:inline-block;'}, class:'cta',remote: true%> 
+					<%= button_to user_friendships_path(@user,friend_requirer: @user, friend_requiree:user,name: params[:name]), form: {style:'display:inline-block;'}, class:'cta',remote: true do%>
+					Add Friend <i class="fas fa-user-plus"></i>
+					<%end%>
+					<%= button_to user_friendships_path(@user,friend_requirer: @user, friend_requiree:user,name: params[:name]), form: {style:'display:inline-block;'}, class:'cta',remote: true,title:"Add Friend" do%>
+					<i class="fas fa-user-plus"></i>
+					<%end%>
+						 
 				<% else%> 
-					<%= button_tag 'Friend Request Sent', disabled: true %>
-
+					<%= button_tag '<i class="fas fa-check"></i> Request Sent'.html_safe, class:'cta cta-background hidden-xs hidden-sm hidden-md',disabled: true %>
+					<%= button_tag '<i class="fas fa-check"></i>'.html_safe, class:'cta cta-background hidden-lg',disabled: true,title:"Friend Request Sent" %>
 				<% end %>
 
 			<% end %>
