@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   get 'auth/facebook/callback', to: 'sessions#create'
+  post 'auth/facebook', to: 'sessions#create'
   
 end
 
