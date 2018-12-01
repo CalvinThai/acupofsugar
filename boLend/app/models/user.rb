@@ -5,7 +5,8 @@ class User < ApplicationRecord
   User.reindex
   #has_friendship gem
   has_friendship
-
+  require 'date'
+  
   has_many :items, dependent: :destroy
   has_many :wish_lists, dependent: :destroy
   has_many :borrowed_items, dependent: :destroy

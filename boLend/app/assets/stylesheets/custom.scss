@@ -2,15 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 .cta{
-    font-size: 15px;
+    font-size: 14px;
     display: inline-block;
     color: #0099e5;
     -webkit-border-radius: 100px;
     border-radius: 100px;
-    height: 40px;
-    padding: 0 15px;
+    height: 30px;
+    padding: 0 10px;
     border: 2px solid #0099e5;
-    line-height: 34px;
+    line-height: 10px;
     font-weight: bold;
     text-shadow: none;
     cursor: pointer;
@@ -122,4 +122,8 @@ a{
 
 .error-text{
 	color:#ff4c4c;
+}
+
+.ProfileMessagingActions {
+    margin-top: 16px;
 }
