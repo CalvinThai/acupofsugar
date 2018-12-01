@@ -6,31 +6,6 @@
 
 <!-- user specific view for /users/:id/items -->
 <%if @user && session[:user_id] && session[:user_id] == @user.id%>
-	<% if flash[:success_msg] %>
-		<div class="alert alert-success"><%= flash[:success_msg] %></div>
-	<% elsif flash[:alert] %>
-		<div class="alert alert-warning"><%= flash[:alert] %></div>	
-	<% elsif flash[:failure_msg]%>
-		<div class="alert alert-danger">
-	    	<% if @wish_item && @wish_item.errors.any?%>
-			    <% @wish_item.errors.each do |attr,error| %>
-			      <p class="text-center"><%= error %></p>
-			    <% end %>
-		    <% elsif @borrowed_item && @borrowed_item.errors.any?%>
-			    <% @borrowed_item.errors.each do |attr,error| %>
-			      <p class="text-center"><%= error %></p>
-			    <% end %>
-			<% elsif @item && @item.errors.any?%>
-			    <% @item.errors.each do |attr,error| %>
-			      <p class="text-center"><%= error %></p>
-			    <% end %>
-			<% elsif @on_hold_item && @on_hold_item.errors.any?%>
-			    <% @on_hold_item.errors.each do |attr,error| %>
-			      <p class="text-center"><%= error %></p>
-			    <% end %>
-		    <%end%>
-	  	</div>
-	<%end%>
 	<div id="user_items"><%= render  "items/manage_items_view" %></div>
 <%elsif @user%>
 	<div id="items"><%= render "items/user_item_public_view" %></div>

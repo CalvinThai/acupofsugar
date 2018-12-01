@@ -25,11 +25,6 @@
 			<%= link_to "Reviews from others", user_review_borrowers_path(@user.id) %>
 			</p>
 		<% else %> 
-			<p> Name: <%= @user.fname %> <%= @user.lname %> </p>
-			<p> Email Address: <%= @user.email %> </p>
-			<p> Address: <%= @user.address %> </p>
-			<p> Telephone number: <%= @user.phonenum %> </p>
-			<p>
 			<%= link_to 'View items >', user_items_path(@user) %>
 			</p>
 			<p>
