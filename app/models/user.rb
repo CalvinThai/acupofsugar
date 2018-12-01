@@ -48,7 +48,9 @@ class User < ApplicationRecord
       self[column]= SecureRandom.urlsafe_base64
     end while User.exists?(column=> self[column])
   end
-    def self.create_with_omniauth(auth)
+
+
+  def self.create_with_omniauth(auth)
   
   user = find_or_create_by(uid: auth['uid'], provider:  auth['provider'])
   user.email = "#{auth['uid']}@#{auth[‘provider’]}.com"
@@ -61,6 +63,18 @@ class User < ApplicationRecord
     user
   end
 end
+
+  def self.find_or_create_from_auth_hash(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
+      user.provider = auth.provider
+      user.uid = auth.uid
+      user.fname = auth.info.first_name
+      user.lname = auth.info.last_name
+      user.email = auth.info.email
+      #user.picture = auth.info.image
+      user.save!
+    end
+  end
 
 
   before_save { self.email = email.downcase }
