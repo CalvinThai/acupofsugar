@@ -62,11 +62,11 @@
 				</div>
 
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4" style="margin-top:-0.5em">
-					<div class="input-group text-center pull-right">
-						<%= form_tag(users_path, method: :get) do %>
-	    					<%= text_field_tag :name, params[:name], placeholder: "Search user name", class: 'form-control' %>
-							<span class="input-group-btn">
-	    						<%= button_tag 'Search ', name: nil, class:'btn btn-default', style:'position:absolute;' do%>
+					<div class="text-center">
+						<%= form_tag(users_path, method: :get,id:"search-bar") do %>
+	    					<%= text_field_tag :name, params[:name], placeholder: "Search user name", class: 'search-input',id:"search-input" %>
+							<span class="search-icon" style="margin-right:1.5em">
+	    						<%= button_tag 'Search ', name: nil, class:'Icon Icon--medium', style:"border:0;padding:0;" do%>
 									<i class="fa fa-search"></i>
 								<%end%>
 							</span>
