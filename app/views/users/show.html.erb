@@ -15,10 +15,12 @@
 				<% else %>
 					<div style="font-size:21px" class="margin-bot-1"><i class="fas fa-user-cog"></i> Management </div>
 				<% end %>
-				<% if @user.admin == true %>
+				<% if @user.admin == true and @user == @logged_in_user%>
 					<p><%= link_to 'Edit admin user information >', edit_user_path(@user)%></p>
 					<p><%= link_to "Your Messages >", conversations_path %></p>
-					<p><%= link_to "Pending Reports >", report_user_path %></p
+					<p><%= link_to "Pending Reports >", report_user_path %></p>
+					<p><%= link_to "View All Items >", items_path %></p>
+					<p><%= link_to "View All Users >", users_path %></p>
 				<% elsif @user == @logged_in_user %>
 					<p><%= link_to 'Manage items >', user_items_path(@user) %></p>
 					<p><%= link_to 'Manage notification preferences >', user_notification_path(@user.id, @notification.id)%></p>
@@ -40,7 +42,7 @@
 		</div>
 		
 		<div class="col-xs-12 col-md-4 margin-bot-2">
-			<% if @user == @logged_in_user %>
+			<% if @user == @logged_in_user and @user.admin == false%>
 				<div id="friend_request_list" class="sticky-note" style="max-height:140px;overflow-y: scroll;">
 					<%= render  "friendships/friend_requests"%>
 				</div>
