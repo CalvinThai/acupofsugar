@@ -6,7 +6,8 @@ class OnHoldItemsController < ApplicationController
 		@item = Item.find(params[:item_id])
 		@on_hold_item = OnHoldItem.new
 		respond_to do |format|
-	      format.js  {}
+	      format.js
+	      format.html
 	    end
 	end
 	def create
