@@ -53,6 +53,9 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+  gem 'cucumber-rails', require: false
+  # database_cleaner is not required, but highly recommended
+  gem 'database_cleaner'
 end
 
 #boostrap
@@ -94,8 +97,3 @@ gem "google-cloud-storage", "~> 1.8", require: false
 gem 'jquery-raty-rails', github: 'bmc/jquery-raty-rails'
 
 gem 'rails_12factor', group: :production
-
-group :test do
-  gem 'cucumber-rails', require: false
-  # database_cleaner is not required, but highly recommended
-  gem 'database_cleaner'
