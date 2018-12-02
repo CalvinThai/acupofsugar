@@ -20,7 +20,6 @@
 
 //= require filterrific/filterrific-jquery
 
-//= require_tree .
 
 //ajax refresh for item profile user action buttons 
 
