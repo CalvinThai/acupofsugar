@@ -24,10 +24,14 @@ helper_method :authenticate_user_before_db_update
         redirect_to user_items_path(session[:user_id])
       else
         puts "you are the one!"
+        #forward message
+        flash.now[:success_message] = flash[:success_message] if flash[:success_message]
+        flash.now[:failure_message] = flash[:failure_message] if flash[:failure_message]
         return
       end
     else
       puts "no user_id params"
+      flash[:alert] = "Invalid request: unauthorized user"  
       redirect_to items
     end
   end
