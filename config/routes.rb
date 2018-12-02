@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   #fixes email linkes/sidekiq host error
   #default_url_options :host => "localhost:3000"
   #default_url_options :host => "acupofsugar.herokuapp.com"
-  
+
   #monitoring scheduled mailer queue
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
@@ -15,6 +15,11 @@ Rails.application.routes.draw do
   get 'users/new'
     get 'users/delete'
   get 'items/index'
+  resources :items do
+   collection do
+      get :search, :as => :search
+   end
+end
   resources :password_resets
   resources :report_users
 
@@ -52,8 +57,9 @@ Rails.application.routes.draw do
   get 'auth/failure', to: redirect('/')
   get 'auth/facebook/callback', to: 'sessions#create'
   get 'auth/facebook', to: 'sessions#create'
-  
+
 end
+
 
 
 

@@ -36,7 +36,7 @@ class ItemsController < ApplicationController
 
 
 	def index
-		@user = User.find(params[:user_id])
+	#	@user = User.find(params[:user_id])
 		#find user if view is for /users/:id/items
 		if(params[:user_id])
 			@user = User.find(params[:user_id])
@@ -132,5 +132,42 @@ class ItemsController < ApplicationController
 		@trans_lent = @transaction_items.where(user_status: 'Lender')
 		@trans_borrow = @transaction_items.where(user_status: 'Borrower')
 	 end
+
+end
+
+
+def search
+	@user = User.find(params[:user_id])
+	#find user if view is for /users/:id/items
+	auth_and_redirect
+	if(params[:user_id])
+		@user = User.find(params[:user_id])
+		get_manageable_items
+	end
+	#testing only, empty session
+	#session[:user_id] = nil;
+
+	@filterrific = initialize_filterrific(
+		Item,
+		params[:filterrific],
+		select_options: {
+		sorted_by: Item.options_for_sorted_by,
+		with_category: Item.options_for_category
+
+	}
+
+	) or return
+	@items = @filterrific.find.page(params[:page])
+
+	respond_to do |format|
+		format.html
+		format.js
+	end
+
+	#@items = Item.item_search(params)
+	@aggs = Item.search "*", aggs: [:status]
+	@category_aggs = Item.search "*", aggs: [:category]
+	@status_filter = Item.status_filter(params[:status])
+	@category_filter = Item.category_filter(params[:category])
 
 end
