@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
 before_action :require_login
 helper_method :current_user
+helper_method :authenticate_user_before_db_update
   def current_user
   	#change after adding session
   	User.find_by(id: session[:user_id])
@@ -14,6 +15,22 @@ helper_method :current_user
     !!current_user2
   end
 
+  def authenticate_user_before_db_update
+    @auth_user ||= User.find(params[:user_id]) if params[:user_id]
+    if @auth_user 
+      puts "user to be authenticated: #{@auth_user.id}"
+      if @auth_user != current_user
+        flash[:alert] = "Invalid request: unauthorized user"
+        redirect_to user_items_path(session[:user_id])
+      else
+        puts "you are the one!"
+        return
+      end
+    else
+      puts "no user_id params"
+      redirect_to items
+    end
+  end
     
   private
     def require_login

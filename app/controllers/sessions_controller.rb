@@ -22,7 +22,6 @@ skip_before_action :require_login
           session[:user_id] = user.id
           redirect_to user #should login to the user page
           # Log the user in and redirect to the user's show page.
-          
           #redirect_to profile_path #save for later use, redirect user to /profile page rather than /user/:id - by jiehao
         else 
           flash[:verification] =  'Please verify your email address first.'

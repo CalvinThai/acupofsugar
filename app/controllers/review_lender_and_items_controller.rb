@@ -1,8 +1,6 @@
 class ReviewLenderAndItemsController < ApplicationController
-#before_action :set_user_item_ids, only: [:new, :create, :destroy]
-def index
+before_action :authenticate_user_before_db_update, except: [:show]
 
-end
 def new
 	@user = User.find(params[:user_id])
     @item = Item.find(params[:item_id])
@@ -31,10 +29,6 @@ def create
       flash[:failure_msg] = "Information did not meet requirements"
       render :new
     end
-end
-
-def destroy
-
 end
 
 def show

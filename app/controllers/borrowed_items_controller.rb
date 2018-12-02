@@ -1,5 +1,5 @@
 class BorrowedItemsController < ApplicationController
-
+  before_action :authenticate_user_before_db_update
   def new
       @user = User.find(params[:user_id])
       @on_hold_item = OnHoldItem.find(params[:on_hold_item_id])
@@ -9,7 +9,7 @@ class BorrowedItemsController < ApplicationController
   def edit
     @user = User.find(params[:user_id])
     @item = Item.find(params[:id])
-    @borrowed_item = BorrowedItem.find_by_item_id(params[:id])
+    @borrowed_item = @user.borrowed_items.find(params[:id])
   end
   def create
     @user =  User.find(params[:user_id])
@@ -52,7 +52,7 @@ class BorrowedItemsController < ApplicationController
 
   def update
     @user = User.find(params[:user_id])
-    @borrowed_item = BorrowedItem.find(params[:id])
+    @borrowed_item = @user.borrowed_items.find(params[:id])
     @item = Item.find(@borrowed_item.item_id)
 
     if @borrowed_item.update(borrowed_item_params)

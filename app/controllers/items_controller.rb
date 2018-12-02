@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+	before_action :authenticate_user_before_db_update, except: [:index, :show]
 	def new
 		@user = User.find(params[:user_id])
 		@item = Item.new
@@ -37,18 +38,15 @@ class ItemsController < ApplicationController
 	def index
 		@user = User.find(params[:user_id])
 		#find user if view is for /users/:id/items
-		auth_and_redirect
 		if(params[:user_id])
 			@user = User.find(params[:user_id])
 			get_manageable_items
 		end
-		#testing only, empty session
-		#session[:user_id] = nil;
 		@filterrific = initialize_filterrific(
 			Item,
 			params[:filterrific],
 			select_options: {
-      sorted_by: Item.options_for_sorted_by,
+     		sorted_by: Item.options_for_sorted_by,
 			with_category: Item.options_for_category
 
     }
@@ -70,7 +68,6 @@ class ItemsController < ApplicationController
 	end
 
 	def show #can be invoked from many URI; use the item_path if applicable
-		#auth_and_redirect
 		@user;
 		if(session[:user_id])
 		  	@user = User.find(session[:user_id])
@@ -89,7 +86,6 @@ class ItemsController < ApplicationController
 	end
 	def update
 		@user = User.find(params[:user_id])
-		#@item = Item.find(params[:id])
 	    @item = @user.items.find_by_id(params[:id])
 	    if @item.update(item_params)
 	      redirect_to user_items_path(@user.id)
@@ -112,7 +108,7 @@ class ItemsController < ApplicationController
  	 def get_manageable_items
  	 	@user_items = Item.where("items.user_id = ?",params[:user_id])
 	 	@borrowed_items = BorrowedItem.joins(:item).select("items.user_id as i_uid, items.*, borrowed_items.*").where('borrowed_items.user_id = ?', params[:user_id])
-		@wish_items = WishList.joins(:item).select("items.user_id as i_uid, items.*, wish_lists.*").where('wish_lists.user_id = ?', params[:user_id]) #all items that have been wishlisted by this user
+		@wish_items = WishList.joins(:item).select("items.user_id as i_uid, items.*, wish_lists.*").where('wish_lists.user_id = ?', params[:user_id])
 		@on_hold_items = OnHoldItem.joins(:item).select("items.*, on_hold_items.*").where('on_hold_items.user_id = ?', params[:user_id])
 		@lend_items = OnHoldItem.joins(:item, :user).select("items.*, on_hold_items.*, users.email").where("items.user_id = ?", params[:user_id])
 		@pending_items = @lend_items.where(approved: 'pending')
@@ -125,30 +121,4 @@ class ItemsController < ApplicationController
 		@trans_borrow = @transaction_items.where(user_status: 'Borrower')
 	 end
 
-	 def auth_and_redirect
-	 	#puts("@@@@@@@@@@@@@@@@in auth_redirect")
-	 	#puts("@@@@@@@@@@@@@@@@ session[:user_id] = #{session[:user_id]}")
-	 	#puts("@@@@@@@@@@@@@@@@ params[:user_id] = #{params[:user_id]}")
-
-	 	#if no session exist, prompt user to sign in
-	 	if(session[:user_id] == nil || session[:user_id].to_i != params[:user_id].to_i)
-	 		puts(session[:user_id] == nil)
-	 		puts(session[:user_id].to_i != params[:user_id].to_i)
-		 	if(params[:auth] && params[:auth] == "login_required")
-				session[:auth] = params[:auth]
-				#clear session
-				session[:user_id] = nil
-				url = request.fullpath if request.get?
-				uri = URI.parse(url)
-				query = Rack::Utils.parse_query(uri.query)
-				# Replace auth to true upon login
-				query["auth"] = true
-				uri.query = Rack::Utils.build_query(query)
-				return_addr = uri.to_s
-				#come back to current page after successful login
-				session[:return_to] ||= return_addr
-				redirect_to login_path
-			end
-		end
-	 end
 end
