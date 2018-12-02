@@ -7,6 +7,21 @@ class ReportUsersController < ApplicationController
 	def new
 		@reportUser= ReportUser.new
 	end
+	
+	def index 
+		@reports = ReportUser.all
+
+	end
+
+	def show 
+		@reports = ReportUser.all
+
+	end
+	def destroy
+		@reports = ReportUser.all
+		@reports.delete(params[:id])
+		redirect_to report_user_path
+	end  
 	private
 	def report_params
 		params.permit(:reporter_id, :reportee_id,:reason,:comment)

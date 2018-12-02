@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get 'users/indexx'
   get 'users/new'
-    get 'users/delete'
+  get 'users/delete'
   get 'items/index'
   resources :items do
    collection do
@@ -22,7 +22,6 @@ Rails.application.routes.draw do
 end
   resources :password_resets
   resources :report_users
-
   resources :users do
   	resources :items do
       put 'lent_out'
@@ -45,9 +44,6 @@ end
     end
   end
 
-  resources :items
-
-  get 'admin' => 'admin#index'
   controller :sessions do
     get 'login' => :new
     post 'login' => :create
