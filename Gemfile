@@ -91,6 +91,8 @@ gem "sidekiq"
 
 gem "font-awesome-rails"
 
+gem 'jquery-ui-rails'
+
 gem "google-cloud-storage", "~> 1.8", require: false
 
 gem 'jquery-raty-rails', github: 'bmc/jquery-raty-rails'
