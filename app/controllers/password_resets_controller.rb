@@ -5,8 +5,13 @@ skip_before_action :require_login
 
 	def create
 		user = User.find_by_email(params[:email])
-		user.send_password_reset if user
-		redirect_to root_url, :notice => "Email sent with password reset instructions."
+		if user
+			user.send_password_reset
+			flash[:success_msg] = "Email sent with password reset instrucitons."
+			redirect_to login_url
+		else
+			flash[:failure_msg] = "Email not found"
+			render 'new'
 	end
 
 	def edit
