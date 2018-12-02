@@ -1,7 +1,6 @@
 class OnHoldItemsController < ApplicationController
 	before_action :find_user_set_item_id, only: [:create, :destroy]
 	before_action :authenticate_user_before_db_update 
-	skip_before_action :verify_authenticity_token, if: :js_request?, only: [:new]
 
 	def new
 		@user = User.find(params[:user_id])
@@ -9,7 +8,6 @@ class OnHoldItemsController < ApplicationController
 		@on_hold_item = OnHoldItem.new
 		respond_to do |format|
 	      format.js
-	      format.html
 	    end
 	end
 	def create
@@ -83,8 +81,5 @@ class OnHoldItemsController < ApplicationController
 		if(!@item_id)
 			@item_id = params[:item_id]
 		end
- 	 end
- 	 def js_request?
- 	 	request.format.js?
  	 end
 end

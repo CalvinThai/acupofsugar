@@ -71,7 +71,15 @@ class User < ApplicationRecord
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   has_secure_password
- # validates :password, presence: false, length: { minimum: 6 }
+  validates :password, :presence => true,
+                       :confirmation => true,
+                       :length => {:within => 6..40},
+                       :on => :create
+
+  validates :password, :confirmation => true,
+                       :length => {:within => 6..40},
+                       :allow_blank => true,
+                       :on => :update
 
   private
   def confirmation_token

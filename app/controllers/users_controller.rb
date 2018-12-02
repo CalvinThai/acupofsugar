@@ -35,11 +35,11 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
     user = User.find_by_confirm_token(params[:id])
     if user
       user.email_activate
-      flash[:success] = 'Welcome to BoLend! Your account has been verified.'
-      redirect_to root_url
+      flash[:success_msg] = 'Welcome to BoLend! Your account has been verified.'
+      redirect_to login_path
     else
-      flash[:error] = 'Error: user does not exist.'
-      redirect_to root_url
+      flash[:failure_msg] = 'Error: user does not exist.'
+      redirect_to login_path
     end
   end
 
@@ -77,7 +77,7 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
   def update
     @user = User.find(session[:user_id])
     if @user.update_attributes(user_params)
-      flash[:success] = "updated"
+      flash[:success] = "Updated user information"
       redirect_to @user
 
     else

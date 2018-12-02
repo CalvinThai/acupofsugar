@@ -5,8 +5,14 @@ skip_before_action :require_login
 
 	def create
 		user = User.find_by_email(params[:email])
-		user.send_password_reset if user
-		redirect_to root_url, :notice => "Email sent with password reset instructions."
+		if user
+			user.send_password_reset
+			flash[:success_msg] = "Email sent with password reset instructions."
+			redirect_to login_url
+		else
+			flash[:failure_msg] = "Email not found."
+			render 'new'
+		end
 	end
 
 	def edit
@@ -17,8 +23,10 @@ skip_before_action :require_login
 		if @user.password_reset_sent_at < 2.hours.ago
 			redirect_to new_password_reset_path, :alert => "Password reset has expired."
 		elsif @user.update_attributes(params.require(:user).permit(:password, :password_confirmation))
-			redirect_to root_url, :notice => "Password has been reset!"
+			flash[:success_msg] = "Password has been reset!"
+			redirect_to login_url
 		else
+			flash[:failure_msg] = "Passwords do not match/Not minimum 6 characters"
 			render :edit
 		end
 	end
