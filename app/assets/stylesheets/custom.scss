@@ -207,3 +207,30 @@ nav .search-input{
     font-size: 18px;
     line-height: 18px;
 }
+
+.close {
+  position: absolute;
+  right: 32px;
+  top: 20px;
+  width: 20px;
+  height: 20px;
+  opacity: 0.3;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 10px;
+  content: ' ';
+  height: 20px;
+  width: 2px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
+
