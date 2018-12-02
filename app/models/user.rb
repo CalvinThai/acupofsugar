@@ -25,7 +25,7 @@ class User < ApplicationRecord
   def self.user_search(name)
     if name.present?
         name = name.gsub(/[^0-9A-Za-z\s]/, '')
-        @users = User.search name, operator: "or", fields: [:lname,:fname], misspellings: {edit_distance: 3}, limit: 5
+        @users = User.search name, operator: "or", fields: [:lname,:fname], misspellings: {edit_distance: 2}, limit: 5
     else
       return nil
     end

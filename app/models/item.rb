@@ -64,8 +64,9 @@ end
 
 def self.options_for_category
 	[
-		['Technology'],
-		['Pet']
+		['Accesories'],
+		['Art'], ['Bath & Beauty'], ['Books, Films & Music'], ['CLothing'], ['Craft Supplies & Tools'],
+		['Electronics'], ['Home & Living'], ['Office Tools'], ['Pet Supplies'], ['Toys & Games']
 	]
 end
 	def self.item_search(params)
