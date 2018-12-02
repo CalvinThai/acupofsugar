@@ -1,6 +1,7 @@
 class OnHoldItemsController < ApplicationController
 	before_action :find_user_set_item_id, only: [:create, :destroy]
 	before_action :authenticate_user_before_db_update 
+
 	def new
 		@user = User.find(params[:user_id])
 		@item = Item.find(params[:item_id])
