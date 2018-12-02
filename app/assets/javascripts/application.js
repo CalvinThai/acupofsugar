@@ -11,13 +11,11 @@
 // about supported directives.
 //
 
+//= require jquery
 //= require rails-ujs
+//= require jquery.raty
 //= require activestorage
 //= require turbolinks
-
-//= require jquery
-//= require jquery.raty
-
 //= require filterrific/filterrific-jquery
 	
 	
