@@ -40,8 +40,6 @@ class FriendshipsController < ApplicationController
     @friend_removee = User.find(params[:friend_removee])
     @decision = params[:decision]
     @user = @friend_remover
-    @logged_in_user = @friend_remover
-    @user = @friend_removee
     if @decision=="unfriend"
       @friend_remover.remove_friend(@friend_removee)
     elsif @decision=="block"
@@ -54,6 +52,7 @@ class FriendshipsController < ApplicationController
     end
     
     @blockee_users = Blockee.blockees_of_user(@user)
+    
     respond_to do |format|
         format.js 
     end

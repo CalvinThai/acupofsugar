@@ -2,9 +2,7 @@ $("#search_user_list").html("<%= j render  "users/search_user" %>");
 $("#friend_request_list").html("<%= j render  "friendships/friend_requests" %>");
 $("#friend_list").html("<%= j render  "friendships/friends" %>");
 $("#block_list").html("<%= j render  "friendships/blocks" %>");
-$("#remove_friend").html("<%= j render  "friendships/remove" %>");
 if (<%=@decision=="unfriend"%>){
-	$("#remove_friend").html("<%= j render  "friendships/remove" %>");
 	alert("You have removed friend with <%= @friend_removee.fname%> <%=@friend_removee.lname %>.");
 }
 else if (<%=@decision=="block"%>){
