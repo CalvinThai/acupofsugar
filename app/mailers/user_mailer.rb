@@ -4,7 +4,7 @@ class UserMailer <ActionMailer::Base
 		@user = user
 		#mail(:to => "#{user.fname} <#{user.email}>", :subject => "Please confirm your registration")
 		#mail(:to @user.email, subject: 'Register plz')
-		mail to: @user.email, subject: "Regtistration Confirmation for Bolend"
+		mail to: @user.email, subject: "Registration Confirmation for Bolend"
 	end 
 	def password_reset(user)
 		@user = user
