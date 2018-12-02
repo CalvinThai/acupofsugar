@@ -3,10 +3,10 @@
 		<!--should be directed to user profile page later -->
 		<% if not @user.blocked_friends.include?(user)%>
 			<%= link_to "#{user.fname.capitalize} #{user.lname.capitalize}", user_path(user),style:"padding-right:1em" %>
-			<%= link_to 'Report User', new_report_user_path(:reportee => user.id)%>
+			
 			<% if user != @user%>
 				<%= button_to conversations_path(sender_id: current_user.id, recipient_id: user.id), form: {style:'display:inline-block;'}, method: :post,class:'cta hidden-xs hidden-sm hidden-md' do%>
-				<i class="fas fa-comment"></i> Send Message
+				 Send Message
 				<%end%>
 				<%= button_to conversations_path(sender_id: current_user.id, recipient_id: user.id), form: {style:'display:inline-block;'}, method: :post,class:'cta hidden-lg',title:'Send Message' do %>
 				<i class="fas fa-comment"></i>
@@ -16,11 +16,14 @@
 					<%= button_tag '<i class="fas fa-user-friends"></i>'.html_safe, class:'cta cta-background hidden-xs hidden-sm hidden-md',title:"Friends",disabled: true %>  
 				<% elsif not @user.pending_friends.include?(user)%> 
 					<%= button_to user_friendships_path(@user,friend_requirer: @user, friend_requiree:user,name: params[:name]), form: {style:'display:inline-block;'}, class:'cta hidden-xs hidden-sm hidden-md',remote: true do%>
-					<i class="fas fa-user-plus"></i> Add Friend 
+					 Add Friend 
 					<%end%>
 					<%= button_to user_friendships_path(@user,friend_requirer: @user, friend_requiree:user,name: params[:name]), form: {style:'display:inline-block;'}, class:'cta hidden-lg',remote: true,title:"Add Friend" do%>
 					<i class="fas fa-user-plus"></i>
 					<%end%>
+					<%= button_to new_report_user_path(:reportee => user.id),class:"cta", form: {style:'display:inline-block;'}, method: :get do%>
+					Report User
+					<% end %>
 						 
 				<% else%> 
 					<%= button_tag '<i class="fas fa-check"></i> Request Sent'.html_safe, class:'cta cta-background hidden-xs hidden-sm hidden-md',disabled: true %>
