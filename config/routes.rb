@@ -56,8 +56,6 @@ end
 
 end
 
-  resources :on_hold_items, only: [:new], defaults: {format: :js}
-
 
 
   #save for later use, redirect user to /profile page rather than /user/:id - by jiehao
