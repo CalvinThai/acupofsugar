@@ -1,10 +1,10 @@
 <div class="container">
 	<div class="row">
 		<div class="col-xs-12 col-md-4 margin-bot-2">
-			
+
 			<div class="sticky-note">
 				<p style="font-size:21px"><%= @user.fname.capitalize %> <%= @user.lname.capitalize %></p>
-				<div style="font-size:16px;color: #657786;"><i class="fa fa-calendar" aria-hidden="true"></i> 
+				<div style="font-size:16px;color: #657786;"><i class="fa fa-calendar" aria-hidden="true"></i>
 					<%= @user.created_at.strftime("Joined %B %Y")%>
 				</div>
 			</div>
@@ -27,20 +27,20 @@
 					<p><%= link_to 'Edit user information >', edit_user_path(@user)%></p>
 					<p><%= link_to "Your Messages >", conversations_path %></p>
 					<p><%= link_to "Reviews from others >", user_review_borrowers_path(@user.id) %></p>
-				<% else %> 
+				<% else %>
 					<p><%= link_to 'View items >', user_items_path(@user) %></p>
 					<p><%= link_to "View reviews >", user_review_borrowers_path(@user.id) %></p>
 				<% end %>
 			</div>
 			<br>
 		</div>
-		
+
 		<div class="col-xs-12 col-md-4 margin-bot-2">
 			<div class="sticky-note" style="max-height:460px;overflow-y: scroll;">
 			For all items? or just friend items?
 			</div>
 		</div>
-		
+
 		<div class="col-xs-12 col-md-4 margin-bot-2">
 			<% if @user == @logged_in_user and @user.admin == false%>
 				<div id="friend_request_list" class="sticky-note" style="max-height:140px;overflow-y: scroll;">

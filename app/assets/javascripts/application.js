@@ -19,4 +19,6 @@
 //= require jquery.raty
 
 //= require filterrific/filterrific-jquery
+	
+	
 
