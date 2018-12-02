@@ -7,7 +7,7 @@ skip_before_action :require_login
 		user = User.find_by_email(params[:email])
 		if user
 			user.send_password_reset
-			flash[:success_msg] = "Email sent with password reset instrucitons."
+			flash[:success_msg] = "Email sent with password reset instructions."
 			redirect_to login_url
 		else
 			flash[:failure_msg] = "Email not found"
