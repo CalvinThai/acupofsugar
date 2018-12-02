@@ -79,6 +79,9 @@ class ItemsController < ApplicationController
 		#for review section
 		@reviews = ReviewLenderAndItem.joins(:user).select("review_lender_and_items.*, users.*").where("review_lender_and_items.item_id = ?", @item.id)
 		@ratings = @reviews.average(:rating)
+
+		#for form 
+		@on_hold_item = OnHoldItem.new
 	end
 	def edit
 		@user = User.find(params[:user_id])
