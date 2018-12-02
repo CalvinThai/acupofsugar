@@ -65,6 +65,5 @@ end
   resources :messages
  end
 
-get "*id" => 'pages#show', as: :page, format: false
 
 end
