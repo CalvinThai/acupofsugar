@@ -25,6 +25,7 @@ skip_before_action :require_login
 		elsif @user.update_attributes(params.require(:user).permit(:password, :password_confirmation))
 			redirect_to root_url, :notice => "Password has been reset!"
 		else
+			flash[:failure_msg] = "Passwords do not match/Not minimum 6 characters"
 			render :edit
 		end
 	end
