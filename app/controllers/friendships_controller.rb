@@ -11,7 +11,8 @@ class FriendshipsController < ApplicationController
     @blockee_users = Blockee.blockees_of_user(@user)
     
     respond_to do |format|
-        format.js
+        format.js {render :layout => false}
+        format.any { render plain: 'Hello' }
     end
   end
 
