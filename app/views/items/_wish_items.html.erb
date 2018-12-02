@@ -16,7 +16,7 @@
       <td><%= link_to item.name, item_path(item.item_id)%></td>
       <td><%= item.descr %></td>
       <td><%= item.status %></td>
-      <td><%= link_to 'Delete', user_wish_list_path(item.user_id, item.item_id), method: :delete,
+      <td><%= button_to 'Delete', user_wish_list_path(item.user_id, item.item_id), method: :delete,
               data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %></td>  <!-- item will be deleted from the list -->
     </tr>
   <% end %>

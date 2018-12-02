@@ -19,14 +19,14 @@
 		<%end%>
 		<% ohi = @user.on_hold_items.find_by_item_id(@item.id)%>
 		<%if !ohi %>
-			<div><%= link_to 'Interested in this item?', new_user_on_hold_item_path(user_id: @user.id, item_id: @item.id, :format => "js"), remote: true, class: "btn btn-primary"%></div>
+			<div><%= button_to 'Interested in this item?', new_user_on_hold_item_path(user_id: @user.id, item_id: @item.id), remote: true, class: "btn btn-primary"%></div>
 			<div id="render_duration_form"></div>
 		<%elsif ohi && ohi.approved != "Approved"%>
 			<%= button_to 'Cancel borrow request', user_on_hold_item_path(user_id: @user.id, item_id: @item.id), method: :delete, class: "btn btn-primary" %>
 		<%end%>
 	<!-- not logged in - prompt user to login/sign up -->
 	<%elsif @user == nil %>
-		<div>Interested in this item? <%=link_to 'Please login/sign up', login_path, method: :get, class: "btn btn-primary" %></div>
+		<div>Interested in this item? <%=link_to 'Please login/sign up', login_path, class: "btn btn-primary" %></div>
 	<%end%>
 	</div>
 </div>

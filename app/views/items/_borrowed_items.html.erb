@@ -18,7 +18,7 @@
       <td><%= link_to item.name, item_path(item.item_id) %></td>
       <td><%= item.descr %></td>
       <td><%= item.due_date.strftime("%Y-%m-%d") %></td>
-      <td><%= link_to "#{@owner.fname} #{@owner.lname}", conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post"%></td> <%# link to user profile OR invoke messanger %>
+      <td><%= button_to "#{@owner.fname} #{@owner.lname}", conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post"%></td> <%# link to user profile OR invoke messanger %>
       <%if item.returned_on == nil%>
       <td>
         <%= link_to 'Confirm return', new_user_review_lender_and_item_path(user_id: @user.id, item_id: item.item_id, lender_id: @owner.id), class: "btn btn-primary"%><br/>
