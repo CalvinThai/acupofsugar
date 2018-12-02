@@ -12,6 +12,7 @@ skip_before_action :require_login
 		else
 			flash[:failure_msg] = "Email not found"
 			render 'new'
+		end
 	end
 
 	def edit
