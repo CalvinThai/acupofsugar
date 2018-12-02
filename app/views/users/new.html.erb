@@ -25,10 +25,10 @@
 				<% end %>
 				
 		
-  				<%= f.label :fname %>
+  				<%= f.label :fname,"First Name" %>
   				<%= f.text_field :fname, :placeholder => "John",class: 'form-control margin-bot-1' %>
 
-   				<%= f.label :lname %>
+   				<%= f.label :lname,"Last Name" %>
  				<%= f.text_field :lname, :placeholder => "Smith",class: 'form-control margin-bot-1' %>
 
   				<%= f.label :email, class:"#{'error-text' if email_error.any?}" %>

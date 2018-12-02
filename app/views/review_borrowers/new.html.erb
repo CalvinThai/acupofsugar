@@ -10,8 +10,7 @@
 <% end %>
 
 <div id="item_profile">
-  <% borrower = User.find(@borrower.id)%>
-  <p>Borrower: <%= borrower.fname %> <%= borrower.lname %></p> <!-- should go to user profile page -->
+  <p>Borrower: <%= @borrower.fname %> <%= @borrower.lname %></p> <!-- should go to user profile page -->
 	<p>Item: <%= @item.name %></p>
 	<%= render partial: 'items/item_profile' %>
 </div>
@@ -37,11 +36,6 @@
     <div class="form-group">
       <%= form.submit "Submit review" , class: "btn btn-primary"%>
     </div>
-      <%= form.text_area :comment %>
-    </p>
-    <p>
-      <%= form.submit "Submit review"%>
-    </p>
     <!-- add button to report user -->
   <% end %>
 </div>
@@ -55,5 +49,5 @@
       //path: '/assets/',
       scoreName: 'review_borrower[rating]',
       size: 24
-    });   
+    });
 </script>

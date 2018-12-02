@@ -1,10 +1,11 @@
 <div class="container">
 	<div class="flex justify-content-center">
+		<% token_tag(nil) %>
 	<%if @user && @user.id != @owner_id%>
 		<%if !@user.wish_lists.find_by_item_id(@item.id) %>
-		<button onclick="ajax_user_action(<%=@user.id %>,<%= @item.id%>,'', 'itemIndex', 2, 'POST', '#user_actions', )", class="btn btn-primary" >Add to wish list</button>
+		<%= button_to 'Add to wish list', user_wish_lists_path(user_id: @user.id, item_id: @item.id), method: :post, class: "btn btn-primary" %>
 		<%else%>
-			<button onclick="ajax_user_action(<%=@user.id %>,<%= @item.id%>,'', 'itemIndex', 3, 'DELETE', '#user_actions', '')", class="btn btn-primary">Remove from wish list</button>
+			<%= button_to 'Remove from wish list', user_wish_list_path(user_id: @user.id, item_id: @item.id), method: :delete, class: "btn btn-primary" %>
 		<%end%>
 
 		<% bi = @user.borrowed_items.find_by_item_id(@item.id)%>
@@ -18,10 +19,10 @@
 		<%end%>
 		<% ohi = @user.on_hold_items.find_by_item_id(@item.id)%>
 		<%if !ohi %>
-			<div><%= link_to 'Interested in this item?', new_user_on_hold_item_path(user_id: @user.id, item_id: @item.id), remote: true, class: "button btn btn-primary"%></div>
+			<div><%= link_to 'Interested in this item?', new_user_on_hold_item_path(user_id: @user.id, item_id: @item.id, :format => "js"), remote: true, class: "btn btn-primary"%></div>
 			<div id="render_duration_form"></div>
 		<%elsif ohi && ohi.approved != "Approved"%>
-			<button onclick="ajax_user_action(<%=@user.id %>,<%= @item.id%>,'', 'itemIndex',1,'DELETE', '#user_actions', '')", class="btn btn-primary">Cancel borrow request</button>
+			<%= button_to 'Cancel borrow request', user_on_hold_item_path(user_id: @user.id, item_id: @item.id), method: :delete, class: "btn btn-primary" %>
 		<%end%>
 	<!-- not logged in - prompt user to login/sign up -->
 	<%elsif @user == nil %>
