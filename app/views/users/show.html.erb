@@ -15,7 +15,11 @@
 				<% else %>
 					<div style="font-size:21px" class="margin-bot-1"><i class="fas fa-user-cog"></i> Management </div>
 				<% end %>
-				<% if @user == @logged_in_user %>
+				<% if @user.admin == true %>
+					<p><%= link_to 'Edit admin user information >', edit_user_path(@user)%></p>
+					<p><%= link_to "Your Messages >", conversations_path %></p>
+					<p><%= link_to "Pending Reports >", report_user_path %></p
+				<% elsif @user == @logged_in_user %>
 					<p><%= link_to 'Manage items >', user_items_path(@user) %></p>
 					<p><%= link_to 'Manage notification preferences >', user_notification_path(@user.id, @notification.id)%></p>
 					<p><%= link_to 'Edit user information >', edit_user_path(@user)%></p>
