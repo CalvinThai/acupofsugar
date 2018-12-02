@@ -1,7 +1,7 @@
 class OnHoldItemsController < ApplicationController
 	before_action :find_user_set_item_id, only: [:create, :destroy]
 	before_action :authenticate_user_before_db_update 
-	skip_before_action :verify_authenticity_token, if: :js_request?, only: [:new]
+	#skip_before_action :verify_authenticity_token, if: :js_request?, only: [:new]
 
 	def new
 		@user = User.find(params[:user_id])

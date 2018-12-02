@@ -56,7 +56,7 @@ end
 
 end
 
-
+  resources :on_hold_items, only: [:new], defaults: {format: :js}
 
 
 
