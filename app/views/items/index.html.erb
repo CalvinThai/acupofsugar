@@ -6,7 +6,8 @@
 	<div id="user_items"><%= render  "items/manage_items_view" %></div>
 <%elsif @user%>
 	<div id="items"><%= render "items/user_item_public_view" %></div>
-<%end%>
+
 <% else %>
 <!--for both /items & /users/:id/items views -->
 <%= render "items/filterrific_search" %>
+<%end%>
