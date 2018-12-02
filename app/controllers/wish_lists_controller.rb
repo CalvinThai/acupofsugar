@@ -1,6 +1,6 @@
 class WishListsController < ApplicationController
+  before_action :authenticate_user_before_db_update
 	before_action :find_user_set_item_id, only: [:create, :destroy]
-	#after_action :back_to_prev_path, only: [:create, :destroy]
 
 	def create
    		@wish_item = @user.wish_lists.create(wish_item_params)
@@ -40,15 +40,4 @@ class WishListsController < ApplicationController
 		end
  	 end
 
-   def set_locals_render_partial
-    puts params.inspect
-    if(params[:from] && params[:from] == "itemIndex")
-      @user = User.find(params[:user_id])
-      @item = Item.find(params[:item_id])
-      @owner_id = @item.user_id
-      render(:partial => "items/user_actions_for_item" , :locals => {user: @user, item: @item, owner_id: @owner_id})
-    else
-     redirect_to user_items_path(params[:user_id])
-    end
-  end 
 end

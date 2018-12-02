@@ -2,7 +2,7 @@ class ReportUsersController < ApplicationController
 	def create
        @user = current_user
 		@reportUser= ReportUser.create!(report_params)
-       redirect_to users_path(@user)
+       redirect_to @user
 	 end
 	def new
 		@reportUser= ReportUser.new

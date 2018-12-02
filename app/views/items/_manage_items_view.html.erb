@@ -4,7 +4,7 @@
 <% if flash[:success_msg] %>
 	<div class="alert alert-success"><%= flash[:success_msg] %></div>
 <% elsif flash[:alert] %>
-	<div class="alert alert-warning"><%= flash[:alert] %></div>	
+	<div class="alert alert-danger"><%= flash[:alert] %></div>	
 <% elsif flash[:failure_msg]%>
 	<div class="alert alert-danger">
     	<% if @wish_item && @wish_item.errors.any?%>

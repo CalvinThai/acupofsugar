@@ -1,4 +1,5 @@
 class ReviewBorrowersController < ApplicationController
+  before_action :authenticate_user_before_db_update, except: [:index, :show]
 def index
     @user = User.find(params[:user_id]);
     @reviews = ReviewBorrower.joins(:user).select("review_borrowers.*, review_borrowers.rating as r_rating, users.*").where("review_borrowers.borrower_id = ?", @user.id)

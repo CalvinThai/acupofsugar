@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_30_233448) do
+ActiveRecord::Schema.define(version: 2018_12_02_021333) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -190,6 +190,7 @@ ActiveRecord::Schema.define(version: 2018_11_30_233448) do
     t.string "uid"
     t.float "rating"
     t.boolean "disable", default: false
+    t.boolean "admin", default: false
   end
 
   create_table "wish_lists", force: :cascade do |t|

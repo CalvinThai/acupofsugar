@@ -15,6 +15,13 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
     @user = current_user
     @users = User.all
   end
+  def checkPrivilege
+    if User.find(current_user).admin == true
+      return true
+    else
+      return false
+    end
+  end
 	def show
 		@user = User.find(params[:id])
     @logged_in_user = User.find(session[:user_id])
@@ -55,6 +62,17 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
     @user = User.find(params[:id])
     @logged_in_user = User.find(session[:user_id])
   end
+
+  def delete
+
+      @users = User.all
+      @users.delete(params[:deleteid])
+      @user = User.find(session[:user_id])
+
+      redirect_to @user
+
+
+  end 
 
   def update
     @user = User.find(session[:user_id])

@@ -4,7 +4,6 @@
 		<!--should be directed to user profile page later -->
 		<% if not @user.blocked_friends.include?(user)%>
 			<%= link_to "#{user.fname.capitalize} #{user.lname.capitalize}", user_path(user),style:"padding-right:1em" %>
-			
 			<% if user != @user%>
 				<%= button_to conversations_path(sender_id: current_user.id, recipient_id: user.id), form: {style:'display:inline-block;'}, method: :post,class:'cta hidden-xs hidden-sm hidden-md' do%>
 				 Send Message
@@ -22,15 +21,23 @@
 					<%= button_to user_friendships_path(@user,friend_requirer: @user, friend_requiree:user,name: params[:name]), form: {style:'display:inline-block;'}, class:'cta hidden-lg',remote: true,title:"Add Friend" do%>
 					<i class="fas fa-user-plus"></i>
 					<%end%>
-					<%= button_to new_report_user_path(:reportee => user.id),class:"cta", form: {style:'display:inline-block;'}, method: :get do%>
+					<%= button_to new_report_user_path(:reportee => user.id),class:"cta hidden-xs hidden-sm hidden-md", form: {style:'display:inline-block;'}, method: :get do%>
 					Report User
 					<% end %>
+					<%= button_to new_report_user_path(:reportee => user.id),class:"cta hidden-lg", form: {style:'display:inline-block;'}, method: :get, title:"Report User" do%>
+					<i class="fas fa-exclamation"></i>
+					<% end %>
+					
 						 
 				<% else%> 
 					<%= button_tag '<i class="fas fa-check"></i> Request Sent'.html_safe, class:'cta cta-background hidden-xs hidden-sm hidden-md',disabled: true %>
 					<%= button_tag '<i class="fas fa-check"></i>'.html_safe, class:'cta cta-background hidden-lg',disabled: true,title:"Friend Request Sent" %>
 				<% end %>
-
+				<%= link_to 'Report User', new_report_user_path(:reportee => user.id)%>
+				<!-- check if admin -->
+				<% if @user.admin == true %>
+				<%= link_to 'Delete User', users_delete_path(:deleteid => user.id)%>
+				<% end %>
 			<% end %>
 		<% end %>
 	</div>
