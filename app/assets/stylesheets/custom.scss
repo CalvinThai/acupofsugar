@@ -20,6 +20,11 @@
     transition: 0.1s ease-in-out;
 }
 
+.cta:focus{
+	outline:none;
+	
+	box-shadow: 0 0 0 2px #1da1f2, 0 0 2px 4px rgba(0,132,180,0.5);
+}
 .cta-background{
 	background-color: #0099e5;
 	color:white;
