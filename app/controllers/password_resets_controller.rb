@@ -10,7 +10,7 @@ skip_before_action :require_login
 			flash[:success_msg] = "Email sent with password reset instructions."
 			redirect_to login_url
 		else
-			flash[:failure_msg] = "Email not found"
+			flash[:failure_msg] = "Email not found."
 			render 'new'
 		end
 	end
@@ -23,7 +23,8 @@ skip_before_action :require_login
 		if @user.password_reset_sent_at < 2.hours.ago
 			redirect_to new_password_reset_path, :alert => "Password reset has expired."
 		elsif @user.update_attributes(params.require(:user).permit(:password, :password_confirmation))
-			redirect_to root_url, :notice => "Password has been reset!"
+			flash[:success_msg] = "Password has been reset!"
+			redirect_to login_url
 		else
 			flash[:failure_msg] = "Passwords do not match/Not minimum 6 characters"
 			render :edit
