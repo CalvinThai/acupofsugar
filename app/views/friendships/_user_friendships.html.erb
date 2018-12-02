@@ -1,6 +1,6 @@
+<div style="font-size:21px" class="margin-bot-1"><i class="fas fa-search"></i> Search Result: </div> 
 <% for user in @users%>
  	<div>
-		<div style="font-size:21px" class="margin-bot-1"><i class="fas fa-search"></i> Search Result: </div> 
 		<!--should be directed to user profile page later -->
 		<% if not @user.blocked_friends.include?(user)%>
 			<%= link_to "#{user.fname.capitalize} #{user.lname.capitalize}", user_path(user),style:"padding-right:1em" %>
