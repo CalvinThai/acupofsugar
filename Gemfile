@@ -6,7 +6,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.1'
 # Use sqlite3 as the database for Active Record
-group :development, :test do 
+group :development, :test do
 	gem 'sqlite3' , git: "https://github.com/larskanis/sqlite3-ruby", branch: "add-gemspec"
 end
 # Use Puma as the app server
@@ -93,5 +93,9 @@ gem "google-cloud-storage", "~> 1.8", require: false
 
 gem 'jquery-raty-rails', github: 'bmc/jquery-raty-rails'
 
-#should fix using method - put/delete
 gem 'rails_12factor', group: :production
+
+group :test do
+  gem 'cucumber-rails', require: false
+  # database_cleaner is not required, but highly recommended
+  gem 'database_cleaner'
