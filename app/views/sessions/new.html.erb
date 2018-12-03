@@ -11,9 +11,9 @@
 				<% elsif flash[:verification] %>
 	   	 			<div class="alert alert-warning text-center"><%= flash[:verification] %></div>
 	   	 		<% elsif flash[:success_msg] %>
-	   	 			<div class="alert alert-warning text-center"><%= flash[:success_msg] %></div>
+	   	 			<div class="alert alert-success text-center"><%= flash[:success_msg] %></div>
 	   	 		<% elsif flash[:failure_msg] %>
-	   	 			<div class="alert alert-warning text-center"><%= flash[:failure_msg] %></div>
+	   	 			<div class="alert alert-danger text-center"><%= flash[:failure_msg] %></div>
 				<% end %>
 				
 		
