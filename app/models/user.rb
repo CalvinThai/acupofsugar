@@ -67,24 +67,7 @@ class User < ApplicationRecord
     end
   end
 
-  def self.create_with_omniauth(auth)
-  
-  user = find_or_create_by(uid: auth['uid'], provider:  auth['provider'])
-  user.email = "#{auth['uid']}@#{auth['provider']}.com"
-  user.password = auth['uid']
-  user.fname = auth['info']['first_name']
-  user.lname = auth['info']['last_name']
-  if User.exists?(user)
-    user
-  else
-    user.save!
-    user
-  end
-end
 
-def from_omniauth?
-  provider && uid
-end
 
   before_save { self.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

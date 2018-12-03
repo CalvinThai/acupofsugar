@@ -53,7 +53,7 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
       redirect_to login_path
 
     else
-      flash[:failure_msg] = "Registration failed"
+      flash[:failure_msg] = "Passwords do not match/Not minimum 6 characters."
       render 'new'
     end
   end
@@ -97,7 +97,7 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
   end
 
   private def user_params
-    params.require(:user).permit(:email, :password, :fname, :lname, :phonenum, :address)
+    params.require(:user).permit(:email, :password, :password_confirmation, :fname, :lname, :phonenum, :address)
   end
 
 end
