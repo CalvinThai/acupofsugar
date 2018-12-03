@@ -9,15 +9,15 @@
 				</div>
 			</div>
 			<br>
-			<div class="panel panel-default">
-	      <div class="panel-heading">
-	        <h4>
+			
+	      <div class="sticky-note">
+	        
 				<% if @user != @logged_in_user %>
 					<div style="font-size:21px" class="margin-bot-1"><i class="fas fa-eye"></i> View </div>
 				<% else %>
 					<div style="font-size:21px" class="margin-bot-1"><i class="fas fa-user-cog"></i> Management </div>
 				<% end %>
-				<div class="panel-body">
+				
 
 				<% if @user.admin == true and @user == @logged_in_user%>
 					<p><%= link_to 'Edit admin user information >', edit_user_path(@user)%></p>
@@ -35,38 +35,35 @@
 					<p><%= link_to 'View items >', user_items_path(@user) %></p>
 					<p><%= link_to "View reviews >", user_review_borrowers_path(@user.id) %></p>
 				<% end %>
-				<h4>
-			</div>
-			</div> </div>
+				
+			
+			</div> 
 			<br>
 		</div>
 
 		<div class="col-xs-12 col-md-4 margin-bot-2">
-			<div class="sticky-note scrollbar" style="max-height:460px;">
+			<div class="sticky-note" style="max-height:460px;">
 			For all items? or just friend items?
 			</div>
 		</div>
 
 		<div class="col-xs-12 col-md-4 margin-bot-2">
 			<% if @user == @logged_in_user and @user.admin == false%>
-			<div id = "friend_request_list" class="panel panel-default scrollbar" style="max-height:140px;max-width:360px;">
-	      <div class="panel-heading">
-	        <h4>
-
+				<div id = "friend_request_list" class="sticky-note" style="max-height:140px;max-width:360px;overflow:auto">
 					<%= render  "friendships/friend_requests"%>
-				</div> </div> 
+				</div> 
+				
 				<br>
-				<div id = "friend_list" class="panel panel-default scrollbar" style="max-height:140px;max-width:360px;">
-		      <div class="panel-heading">
-		        <h4>
+				<div id = "friend_list" class=" sticky-note" style="max-height:140px;max-width:360px;overflow:auto">
+		
 					<%= render  "friendships/friends"%>
-				</div> </div>
+				</div> 
 				<br>
-				<div id = "friend_block_list" class="panel panel-default scrollbar" style="max-height:140px;max-width:360px;">
-		      <div class="panel-heading">
-		        <h4>
+				
+				<div id = "friend_block_list" class="sticky-note" style="max-height:140px;max-width:360px;">
+		      
 					<%= render  "friendships/blocks"%>
-				</div> </div>
+				</div> 
 			<%end%>
 		</div>
 	</div>
