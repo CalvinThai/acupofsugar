@@ -1,5 +1,5 @@
 <div class="container">
-<h1>Update preferences</h1>
+<div class="page-header"><h1>Update preferences</h1></div>
 
 <% if flash[:failure_msg]%>
   <div class="alert alert-danger">
@@ -11,5 +11,4 @@
 
 <%= render 'preference_form' %>
 
-<%= link_to 'Cancel', user_path(@user.id), class: "cta-alt" %>
 </div>

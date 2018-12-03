@@ -1,4 +1,5 @@
-<h1>Items</h1>
+<div class="container">
+  <div class="page-header"><h1>Search items</h1></div>
 
 <%#
   Filterrific adds the `form_for_filterrific` view helper:
@@ -8,30 +9,31 @@
       * AJAX spinner while AJAX request is being processed
   * sets form_for options like :url, :method and input name prefix
 %>
+<p> Search items by: </p>
 <%= form_for_filterrific @filterrific do |f| %>
-  <div>
-    Search
+  <div class="form-group">
+    <label>Item name</label>
     <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
     <%= f.text_field(
-      :search_query,
-      class: 'filterrific-periodically-observed'
+      :search_query, placeholder: "Search..",
+      class: 'filterrific-periodically-observed form-control'
     ) %>
   </div>
-  <div>
-    Category
+  <div class="form-group">
+    <label>Category</label>
     <%= f.select(
       :with_category,
       @filterrific.select_options[:with_category],
-      { include_blank: '- Any -' }
+      { include_blank: '- Any -' }, class: "form-control"
     ) %>
   </div>
-  <div>
-    Registered after
-    <%= f.text_field(:with_created_at_gte, class: 'js-datepicker') %>
+  <div class="form-group">
+    <label>Registered after</label>
+    <%= f.text_field(:with_created_at_gte, class: 'form-control') %>
   </div>
-  <div>
-    Sorted by
-    <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
+  <div class="form-group">
+    <label>Sorted</label>
+    <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by], {include_blank: "- Sort by - "} , class: 'form-control') %>
   </div>
   <div>
     <%= link_to(
@@ -47,3 +49,18 @@
   partial: 'items/list',
   locals: { items: @items }
 ) %>
+
+</div>
+
+<style>
+ input[type=text] {
+    width: 130px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+/* When the input field gets focus, change its width to 100% */
+input[type=text]:focus {
+    width: 100%;
+}
+</style>

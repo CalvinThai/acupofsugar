@@ -1,9 +1,11 @@
 
 <div class="container">
-	<h1><%="Reviews for #{@user.fname} #{@user.lname}"%></h1>
+	<div class="page-header"><h1><%="Reviews for #{@user.fname} #{@user.lname}"%></h1></div>
 	<p class="img-responsive rating-display" data-score="<%= @user.rating.to_i %>"></p>
-	<%= render partial: 'reviews_from_lender' %>
-	<%= render partial: 'reviews_from_borrower' %>
+	<div class="panel-group">
+    <%= render partial: 'reviews_from_lender' %>
+  	<%= render partial: 'reviews_from_borrower' %>
+  </div>
 </div>
 
 <script>

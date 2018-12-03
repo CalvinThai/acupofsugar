@@ -6,7 +6,7 @@
       <div class="panel-body">
         <div class= "table-responsive">
         <% if @trans_lent.length > 0 %>
-        <div class="page-header"><h5>Lent history</h5></div>
+        <div class="page-header text-uppercase"><h5>Lent history</h5></div>
         <table class="table">
           <thead>
           <tr>
@@ -22,7 +22,7 @@
             <% borrower = User.find(item.other_user_id) %>
             <% this_item = Item.find(item.item_id) %>
             <tr>
-              <td><%= link_to this_item.name, item_path(item.item_id) %></td> 
+              <td><%= this_item.name %></td> 
               <td><%= item.due_date.strftime("%Y-%m-%d") %></td>
               <td><%= item.returned_on.strftime("%Y-%m-%d") %></td>
               <td><%= "#{borrower.fname} #{borrower.lname}" %></td> <%# link to user profile? %>
@@ -33,7 +33,7 @@
         </table>
         <% end %>
         <% if @trans_borrow.length > 0 %>
-        <h5>Borrow history</h5>
+        <div class="page-header text-uppercase"><h5>Borrow history</h5></div>
         <table class="table">
           <thead>
           <tr>
@@ -49,7 +49,7 @@
             <% lender = User.find(item.other_user_id) %>
             <% this_item = Item.find(item.item_id) %>
             <tr>
-              <td><%= link_to this_item.name, item_path(item.item_id) %></td> 
+              <td><%= this_item.name %></td> 
               <td><%= item.due_date.strftime("%Y-%m-%d") %></td>
               <td><%= item.returned_on.strftime("%Y-%m-%d") %></td>
               <td><%= "#{lender.fname} #{lender.lname}" %></td> <%# link to user profile? %>
