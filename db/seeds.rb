@@ -9,7 +9,7 @@
 # user2 = User.create(fname: 'tony', lname: 'stark', email:'tony@mail.com')
 # user3 = User.create(fname: 'smith', lname: 'lynn', email:'smith@mail.com')
 #admin account
-User.create!(fname: 'Admin', lname: 'Admin', email:'admin@anymail.com',password:'adminpass',phonenum: '416666666', address:'123 fake street',email_confirmed: true,  admin: true)
+User.create!(fname: 'Admin', lname: 'Admin', email:'admin@admin.com',password:'adminpass',phonenum: '416666666', address:'123 fake street',email_confirmed: true,  admin: true)
 # items = Item.create([{name: 'pencil', descr: 'brand new condition', status: 'lentout',user_id: user3.id},
 # 	{name: 'eraser', descr: 'brand new condition', status: 'lentout',user_id: user3.id},
 # 	{name: 'ps4 console', descr: 'brand new condition', status: 'available' ,user_id: user2.id},
@@ -21,4 +21,3 @@ User.create!(fname: 'Admin', lname: 'Admin', email:'admin@anymail.com',password:
 # BorrowedItem.create([{item_id: items[1].id, user_id: user.id, due_on: "2018/11/11"},
 # 	{item_id: items[0].id, user_id: user.id, due_on: "2018/12/02"}])
 # OnHoldItem.create([{item_id: items[2].id, user_id: user.id, req_on: "2018/10/31"}])
-
