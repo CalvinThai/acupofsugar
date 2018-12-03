@@ -40,8 +40,8 @@
 		<div class="container" style="margin-top:0.5em;" >
 
 			<div class="row">
-				<div class="col-xs-4 font-weight bold">
-					<ul class="list-inline text-center font-weight bold">
+				<div class="col-xs-4" style="margin-top:0.5em">
+					<ul class="list-inline text-center" style="font-weight:bold">
 						<li class="list-inline-item hidden-xs hidden-sm hidden-md"> <%= link_to 'Home', root_path%></li>
 				  	 	<li class="list-inline-item hidden-lg"> <%= link_to '<i class="fa fa-home" aria-hidden="true"></i>'.html_safe, root_path,title:"Home"%></li>
 
@@ -62,13 +62,13 @@
 					</ul>
 				</div>
 
-				<div class="col-xs-4 text-block" >
+				<div class="col-xs-4 " >
 
-                	<%= image_tag("logo.png", class: "img-responsive", alt:"A Cup of Sugar") %>
+                	<%= image_tag("logo.png", class: "img-center", alt:"A Cup of Sugar") %>
 
 				</div>
 
-				<div class="col-xs-4" style="margin-top:1em">
+				<div class="col-xs-4" style="margin-top:0.5em">
 					<div class="text-center">
 						<%= form_tag(users_path, method: :get,id:"search-bar") do %>
 	    					<%= text_field_tag :name, params[:name], placeholder: "Search user name", class: 'search-input',id:"search-input" %>
