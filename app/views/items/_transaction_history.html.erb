@@ -4,6 +4,8 @@
       </div>
       <div id="item_history" class="panel-collapse collapse in">
       <div class="panel-body">
+          <% if @transaction_items.length > 0 %>
+            
         <div class= "table-responsive">
         <% if @trans_lent.length > 0 %>
         <div class="page-header text-uppercase"><h5>Lent history</h5></div>
@@ -60,6 +62,7 @@
         </table>
         <% end %>
         </div>
+		<% end %>
         <% if @transaction_items.length == 0 %>
           <p>You don't have any item transaction history</p>
         <%end%>
