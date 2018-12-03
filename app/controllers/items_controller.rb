@@ -48,7 +48,7 @@ class ItemsController < ApplicationController
 			select_options: {
      		sorted_by: Item.options_for_sorted_by,
 			with_category: Item.options_for_category,
-			
+			with_city: Item.options_for_city
 
 
     }

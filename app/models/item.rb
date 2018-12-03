@@ -8,19 +8,20 @@ class Item < ApplicationRecord
 	has_many_attached :images
 	validates :name, presence: {message: "Please provide name for your item"}
 	validates :descr, presence: {message: "Please describe your item"}
-	validates :street, presence: {message: "Please provide a street"}
-	validates :city, presence: {message: "Please provide a city"}
-	validates :address, presence: {message: "Please provide a country"}
-	geocoded_by :address
+	#validates :street, presence: {message: "Please provide a street"}
+	#validates :city, presence: {message: "Please provide a city"}
+	#validates :address, presence: {message: "Please provide a country"}
+	geocoded_by :address1
 	after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
 
-	def address
-	[street, city, country].compact.join(', ')
+	def address1
+	[ city, address].compact.join(', ')
 	end
 
-	self.per_page = 1
+	self.per_page = 10
 	scope :with_category, -> (category) { where('category = ?', category)}
 	scope :with_status, -> (status) {where('status = ?', status)}
+	scope :with_city, -> (city) {where('city = ?', city)}
 	scope :sorted_by, lambda { |sort_option|
 	  # extract the sort direction from the param value.
 	  direction = (sort_option =~ /desc$/) ? 'desc' : 'asc'
@@ -51,6 +52,7 @@ class Item < ApplicationRecord
 	     :search_query,
 	     :with_category,
 	     :with_status,
+			 :with_city,
 			 :with_created_at_gte,
 
 	   ]
@@ -72,6 +74,14 @@ def self.options_for_category
 		['Accesories'],
 		['Art'], ['Bath & Beauty'], ['Books, Films & Music'], ['Clothing'], ['Craft Supplies & Tools'],
 		['Electronics'], ['Home & Living'], ['Office Tools'], ['Pet Supplies'], ['Toys & Games']
+	]
+end
+
+def self.options_for_city
+	[
+		['Brampton'],['Hamilton'],['Kitchener'],['London'], ['Markham'],
+	['Mississauga'], ['Ottawa'], ['Toronto'],['Vaughan'],
+	['Windsor']
 	]
 end
 	def self.item_search(params)
