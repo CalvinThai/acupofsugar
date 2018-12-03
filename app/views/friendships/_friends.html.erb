@@ -6,8 +6,8 @@
 		<!--desktop view -->
 		<%= link_to "#{friend.fname.capitalize} #{friend.lname.capitalize}", user_path(friend) %>
 		<br>
-		<%= button_to 'Message', conversations_path(sender_id: @user.id, recipient_id: friend.id), form: {style:'display:inline-block;'}, class:"cta hidden-xs hidden-sm hidden-md",method: :post %>
-		<%= button_to conversations_path(sender_id: @user.id, recipient_id: friend.id), form: {style:'display:inline-block;'}, method: :post,class:'cta hidden-lg',title:'Send Message' do %>
+		<%= button_to 'Message', conversations_path(sender_id: @user.id, recipient_id: friend.id), form: {style:'display:inline-block;'}, class:"cta hidden-xs hidden-sm hidden-md margin-top-1",method: :post %>
+		<%= button_to conversations_path(sender_id: @user.id, recipient_id: friend.id), form: {style:'display:inline-block;'}, method: :post,class:'cta hidden-lg margin-top-1',title:'Send Message' do %>
 		<i class="fas fa-comment"></i>
 		<% end %>
 		<%= form_tag user_friendship_path(@user,id:1,:format => "js"), method: :delete,style:'display:inline-block;',data: { confirm: "Are you sure to unfriend with #{friend.fname} #{friend.lname}?" },class:"hidden-md hidden-sm hidden-xs",remote: true,authenticity_token: true do %>
