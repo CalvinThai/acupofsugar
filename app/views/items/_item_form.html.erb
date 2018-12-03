@@ -24,7 +24,7 @@
         </div>
         <div class="form-group">
            <%= form.label "Preferred location of transaction: " %><br>
-           <%= form.select :city, [['Brampton', 'Brampton'],['Hamilton','Hamilton'],['Kitchener', 'Kitchener'],['London', 'London'], ['Markham', 'Markham'],
+           <%= form.select :address, [['Brampton', 'Brampton'],['Hamilton','Hamilton'],['Kitchener', 'Kitchener'],['London', 'London'], ['Markham', 'Markham'],
          ['Mississauga', 'Mississauga'], ['Ottawa', 'Ottawa'], ['Toronto','Toronto'],['Vaughan', 'Vaughan'],
          ['Windsor', 'Windsor']], {include_blank: "- Select a city -"}, class: "form-control" %>
        </div>
@@ -37,5 +37,3 @@
     <p><%= form.submit class: "btn btn-primary", style:"width:100%;" %></p>
     <p><%= link_to "Cancel", user_items_path(@user), class: "btn btn-default", style:"width:100%;" %></p>
   <% end %>
-
-

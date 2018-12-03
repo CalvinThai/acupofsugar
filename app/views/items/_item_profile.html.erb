@@ -9,9 +9,8 @@
 <% end %>
 
 <p>Description: <%= @item.descr %></p>
-<%if @item.street != nil %>
-<p>Preferred location of transaction: <%= @item.city %></p>
-
+<%if @item.address != nil && @item.latitude != nil && @item.longitude !=nil %>
+<p>Preferred location of transaction: <%= @item.address %></p>
 <%= image_tag "http://maps.googleapis.com/maps/api/staticmap?center=#{@item.latitude},#{@item.longitude}&markers=#{@item.latitude},#{@item.longitude}&zoom=15&size=640x400&key=AIzaSyB8VOIlsN2jBMd3C1NcWJPDId1OW64R3mQ",
               class: 'img-fluid img-rounded', alt: "#{@item.name} on the map"%>
 <% end %>
