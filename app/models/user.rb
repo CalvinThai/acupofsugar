@@ -91,12 +91,12 @@ end
   validates :email, presence: true, 
                   length: { maximum: 255 },
                   format: { with: VALID_EMAIL_REGEX },
-                  uniqueness: { case_sensitive: false },
+                  uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, :presence => true,
                        :confirmation => true,
                        :length => {:within => 6..40},
-                       :on => :create,
+                       :on => :create
                       
 
   validates :password, :confirmation => true,
