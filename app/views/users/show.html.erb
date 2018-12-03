@@ -43,7 +43,7 @@
 
 		<div class="col-xs-12 col-md-4 margin-bot-2">
 			<% if @user == @logged_in_user and @user.admin == false%>
-				<div id="friend_request_list scrollbar" class="sticky-note" style="max-height:140px;">
+				<div id="friend_request_list" class="sticky-note scrollbar" style="max-height:140px;">
 					<%= render  "friendships/friend_requests"%>
 				</div>
 				<br>
