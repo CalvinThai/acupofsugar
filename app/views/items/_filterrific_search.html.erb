@@ -28,10 +28,6 @@
     ) %>
   </div>
   <div class="form-group">
-    <label>Registered after</label>
-    <%= f.text_field(:with_created_at_gte, class: 'form-control') %>
-  </div>
-  <div class="form-group">
     <label>Sorted</label>
     <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by], {include_blank: "- Sort by - "} , class: 'form-control') %>
   </div>

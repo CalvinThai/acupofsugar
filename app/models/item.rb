@@ -18,7 +18,7 @@ class Item < ApplicationRecord
 	[street, city, country].compact.join(', ')
 	end
 
-	self.per_page = 5
+	self.per_page = 1
 	scope :with_category, -> (category) { where('category = ?', category)}
 	scope :with_status, -> (status) {where('status = ?', status)}
 	scope :sorted_by, lambda { |sort_option|
@@ -70,7 +70,7 @@ end
 def self.options_for_category
 	[
 		['Accesories'],
-		['Art'], ['Bath & Beauty'], ['Books, Films & Music'], ['CLothing'], ['Craft Supplies & Tools'],
+		['Art'], ['Bath & Beauty'], ['Books, Films & Music'], ['Clothing'], ['Craft Supplies & Tools'],
 		['Electronics'], ['Home & Living'], ['Office Tools'], ['Pet Supplies'], ['Toys & Games']
 	]
 end
