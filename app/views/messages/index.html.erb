@@ -35,7 +35,7 @@
 	<div class="margin-top-1 margin-bot-1" style="padding:5px 10px 10px 10px">
 	<hr class="hr-class"/>
     <%= form_for [@conversation, @message] do |f| %>
-      <%= f.text_field :body, :placeholder => "Type Message Here",class:"form-control", style:"width:50%;display:inline-block;border-color:#0099e5" %>
+      <%= f.text_field :body, :placeholder => "Type Message Here",class:"form-control", style:"width:50%;display:inline-block;border-color:#0099e5", id:"chat-box" %>
       <%= f.hidden_field :user_id, value: current_user.id%>
       <%= f.submit "Send Message",class:"hidden-xs hidden-sm hidden-md cta" %>
 	  <%= button_tag '<i class="fas fa-comments"></i>'.html_safe,class:"hidden-lg cta" %>
@@ -50,5 +50,6 @@
 	    $('#chat').animate({
 	        scrollTop: $('#chat').get(0).scrollHeight
 	    }, 0);
+		$('#chat-box').focus()
 	});
 </script>
