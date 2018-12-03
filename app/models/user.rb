@@ -54,37 +54,20 @@ class User < ApplicationRecord
 
   def self.find_or_create_from_auth_hash(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_initialize.tap do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.fname = auth.info.first_name
-      user.lname = auth.info.last_name
-      user.password = auth.uid
-      user.email = auth.info.email
-      user.email_confirmed = true
-      user.confirm_token = nil
-      #user.picture = auth.info.image
-      user.save!
+        user.provider = auth.provider
+        user.uid = auth.uid
+        user.fname = auth.info.first_name
+        user.lname = auth.info.last_name
+        user.password = auth.uid
+        user.email = auth.info.email
+        user.email_confirmed = true
+        user.confirm_token = nil
+        #user.picture = auth.info.image
+        user.save!
     end
   end
 
-  def self.create_with_omniauth(auth)
-  
-  user = find_or_create_by(uid: auth['uid'], provider:  auth['provider'])
-  user.email = "#{auth['uid']}@#{auth['provider']}.com"
-  user.password = auth['uid']
-  user.fname = auth['info']['first_name']
-  user.lname = auth['info']['last_name']
-  if User.exists?(user)
-    user
-  else
-    user.save!
-    user
-  end
-end
 
-def from_omniauth?
-  provider && uid
-end
 
   before_save { self.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i

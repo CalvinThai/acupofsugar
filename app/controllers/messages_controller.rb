@@ -27,7 +27,9 @@ class MessagesController < ApplicationController
 		@message = @conversation.messages.new(message_params)
 		if @message.save
 			redirect_to conversation_messages_path(@conversation)
-		end
+    else
+      redirect_to conversation_messages_path(@conversation)
+    end
 	end
 	private
 	def message_params

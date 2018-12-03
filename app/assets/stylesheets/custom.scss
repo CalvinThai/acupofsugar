@@ -175,12 +175,12 @@ a{
   border:1;
   border-radius:10px;
   background: linear-gradient(#D3D3D3, #FFFFFF);
-  box-shadow:0 4px 6px rgba(0,0,0,0.1);
+  box-shadow:0 4px 4px rgba(0,0,0,0.1);
   overflow:hidden;
   transition:box-shadow 0.5s ease;
   font-smoothing:subpixel-antialiased;
   padding:25px 25px 40px;
-  #max-width:360px;
+  //max-width:360px;
 }
 
 nav .search-input{
