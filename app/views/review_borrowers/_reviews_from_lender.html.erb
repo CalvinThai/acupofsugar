@@ -4,8 +4,8 @@
       </div>
       <div id="review_lender" class="panel-collapse collapse in">
       <div class="panel-body">
-        <div class=" table-responsive">
-          <%if @reviews.length > 0 %>       
+		  <%if @reviews.length > 0 %>
+        <div class=" table-responsive">       
           <table class="table">
             <tbody>
               <% @reviews.each do |reviewer| %>
@@ -19,14 +19,14 @@
               <%end%>
             </tbody>
           </table>
-          <%else%>
-            <p>There's no review from lenders</p>
-          <%end%>
         </div>
+        <%else%>
+          <p>There's no review from lenders</p>
+        <%end%>
       </div>
     </div>
   </div>
-
+<br>
 <script>
   $('.rating-display').raty({
       readOnly: true,
