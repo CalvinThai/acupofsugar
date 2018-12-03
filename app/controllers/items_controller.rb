@@ -157,6 +157,7 @@ def search
 		params[:filterrific],
 		select_options: {
 		sorted_by: Item.options_for_sorted_by,
+		with_city: Item.options_for_city,
 		with_category: Item.options_for_category
 
 	}
