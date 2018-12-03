@@ -1,7 +1,9 @@
    <div class="panel-group">
   <%= form_with(model: [ @user, @item ], local: true) do |form| %>
     <div class="panel panel-primary">
-      <div class="panel-heading text-uppercase"><h4>Basic item information<h4></div>
+      <div class="panel-heading">
+        <h4 class="text-uppercase">Basic item information<h4>
+      </div>
       <div class="panel-body">
         <div class="form-group">
           <%= form.label :name %><br>
@@ -26,7 +28,9 @@
     </div>
     <hr/>
      <div class="panel panel-default">
-      <div class="panel-heading text-uppercase"><h4>optional: item pick up location<h4></div>
+      <div class="panel-heading">
+        <h4 class=" text-uppercase">Optional: item pick-up location<h4>
+      </div>
       <div class="panel-body">
          <div class="form-group">
           <%= form.label :country %><br>
@@ -43,7 +47,7 @@
       </div>
     </div>
     <hr />
-    <%= form.submit class: "btn btn-primary", style:"width:100%;" %>
-
+    <p><%= form.submit class: "btn btn-primary", style:"width:100%;" %></p>
+    <p><%= link_to "Cancel", user_items_path(@user.id), class: "btn btn-default", style:"width:100%;" %></p>
   <% end %>
  </div>

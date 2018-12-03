@@ -14,6 +14,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery.raty
+//= require bootstrap-sprockets
 //= require activestorage
 //= require turbolinks
 //= require filterrific/filterrific-jquery
