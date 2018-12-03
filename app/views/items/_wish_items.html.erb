@@ -4,8 +4,8 @@
       </div>
       <div id="item_wish" class="panel-collapse collapse in">
       <div class="panel-body">
+		  <% if @wish_items.length > 0 %>
         <div class="table-responsive">
-        <% if @wish_items.length > 0 %>
         <table class="table">
           <thead>
           <tr>
@@ -27,10 +27,10 @@
           <% end %>
           </tbody>
         </table>
+        </div>
         <%else%>
           <p>You don't have any wish lists</p>
         <%end%>
-        </div>
       </div>
     </div>
   </div>

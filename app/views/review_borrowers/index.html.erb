@@ -5,6 +5,8 @@
 	<div class="panel-group">
     <%= render partial: 'reviews_from_lender' %>
   	<%= render partial: 'reviews_from_borrower' %>
+	<br>
+	<%= button_to 'Back', user_path(@user),class:"cta",method: :get,title:"Back to profile"%>
   </div>
 </div>
 

@@ -276,3 +276,15 @@ nav .search-input{
     -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.15);
     box-shadow: 0 1px 1px rgba(0,0,0,0.15);
 }
+
+.hr-class {
+    display: block;
+    unicode-bidi: isolate;
+    margin-block-start: 0.5em;
+    margin-block-end: 0.5em;
+    margin-inline-start: auto;
+    margin-inline-end: auto;
+    overflow: hidden;
+    border-style: inset;
+    border-width: 1px;
+}
