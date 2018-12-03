@@ -43,21 +43,25 @@ class ItemsController < ApplicationController
 			get_manageable_items
 		end
 		@filterrific = initialize_filterrific(
-			Item,
+			Item.where("items.disable = false"),
 			params[:filterrific],
 			select_options: {
      		sorted_by: Item.options_for_sorted_by,
-			with_category: Item.options_for_category
+			with_category: Item.options_for_category,
+			
+
 
     }
+) or return
 
-		) or return
 		@items = @filterrific.find.page(params[:page])
+
 
 		respond_to do |format|
 			format.html
 			format.js
 		end
+
 
    	#@items = Item.item_search(params)
 		@aggs = Item.search "*", aggs: [:status]
@@ -80,7 +84,7 @@ class ItemsController < ApplicationController
 		@reviews = ReviewLenderAndItem.joins(:user).select("review_lender_and_items.*, users.*").where("review_lender_and_items.item_id = ?", @item.id)
 		@ratings = @reviews.average(:rating)
 
-		#for form 
+		#for form
 		@on_hold_item = OnHoldItem.new
 	end
 	def edit
@@ -137,8 +141,6 @@ class ItemsController < ApplicationController
 	 end
 
 end
-
-
 def search
 	@user = User.find(params[:user_id])
 	#find user if view is for /users/:id/items

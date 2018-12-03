@@ -61,6 +61,7 @@ class User < ApplicationRecord
       user.password = auth.uid
       user.email = auth.info.email
       user.email_confirmed = true
+      user.confirm_token = nil
       #user.picture = auth.info.image
       user.save!
     end
@@ -90,14 +91,12 @@ end
   validates :email, presence: true, 
                   length: { maximum: 255 },
                   format: { with: VALID_EMAIL_REGEX },
-                  uniqueness: { case_sensitive: false },
-                  unless: -> {from_omniauth?}
+                  uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, :presence => true,
                        :confirmation => true,
                        :length => {:within => 6..40},
-                       :on => :create,
-                       unless: -> {from_omniauth?}
+                       :on => :create
                       
 
   validates :password, :confirmation => true,

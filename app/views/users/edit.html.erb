@@ -10,8 +10,11 @@
 			  <br>
 			  <h3 class="text-center margin-bot-1"> Update your profile</h3>
 
-        <%= f.label :fname %>
+        <%= f.label :fname, "First Name" %>
         <%= f.text_field :fname, class: 'form-control margin-bot-1' %>
+
+        <%= f.label :lname, "Last Name" %>
+        <%= f.text_field :lname, class: 'form-control margin-bot-1' %>
 
         <%= f.label :email %>
         <%= f.email_field :email, class: 'form-control margin-bot-1' %>
@@ -21,12 +24,6 @@
 
         <%= f.label :phonenum %>
         <%= f.text_field :phonenum, class: 'form-control margin-bot-1' %>
-
-        <%= f.label :password %>
-        <%= f.password_field :password, class: 'form-control margin-bot-1' %>
-
-        <%= f.label :password_confirmation, "Confirmation" %>
-        <%= f.password_field :password_confirmation, class: 'form-control margin-bot-1' %>
 
 
 

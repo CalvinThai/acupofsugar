@@ -1,7 +1,7 @@
 <div id="filterrific_results" class="table-responsive">
 
   <div>
-    <%= page_entries_info items %>
+    <%= page_entries_info @items, :count => {:disable => 'false' }%>
   </div>
 
   <table class="table">
@@ -22,7 +22,7 @@
         <td><%= item.category %></td>
         <td><%= item.created_at.strftime("%Y-%m-%d") %></td>
       </tr>
-     <% end %> 
+     <% end %>
     <% end %>
   </tbody>
   </table>
