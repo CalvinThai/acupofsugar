@@ -27,7 +27,6 @@
       { include_blank: '- Any -' }, class: "form-control"
     ) %>
   </div>
-<<<<<<< HEAD
 
   <div>
     City
@@ -38,15 +37,14 @@
     ) %>
   </div>
 
-
   <div>
     Sorted by
     <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
-=======
+	
   <div class="form-group">
     <label>Sorted</label>
     <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by], {include_blank: "- Sort by - "} , class: 'form-control') %>
->>>>>>> 3188b7e1c234f694419dcc62f45df9ec50426f63
+
   </div>
   <div>
     <%= link_to(
