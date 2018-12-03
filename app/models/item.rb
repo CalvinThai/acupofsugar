@@ -10,7 +10,7 @@ class Item < ApplicationRecord
 	validates :descr, presence: {message: "Please describe your item"}
 	validates :street, presence: {message: "Please provide a street"}
 	validates :city, presence: {message: "Please provide a city"}
-	validates :country, presence: {message: "Please provide a country"}
+	validates :address, presence: {message: "Please provide a country"}
 	geocoded_by :address
 	after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
 
