@@ -8,6 +8,9 @@ class Item < ApplicationRecord
 	has_many_attached :images
 	validates :name, presence: {message: "Please provide name for your item"}
 	validates :descr, presence: {message: "Please describe your item"}
+	validates :street, presence: {message: "Please provide a street"}
+	validates :city, presence: {message: "Please provide a city"}
+	validates :country, presence: {message: "Please provide a country"}
 	geocoded_by :address
 	after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
 
@@ -42,13 +45,14 @@ class Item < ApplicationRecord
 	}
 
 	filterrific(
-	   default_filter_params: { sorted_by: 'created_at_desc' },
+	   default_filter_params: { sorted_by: 'created_at_desc'},
 	   available_filters: [
 	     :sorted_by,
 	     :search_query,
 	     :with_category,
 	     :with_status,
-			 :with_created_at_gte
+			 :with_created_at_gte,
+
 	   ]
 	 )
 
@@ -56,11 +60,12 @@ class Item < ApplicationRecord
 	 def self.options_for_sorted_by
   [
 
-    ['name', 'name_asc'],
+    ['Name (a-z)', 'name_asc'],
     ['Created at (newer first)', 'created_at_desc'],
     ['Created at (older first)', 'created_at_asc'],
   ]
 end
+
 
 def self.options_for_category
 	[
