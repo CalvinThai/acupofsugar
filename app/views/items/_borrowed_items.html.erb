@@ -4,8 +4,8 @@
       </div>
       <div id="item_borrowed" class="panel-collapse collapse in">
       <div class="panel-body">
+		  <% if @borrowed_items.length > 0 %>
         <div class="table-responsive">
-        <% if @borrowed_items.length > 0 %>
         <table class="table">
           <thead>
           <tr>
@@ -40,10 +40,10 @@
           <% end %>
           </tbody> 
         </table>
+        </div>
         <% else %>
           <p>You don't have any borrowed items</p>
         <%end%>
-        </div>
       </div>
     </div>
 </div>
