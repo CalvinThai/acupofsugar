@@ -13,6 +13,26 @@
     line-height: 10px;
     font-weight: bold;
     text-shadow: none;
+    text-align: center;
+    cursor: pointer;
+    background-color: transparent;
+    -webkit-transition: 0.1s ease-in-out;
+    -moz-transition: 0.1s ease-in-out;
+    transition: 0.1s ease-in-out;
+}
+
+.cta-alt{
+    font-size: 14px;
+    display: inline-block;
+    color: #0099e5;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+    padding: 10px;
+    border: 2px solid #0099e5;
+    line-height: 10px;
+    font-weight: bold;
+    text-shadow: none;
+    text-align: center;
     cursor: pointer;
     background-color: transparent;
     -webkit-transition: 0.1s ease-in-out;
@@ -24,6 +44,12 @@
 	outline:none;
 
 	box-shadow: 0 0 0 2px #1da1f2, 0 0 2px 4px rgba(0,132,180,0.5);
+}
+
+.cta-alt:focus{
+  outline:none;
+
+  box-shadow: 0 0 0 2px #1da1f2, 0 0 2px 4px rgba(0,132,180,0.5);
 }
 .cta-background{
 	background-color: #0099e5;

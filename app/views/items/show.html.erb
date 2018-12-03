@@ -18,7 +18,7 @@
 <% @owner = User.find(@item.user_id)%>
 <h1><%= @item.name %></h1> <span class="img-responsive rating-display" data-score="<%= @reviews.average(:rating).to_i %>"></span>
 <p>
-	<div><string>Owner:</string> <%= "#{@owner.fname} #{@owner.lname}" %> <%= button_to "contact" ,conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post", class: "btn btn-default" %> </div>
+	<div><string>Owner:</string> <%= "#{@owner.fname} #{@owner.lname}" %> <%= button_to "contact" ,conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post", class: "cta-alt" %> </div>
 
 </p> <!-- should link to message -->
 
@@ -35,8 +35,8 @@
 <div id="review_sections" >
 	<%= render partial: 'review_lender_and_items/item_reviews_from_borrower' %>
 </div>
-<p><%= link_to '< To search items', items_path, class: "btn btn-default" %></p>
+<p><%= link_to '< To search items', items_path, class: "cta-alt" %></p>
 <%if session[:user_id] && session[:user_id] == @user.id%>
-<p><%= link_to '< To manage items' , user_items_path(@user.id), class: "btn btn-default"%></p>
+<p><%= link_to '< To manage items' , user_items_path(@user.id), class: "cta-alt"%></p>
 <%end%>
 </div>

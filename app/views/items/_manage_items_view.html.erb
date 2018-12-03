@@ -1,6 +1,5 @@
 <div class="container">
-<hr />
-<h1>Manage Items</h1>
+<div class="page-header"><h1>Manage Items</h1></div>
 <% if flash[:success_msg] %>
 	<div class="alert alert-success"><%= flash[:success_msg] %></div>
 <% elsif flash[:alert] %>
@@ -26,15 +25,17 @@
 	    <%end%>
   	</div>
 <%end%>
-<%= render  "items/show_user_items" %>
+<div class="panel-group">
+	<%= render  "items/show_user_items" %>
 
-<%= render  "items/lend_items" %>
+	<%= render  "items/lend_items" %>
 
-<%= render  "items/borrowed_items" %>
+	<%= render  "items/borrowed_items" %>
 
-<%= render  "items/on_hold_items" %>
+	<%= render  "items/on_hold_items" %>
 
-<%= render  "items/transaction_history" %>
+	<%= render  "items/transaction_history" %>
 
-<%= render  "items/wish_items" %>
+	<%= render  "items/wish_items" %>
+</div>
 </div>
