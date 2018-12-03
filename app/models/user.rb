@@ -58,8 +58,10 @@ class User < ApplicationRecord
       user.uid = auth.uid
       user.fname = auth.info.first_name
       user.lname = auth.info.last_name
+      user.password = auth.uid
       user.email = auth.info.email
       user.email_confirmed = true
+      user.confirm_token = nil
       #user.picture = auth.info.image
       user.save!
     end
@@ -80,16 +82,22 @@ class User < ApplicationRecord
   end
 end
 
+def from_omniauth?
+  provider && uid
+end
+
   before_save { self.email = email.downcase }
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-  validates :email, presence: true, length: { maximum: 255 },
-                    format: { with: VALID_EMAIL_REGEX },
-                    uniqueness: { case_sensitive: false }
+  validates :email, presence: true, 
+                  length: { maximum: 255 },
+                  format: { with: VALID_EMAIL_REGEX },
+                  uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, :presence => true,
                        :confirmation => true,
                        :length => {:within => 6..40},
                        :on => :create
+                      
 
   validates :password, :confirmation => true,
                        :length => {:within => 6..40},
