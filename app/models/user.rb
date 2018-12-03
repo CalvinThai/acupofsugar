@@ -58,6 +58,7 @@ class User < ApplicationRecord
       user.uid = auth.uid
       user.fname = auth.info.first_name
       user.lname = auth.info.last_name
+      user.password = auth.uid
       user.email = auth.info.email
       user.email_confirmed = true
       #user.picture = auth.info.image
