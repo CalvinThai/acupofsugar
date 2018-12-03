@@ -1,5 +1,5 @@
 class BorrowedItemsController < ApplicationController
-  before_action :authenticate_user_before_db_update
+  before_action :authenticate_user_before_db_update, except: [:new, :create]
   def new
       @user = User.find(params[:user_id])
       @on_hold_item = OnHoldItem.find(params[:on_hold_item_id])
