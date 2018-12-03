@@ -1,6 +1,6 @@
 class OnHoldItemsController < ApplicationController
 	before_action :find_user_set_item_id, only: [:create, :destroy]
-	before_action :authenticate_user_before_db_update 
+	before_action :authenticate_user_before_db_update, except: []
 
 	def new
 		@user = User.find(params[:user_id])

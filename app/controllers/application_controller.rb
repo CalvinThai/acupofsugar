@@ -17,17 +17,21 @@ helper_method :authenticate_user_before_db_update
 
   def authenticate_user_before_db_update
     @auth_user ||= User.find(params[:user_id]) if params[:user_id]
-    if @auth_user 
+    if @auth_user
+      #puts "params user_id : #{params[:user_id]}@@@@@@@@@@@@@@@@"
       if @auth_user != current_user
+        #puts "not the same!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
         flash[:alert] = "Invalid request: unauthorized user"
         redirect_to user_items_path(session[:user_id])
       else
+        #puts "authorized !!!!!!!!!!!!!!!!!!!!!!!!!!"
         #forward message
         flash.now[:success_message] = flash[:success_message] if flash[:success_message]
         flash.now[:failure_message] = flash[:failure_message] if flash[:failure_message]
         return
       end
     else
+      #puts "no user_id to perform!!!!!!!!!!!!!!!"
       flash[:alert] = "Invalid request: unauthorized user"  
       redirect_to items
     end
