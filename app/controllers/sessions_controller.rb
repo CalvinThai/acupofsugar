@@ -9,8 +9,11 @@ skip_before_action :require_login
   
   def create
     if request.env['omniauth.auth']
-
-      user = User.find_or_create_from_auth_hash(request.env['omniauth.auth'])
+      if User.find_by(email: request.env['omniauth.auth'].info.email.downcase).present?
+        user = User.find_by(email: request.env['omniauth.auth'].info.email.downcase)
+      else
+        user = User.find_or_create_from_auth_hash(request.env['omniauth.auth'])
+      end
       session[:user_id] = user.id
       redirect_to user
     else
