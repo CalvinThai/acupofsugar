@@ -99,4 +99,6 @@ gem 'jquery-raty-rails', github: 'bmc/jquery-raty-rails'
 
 gem 'rails_12factor', group: :production
 
+gem 'will_paginate-bootstrap'
+
 ruby '2.5.3'

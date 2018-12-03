@@ -9,14 +9,14 @@
       * AJAX spinner while AJAX request is being processed
   * sets form_for options like :url, :method and input name prefix
 %>
-<p> Search items by: </p>
+<h2> Search items by: </h2>
 <%= form_for_filterrific @filterrific do |f| %>
   <div class="form-group">
     <label>Item name</label>
     <%# give the search field the 'filterrific-periodically-observed' class for live updates %>
     <%= f.text_field(
       :search_query, placeholder: "Search..",
-      class: 'filterrific-periodically-observed form-control'
+      class: 'filterrific-periodically-observed form-control', id: "search_bar"
     ) %>
   </div>
   <div class="form-group">
@@ -27,37 +27,30 @@
       { include_blank: '- Any -' }, class: "form-control"
     ) %>
   </div>
-<<<<<<< HEAD
-
-  <div>
-    City
+  <div class="form-group">
+    <label>City</label>
     <%= f.select(
       :with_city,
       @filterrific.select_options[:with_city],
-      { include_blank: '- Any -' }
+      { include_blank: '- Any -' }, class: "form-control"
     ) %>
   </div>
-
-
-  <div>
-    Sorted by
-    <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by]) %>
-=======
-  <div class="form-group">
-    <label>Sorted</label>
-    <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by], {include_blank: "- Sort by - "} , class: 'form-control') %>
->>>>>>> 3188b7e1c234f694419dcc62f45df9ec50426f63
-  </div>
-  <div>
-    <%= link_to(
-      'Reset filters',
-      reset_filterrific_url,
-    ) %>
-  </div>
+  <div class="">
+    <div class="form-group">
+      <label>Sort table with: </label>
+      <%= f.select(:sorted_by, @filterrific.select_options[:sorted_by], {include_blank: "- Sort by - "} , class: 'form-control') %>
+    </div>
+    <div class="form-group">
+      <%= link_to(
+        'Reset filters',
+        reset_filterrific_url, class: "cta-alt cta-background"
+      ) %>
+    </div>
+</div>
   <%# add an automated spinner to your form when the list is refreshed %>
   <%= render_filterrific_spinner %>
 <% end %>
-
+<hr/>
 <%= render(
   partial: 'items/list',
   locals: { items: @items }
@@ -66,14 +59,14 @@
 </div>
 
 <style>
- input[type=text] {
+ input[type=text]#search_bar {
     width: 130px;
     -webkit-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
 }
 
 /* When the input field gets focus, change its width to 100% */
-input[type=text]:focus {
+input[type=text]#search_bar:focus {
     width: 100%;
 }
 </style>

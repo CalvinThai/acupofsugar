@@ -7,7 +7,7 @@
 
         <div class=" table-responsive">
           <%if @reviews_by_borrower.length > 0 %>   
-          <table class="table">
+          <table class="table table-hover">
             <tbody>
               <% @reviews_by_borrower.each do |reviewer| %>
                <% item = Item.find(reviewer.item_id)%>

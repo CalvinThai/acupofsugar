@@ -8,7 +8,7 @@
         <% if @lend_items.length > 0 %>
           <% if @pending_items.length > 0 %>
             <h3>Pending Requests</h3>
-            <table class="table">
+            <table class="table table-hover">
               <thead>
               <tr>
                 <th>Item name</th>
@@ -40,7 +40,7 @@
           <% end %>
           <% if @approved_items.length > 0 %>
           <h3>Approved Requests/ On Loan</h3>
-          <table class="table">
+          <table class="table table-hover">
             <thead>
             <tr>
               <th>Item name</th>

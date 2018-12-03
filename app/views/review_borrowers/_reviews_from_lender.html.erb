@@ -6,7 +6,7 @@
       <div class="panel-body">
         <div class=" table-responsive">
           <%if @reviews.length > 0 %>       
-          <table class="table">
+          <table class="table table-hover">
             <tbody>
               <% @reviews.each do |reviewer| %>
               <% item = Item.find(reviewer.item_id)%>

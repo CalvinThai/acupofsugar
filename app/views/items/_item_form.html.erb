@@ -1,5 +1,5 @@
   <%= form_with(model: [ @user, @item ], local: true) do |form| %>
-    <div class="panel panel-primary">
+    <div class="panel panel-default">
       <div class="panel-heading">
         <h4 class="text-uppercase">Basic item information<h4>
       </div>
@@ -16,53 +16,26 @@
           <%= form.label :description %><br>
           <%= form.text_area :descr, class: "form-control" %>
        </div>
-
         <div class="form-group">
             <%= form.label :category %><br>
             <%= form.select :category, [['Accessories', 'Accesories'],['Art', 'Art'],['Bath & Beauty', 'Bath & Beauty'], ['Books, Films & Music', 'Books, Films & Music'],
           ['Clothing', 'Clothing'], ['Craft Supplies & Tools', 'Craft Supplies & Tools'], ['Electronics', 'Electronics'],
           ['Home & Living', 'Home & Living'], ['Office Tools', 'Office Tools'], ['Pet Supplies', 'Pet Supplies'], ['Toys & Games', 'Toys & Games']], {include_blank: "- Select a category -"}, class: "form-control" %>
         </div>
+        <div class="form-group">
+           <%= form.label "Preferred location of transaction: " %><br>
+           <%= form.select :city, [['Brampton', 'Brampton'],['Hamilton','Hamilton'],['Kitchener', 'Kitchener'],['London', 'London'], ['Markham', 'Markham'],
+         ['Mississauga', 'Mississauga'], ['Ottawa', 'Ottawa'], ['Toronto','Toronto'],['Vaughan', 'Vaughan'],
+         ['Windsor', 'Windsor']], {include_blank: "- Select a city -"}, class: "form-control" %>
+       </div>
+       <div class="form-group">
+          <%= form.label :street %><br>
+          <%= form.text_field :street, class: "form-control"%>
+        </div>
       </div>
     </div>
-    <div class="form-group">
-      <%= form.label :images %><br>
-      <%= form.file_field :images, multiple: true, class: "form-control"  %>
-   </div>
-   <div class="form-group">
-      <%= form.label :description %><br>
-      <%= form.text_area :descr, class: "form-control" %>
-   </div>
-
-  <div class="form-group">
-      <%= form.label :category %><br>
-    <p>
-      <%= form.select :category, [['Accessories', 'Accesories'],['Art', 'Art'],['Bath & Beauty', 'Bath & Beauty'], ['Books, Films & Music', 'Books, Films & Music'],
-    ['Clothing', 'Clothing'], ['Craft Supplies & Tools', 'Craft Supplies & Tools'], ['Electronics', 'Electronics'],
-    ['Home & Living', 'Home & Living'], ['Office Tools', 'Office Tools'], ['Pet Supplies', 'Pet Supplies'], ['Toys & Games', 'Toys & Games']] %>
-    </p>
- </div>
-
-
- <div class="form-group">
-     <%= form.label :city %><br>
-   <p>
-     <%= form.select :city, [['Brampton', 'Brampton'],['Hamilton','Hamilton'],['Kitchener', 'Kitchener'],['London', 'London'], ['Markham', 'Markham'],
-   ['Mississauga', 'Mississauga'], ['Ottawa', 'Ottawa'], ['Toronto','Toronto'],['Vaughan', 'Vaughan'],
-   ['Windsor', 'Windsor']] %>
-   </p>
- </div>
-
-
-
-
-    <p>
-      <%= form.label :street %><br>
-
-      <%= form.text_area :address, class: "form-control" %>
-    </p>
-
-    <p>
-      <%= form.submit "Post My Item",class: "btn btn-primary" %>
-    </p>
+    <p><%= form.submit class: "btn btn-primary", style:"width:100%;" %></p>
+    <p><%= link_to "Cancel", user_items_path(@user), class: "btn btn-default", style:"width:100%;" %></p>
   <% end %>
+
+
