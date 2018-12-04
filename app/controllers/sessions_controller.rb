@@ -13,11 +13,10 @@ skip_before_action :require_login
         user = User.find_by(email: request.env['omniauth.auth'].info.email.downcase)
       else
         user = User.find_or_create_from_auth_hash(request.env['omniauth.auth'])
-        Notification.create(:user_id => @user.id);
       end
       session[:user_id] = user.id
       if user.address.nil? || user.phonenum.nil?
-        redirect_to edit_user_url
+        redirect_to edit_user_url(user)
       else
         redirect_to user
       end
