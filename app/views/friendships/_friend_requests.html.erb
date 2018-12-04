@@ -8,7 +8,6 @@
 	<% for requirer in request_list%>
 		<div>
 			<%= link_to "#{requirer.fname.capitalize} #{requirer.lname.capitalize}", user_path(requirer) %> 
-			<br>
 			<%= form_tag user_friendship_path(@user,id:1,:format => "js"), method: :put,style:'display:inline-block;',class:"hidden-xs hidden-sm hidden-md",remote: true, authenticity_token: true do %>
 			  <%= hidden_field_tag :friend_requirer, requirer.id %>
 			  <%= hidden_field_tag :friend_requiree, @user.id %>

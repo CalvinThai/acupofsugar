@@ -27,10 +27,10 @@
 					<%= button_tag '<i class="fas fa-check"></i> Request Sent'.html_safe, class:'cta cta-background hidden-xs hidden-sm hidden-md',disabled: true %>
 					<%= button_tag '<i class="fas fa-check"></i>'.html_safe, class:'cta cta-background hidden-lg',disabled: true,title:"Friend Request Sent" %>
 				<% end %>
-				<%= button_to new_report_user_path(:reportee => user.id),class:"cta hidden-xs hidden-sm hidden-md", form: {style:'display:inline-block;'}, method: :get do%>
+				<%= button_to new_report_user_path, :params => { :reportee =>user.id} ,class:"cta hidden-xs hidden-sm hidden-md", form: {style:'display:inline-block;'}, method: :get do%>
 				Report User
 				<% end %>
-				<%= button_to new_report_user_path(:reportee => user.id),class:"cta hidden-lg", form: {style:'display:inline-block;'}, method: :get, title:"Report User" do%>
+				<%= button_to new_report_user_path, :params => { :reportee =>user.id} ,class:"cta hidden-lg", form: {style:'display:inline-block;'}, method: :get, title:"Report User" do%>
 				<i class="fas fa-exclamation"></i>
 				<% end %>
 				<!-- check if admin -->

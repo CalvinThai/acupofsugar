@@ -28,7 +28,6 @@
                 <%= link_to 'edit', edit_user_item_path(@user.id, item.id), class: "cta-alt cta-background",form:{style:"display:inline-block;margin-right:1em"} %> 
                 <%= button_to 'delete', user_item_delete_item_path(@user.id, item.id), method: :put,
                     data: { confirm: 'Are you sure?'}, class: "cta-alt cta-background",form:{style:"display:inline-block;margin-right:1em"} %>
-                      
                   </div>
               </td> 
             </tr>

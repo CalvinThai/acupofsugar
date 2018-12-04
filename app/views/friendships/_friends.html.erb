@@ -5,7 +5,6 @@
 	<div >
 		<!--desktop view -->
 		<%= link_to "#{friend.fname.capitalize} #{friend.lname.capitalize}", user_path(friend) %>
-		<br>
 		<%= button_to 'Message', conversations_path(sender_id: @user.id, recipient_id: friend.id), form: {style:'display:inline-block;'}, class:"cta hidden-xs hidden-sm hidden-md ",method: :post %>
 		<%= button_to conversations_path(sender_id: @user.id, recipient_id: friend.id), form: {style:'display:inline-block;'}, method: :post,class:'cta hidden-lg',title:'Send Message' do %>
 		<i class="fas fa-comment"></i>

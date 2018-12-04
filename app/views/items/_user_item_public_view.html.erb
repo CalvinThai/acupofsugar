@@ -1,5 +1,5 @@
-<h2>Items belong to this user</h2>
-<div class="table-responsive">
+<!-- <h2>Items belong to this user</h2>
+ --><div class="table-responsive">
 <% if @user_items.length > 0 %>
 <table class="table table-hover">
   <thead>
@@ -26,4 +26,4 @@
   <p>No items registered yet</p>
 <%end%>
 </div>
-<div><%= link_to '< Back', user_path(@user.id), class: "cta-alt"%></div>
+<div><%#= link_to '< Back', user_path(@user.id), class: "cta-alt"%></div>
