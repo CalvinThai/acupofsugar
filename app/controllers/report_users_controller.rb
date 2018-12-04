@@ -9,6 +9,9 @@ class ReportUsersController < ApplicationController
 	end
 	
 	def index 
+		if current_user.admin == false
+			redirect_to current_user
+		end
 		@reports = ReportUser.all
 
 	end
