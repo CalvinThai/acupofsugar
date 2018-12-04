@@ -36,6 +36,7 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
     if(!@notification)
       Notification.create(:user_id => @user.id);
     end
+    @notification = Notification.find_by_user_id(@user.id)
 
     #public view
     @user_items = Item.where("items.user_id = ? and items.disable = false",params[:user_id])

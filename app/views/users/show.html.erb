@@ -15,7 +15,7 @@
 		    <div class="panel panel-default">
 		    	<div class="panel-heading">	        
 				<% if @user != @logged_in_user %>
-					<div style="font-size:21px" class="margin-bot-1"><i class="fas fa-eye"></i> Contact </div>
+					<div style="font-size:21px" class="margin-bot-1"><i class="fas fa-eye"></i> View </div>
 				<% else %>
 					<div style="font-size:21px" class="margin-bot-1"><i class="fas fa-user-cog"></i> Management </div>
 				<% end %>
@@ -29,41 +29,13 @@
 					<p><%= link_to "View All Users >", users_indexx_url %></p>
 				<% elsif @user == @logged_in_user %>
 					<p><%= link_to 'Manage items >', user_items_path(@user) %></p>
+					<p><%= link_to 'Manage notification preferences >', user_notification_path(@user.id, @notification.id)%></p>
 					<p><%= link_to 'Edit user information >', edit_user_path(@user)%></p>
 					<p><%= link_to "Your Messages >", conversations_path %></p>
 					<p><%= link_to "Reviews from others >", user_review_borrowers_path(@user.id) %></p>
-				<% else %>
-				 	<div>
-						<!--should be directed to user profile page later -->
-						<% user = @user %>
-						<% if not @logged_in_user.blocked_friends.include?(user)%>
-							<% if user != @logged_in_user%>
-								<p><%= button_to conversations_path(sender_id: current_user.id, recipient_id: user.id), method: :post,class:'cta ' do%>
-								 Send Message
-								<%end%></p>
-								
-								<% if @logged_in_user.friends.include?(user) %> 
-									
-									<p><%= button_tag '<i class="fas fa-user-friends"></i>'.html_safe, class:'cta cta-background',title:"Friends",disabled: true %></p>
-								<% elsif not @logged_in_user.pending_friends.include?(user)%> 
-									<p><%= button_to user_friendships_path(@logged_in_user,friend_requirer: @logged_in_user, friend_requiree:user,name: params[:name],:format => "js"), class:'cta',remote: true, authenticity_token: true do%>
-									 Add Friend 
-									<%end%></p>
-								<% else%> 
-									<p><%= button_tag '<i class="fas fa-check"></i> Request Sent'.html_safe, class:'cta cta-background ',disabled: true %></p>
-									
-								<% end %>
-								<p><%= button_to new_report_user_path, :params => { :reportee =>user.id} ,class:"cta ", method: :get do%>
-								Report User
-								<% end %></p>
-								
-								<!-- check if admin -->
-								<% if @logged_in_user.admin == true %>
-								<%= link_to 'Delete User', users_delete_path(:deleteid => user.id)%>
-								<% end %>
-							<% end %>
-						<% end %>
-					</div>
+				<%# else %>
+					<!-- <p><%#= link_to 'View items >', user_items_path(@user) %></p>
+					<p><%#= link_to "View reviews >", user_review_borrowers_path(@user.id) %></p> -->
 				<% end %>
 				</div>
 			</div>
