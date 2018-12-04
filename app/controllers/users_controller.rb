@@ -9,7 +9,6 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
       #@user = User.find(1)
       @blockee_users = Blockee.blockees_of_user(@user)
       @time = greetings_by_time
-      redirect_to @user
     end
 	end
   def indexx
