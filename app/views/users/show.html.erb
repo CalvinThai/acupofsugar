@@ -29,6 +29,9 @@
 					<p><%= link_to "View All Users >", users_indexx_url %></p>
 				<% elsif @user == @logged_in_user %>
 					<p><%= link_to 'Manage items >', user_items_path(@user) %></p>
+					<!--
+					<p><%= link_to 'Manage notification preferences >', user_notification_path(@user.id, @notification.id)%></p>
+					!-->
 					<p><%= link_to 'Edit user information >', edit_user_path(@user)%></p>
 					<p><%= link_to "Your Messages >", conversations_path %></p>
 					<p><%= link_to "Reviews from others >", user_review_borrowers_path(@user.id) %></p>
