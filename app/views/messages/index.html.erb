@@ -16,19 +16,24 @@
 	 <br>
 	  <h3 class="text-center margin-bot-1"> Conversation with <%= the_other.fname.capitalize%> <%= the_other.lname.capitalize%></h3>
 	  <hr class="hr-class"/>
+	  
 	  <div id="chat" class="" style="max-height:240px;padding:10px;overflow:auto">
  		 <% @messages.each do |message| %>
   	   	 	<% if message.body %>
   	   	 	<% user = User.find(message.user_id) %>
+		
 
+			<div>
        <div><strong><%= user.fname.capitalize %></strong> <%= message.message_time %></div>
      
-       <div style="word-wrap: break-word;padding:6px;">
-         > <%= message.body %>
+       <div style="word-break:break-all;padding:6px;display:inline-block;padding:3px 10px 5px;border-radius:12px;margin-top:2px;margin-bot:12px;<%= user==current_user ? 'color:white;background-color:#3578e5' : 'color:black;background-color:#e9ebee'%>">
+          <%= message.body %>
       </div>
+  </div>
   		
  
  	   		<% end %>
+		
 	   <% end %>
 	</div>
 
