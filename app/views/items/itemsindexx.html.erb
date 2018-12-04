@@ -1,7 +1,7 @@
 
 <h2>All Items belonging to users</h2>
 
-
+<%if @items != nil %>
  <% @users.each do |user| %>
 <%=link_to "#{user.fname.capitalize} #{user.lname.capitalize}", user_path(user),style:"padding-right:1em" %>
 <div class="table-responsive">
@@ -33,6 +33,9 @@
 <%end%>
 </div>
 <% end %>
+<%else%>
+    <p>No items registered yet</p>
+<%end%>
 
 
 
