@@ -16,7 +16,11 @@ skip_before_action :require_login
         Notification.create(:user_id => @user.id);
       end
       session[:user_id] = user.id
-      redirect_to user
+      if user.address.nil? || user.phonenum.nil?
+        redirect_to edit_user
+      else
+        redirect_to user
+      end
     else
       user = User.find_by(email: params[:session][:email].downcase)
       if user && user.authenticate(params[:session][:password_digest])
