@@ -46,11 +46,16 @@
         reset_filterrific_url, class: "cta-alt cta-background"
       ) %>
     </div>
+
+
 </div>
+
+
   <%# add an automated spinner to your form when the list is refreshed %>
   <%= render_filterrific_spinner %>
 <% end %>
 <hr/>
+
 <%= render(
   partial: 'items/list',
   locals: { items: @items }
