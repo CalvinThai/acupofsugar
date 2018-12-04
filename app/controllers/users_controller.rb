@@ -31,6 +31,12 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
     @logged_in_user = User.find(session[:user_id])
     @notification = Notification.find_by_user_id(@user.id)
     @blockee_users = Blockee.blockees_of_user(@user)
+    
+    #create notification preference when fb user first login
+    if(!@notification)
+      Notification.create(:user_id => @user.id);
+    end
+
     #public view
     @user_items = Item.where("items.user_id = ? and items.disable = false",params[:user_id])
     @reviews = ReviewBorrower.joins(:user).select("review_borrowers.*, review_borrowers.rating as r_rating, users.*").where("review_borrowers.borrower_id = ?", @user.id)
