@@ -17,6 +17,9 @@ helper_method :authenticate_user_before_db_update
 
   def authenticate_user_before_db_update
     @auth_user ||= User.find(params[:user_id]) if params[:user_id]
+    if current_user.admin == true
+      return 
+    end 
     if @auth_user
       #puts "params user_id : #{params[:user_id]}@@@@@@@@@@@@@@@@"
       if @auth_user != current_user
