@@ -1,5 +1,5 @@
 <h1>A Cup of Sugar</h1>
-
+<%= link_to 'Look for Items!', items_path(), class: "cta-alt cta-background" %>
 <div class="center">
     <div class="row">
     <% @items.each do |item| %>
@@ -17,5 +17,4 @@
     <% end %>
     <% end %>
     </div>
-    <%= link_to 'Look for Items!', items_path(), class: "cta-alt cta-background" %>
 </div>
