@@ -39,6 +39,6 @@ skip_before_action :require_login
 end
   def destroy
     session[:user_id] = nil
-    redirect_to login_url
+    redirect_to root_url
   end
 end
