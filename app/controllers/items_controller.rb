@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-	before_action :authenticate_user_before_db_update, except: [:index, :show]
+	before_action :authenticate_user_before_db_update, except: [:index, :show, :itemsindexx]
 	def new
 		@user = User.find(params[:user_id])
 		@item = Item.new
@@ -70,6 +70,15 @@ class ItemsController < ApplicationController
 		@category_filter = Item.category_filter(params[:category])
 
 	end
+
+	def itemsindexx
+		@user = User.find(current_user.id)
+    	if @user.admin == false
+     	 redirect_to @user
+    	end 
+    	@users = User.all
+
+	end 
 
 	def show #can be invoked from many URI; use the item_path if applicable
 		@user;
