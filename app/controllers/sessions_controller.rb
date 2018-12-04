@@ -17,7 +17,7 @@ skip_before_action :require_login
       end
       session[:user_id] = user.id
       if user.address.nil? || user.phonenum.nil?
-        redirect_to edit_user_url
+        redirect_to edit_user_url(user)
       else
         redirect_to user
       end
