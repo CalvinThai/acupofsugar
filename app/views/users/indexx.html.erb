@@ -15,7 +15,7 @@
       <% if user.id != current_user.id %>
     <tr>
       <td><%=link_to "#{user.fname.capitalize} #{user.lname.capitalize}", user_path(user),style:"padding-right:1em" %></td>
-      <td style:"padding-right:1em" ><%= "#{user.email_confirmed}"%>&nbsp&nbsp&nbsp&nbsp</td>
+      <td style:"padding-right:1em" ><%= "#{user.email}"%>&nbsp&nbsp&nbsp&nbsp</td>
       <td style:"padding-right:1em" ><%= "#{user.phonenum}"%>&nbsp&nbsp&nbsp&nbsp</td>
       <td style:"padding-right:1em" ><%= "#{ user.address}"%>&nbsp&nbsp&nbsp&nbsp</td>
       <td><%= button_to conversations_path(sender_id: current_user.id, recipient_id: user.id), form: {style:'display:inline-block;'}, method: :post,class:'cta hidden-xs hidden-sm hidden-md' do%>
