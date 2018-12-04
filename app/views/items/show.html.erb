@@ -16,24 +16,31 @@
   </div>
 <% end %>
 <% @owner = User.find(@item.user_id)%>
-<h1><%= @item.name %></h1> <span class="img-responsive rating-display" data-score="<%= @reviews.average(:rating).to_i %>"></span>
-<p>
-	<div><string>Owner:</string> <%= "#{@owner.fname} #{@owner.lname}" %> <%= button_to "contact" ,conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post", class: "cta-alt" %> </div>
+<div class="panel panel-default">
+      <div class="panel-heading">
+          <h2 class="text-uppercase"><%= @item.name %></h2> <span class="img-responsive rating-display" data-score="<%= @reviews.average(:rating).to_i %>"></span>
+      </div>
+      <div class="panel-body">
 
-</p> <!-- should link to message -->
+		<p>
+			<div><string>Owner:</string> <%= "#{@owner.fname} #{@owner.lname}" %> <%= button_to "contact" ,conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post", class: "cta-alt", form: {style:'display:inline-block;'} %> </div>
 
-<!-- item profile here -->
-<div id="item_profile">
-	<%= render partial: 'item_profile' %>
-</div>
+		</p> <!-- should link to message -->
 
-<!-- only allow other users to wishlist/send borrow request -->
-<div id="user_actions">
-	<%= render partial: 'user_actions_for_item' %>
-</div>
-<!-- show all reviews for this item from borrower -->
-<div id="review_sections" >
-	<%= render partial: 'review_lender_and_items/item_reviews_from_borrower' %>
+		<!-- item profile here -->
+		<div id="item_profile">
+			<%= render partial: 'item_profile' %>
+		</div>
+
+		<!-- only allow other users to wishlist/send borrow request -->
+		<div id="user_actions">
+			<%= render partial: 'user_actions_for_item' %>
+		</div>
+		<!-- show all reviews for this item from borrower -->
+		<div id="review_sections" >
+			<%= render partial: 'review_lender_and_items/item_reviews_from_borrower' %>
+		</div>
+	</div>
 </div>
 <p><%= link_to '< To search items', items_path, class: "cta-alt" %></p>
 <%if session[:user_id] && session[:user_id] == @user.id%>

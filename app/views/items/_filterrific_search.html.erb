@@ -43,16 +43,14 @@
     <div class="form-group">
       <%= link_to(
         'Reset filters',
-        reset_filterrific_url, class: "cta-alt cta-background"
+        reset_filterrific_url, class: "cta-alt", style: "float: right;"
       ) %>
     </div>
-
-
 </div>
 
 
   <%# add an automated spinner to your form when the list is refreshed %>
-  <%= render_filterrific_spinner %>
+  <div style="text-align: center"><%= render_filterrific_spinner %></div>
 <% end %>
 <hr/>
 
