@@ -12,8 +12,12 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
     end
 	end
   def indexx
-    @user = current_user
+    @user = User.find(current_user.id)
+    if @user.admin == false
+      redirect_to @user
+    end 
     @users = User.all
+
   end
   def checkPrivilege
     if User.find(current_user).admin == true

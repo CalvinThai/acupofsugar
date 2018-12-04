@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'users/new'
   get 'users/delete'
   get 'items/index'
+  get 'items/itemsindexx'
   resources :items do
    collection do
       get :search, :as => :search

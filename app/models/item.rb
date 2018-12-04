@@ -5,7 +5,7 @@ class Item < ApplicationRecord
 	has_many :wish_lists, dependent: :destroy
 	has_many :borrowed_items, dependent: :destroy
 	has_many :on_hold_items, dependent: :destroy
-	has_many_attached :images
+	has_many_attached :images, dependent: :destory
 	validates :name, presence: {message: "Please provide name for your item"}
 	validates :descr, presence: {message: "Please describe your item"}
 	#validates :street, presence: {message: "Please provide a street"}
@@ -72,15 +72,15 @@ end
 def self.options_for_category
 	[
 		['Accesories'],
-		['Art'], ['Bath & Beauty'], ['Books, Films & Music'], ['Clothing'], ['Craft Supplies & Tools'],
-		['Electronics'], ['Home & Living'], ['Office Tools'], ['Pet Supplies'], ['Toys & Games']
+		['Art'], ['Bath'],['Beauty'],['Books'], ['Clothing'], ['Craft Supplies'],
+		['Electronics'], ['Films'], ['Games'],['Home'],['Living'], ['Music'], ['Office Tools'], ['Pet Supplies'], ['Tools'], ['Toys']
 	]
 end
 
 def self.options_for_city
 	[
 		['Brampton'],['Hamilton'],['Kitchener'],['London'], ['Markham'],
-	['Mississauga'], ['Ottawa'], ['Toronto'],['Vaughan'],
+	['Mississauga'], ['Ottawa'], ['Toronto'], ['Vaughan'],
 	['Windsor']
 	]
 end
