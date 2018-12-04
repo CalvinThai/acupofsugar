@@ -12,8 +12,8 @@
   </tr>
 
   <% @reports.each do |report| %>
-    <% reporter = User.find(report.reporter_id)%>
-    <% reportee = User.find(report.reportee_id)%>
+    <% reporter = User.find_by_id(report.reporter_id)%>
+    <% reportee = User.find_by_id(report.reportee_id)%>
 
   <tr>
     <td><%=link_to "#{reporter.fname.capitalize} #{reporter.lname.capitalize}", user_path(reporter),style:"padding-right:1em" %></td>
