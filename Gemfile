@@ -49,16 +49,9 @@ group :development do
   gem 'web-console', '>= 3.3.0'
 end
 
-group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
-  gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
-  gem 'cucumber-rails', require: false
-  # database_cleaner is not required, but highly recommended
-  gem 'database_cleaner'
-end
+gem 'cucumber-rails', :require => false
+ gem 'selenium-webdriver'
+ gem 'database_cleaner'
 
 #boostrap
 gem 'bootstrap-sass'
@@ -102,3 +95,5 @@ gem 'rails_12factor', group: :production
 gem 'will_paginate-bootstrap'
 
 ruby '2.5.3'
+
+gem 'rspec'
