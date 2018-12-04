@@ -39,7 +39,7 @@ skip_before_action :require_login, except: [:index, :indexx, :show, :edit, :upda
     @notification = Notification.find_by_user_id(@user.id)
 
     #public view
-    @user_items = Item.where("items.user_id = ? and items.disable = false",params[:user_id])
+    @user_items = Item.where("items.user_id = ? and items.disable = false", @user.id)
     @reviews = ReviewBorrower.joins(:user).select("review_borrowers.*, review_borrowers.rating as r_rating, users.*").where("review_borrowers.borrower_id = ?", @user.id)
     @reviews_by_borrower = ReviewLenderAndItem.joins(:user).select("review_lender_and_items.*, review_lender_and_items.rating as r_rating, users.*").where("review_lender_and_items.lender_id = ?", @user.id)
 	end

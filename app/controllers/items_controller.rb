@@ -96,6 +96,7 @@ class ItemsController < ApplicationController
 
 		#for form
 		@on_hold_item = OnHoldItem.new
+		
 	end
 	def edit
 		@user = User.find(params[:user_id])
