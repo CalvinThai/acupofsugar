@@ -23,7 +23,8 @@
       <div class="panel-body">
 
 		<p>
-			<div><string>Owner:</string> <%= "#{@owner.fname} #{@owner.lname}" %> <%= button_to "contact" ,conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post", class: "cta-alt", form: {style:'display:inline-block;'} %> </div>
+			<div><h4>Owner: <%= "#{@owner.fname} #{@owner.lname}" %> </h4>
+				<%if @user != current_user %><%= button_to "contact" ,conversations_path(sender_id: @user.id, recipient_id: @owner.id), method: "post", class: "cta-alt", form: {style:'display:inline-block;'} %> <% end %></div>
 
 		</p> <!-- should link to message -->
 
