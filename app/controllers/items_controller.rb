@@ -77,6 +77,7 @@ class ItemsController < ApplicationController
      	 redirect_to @user
     	end 
     	@users = User.all
+    	@items = Item.all
 
 	end 
 
