@@ -138,7 +138,7 @@ GEM
     filterrific (5.1.0)
     font-awesome-rails (4.7.0.4)
       railties (>= 3.2, < 6.0)
-    geocoder (1.5.0)
+    geocoder (1.6.1)
     gherkin (5.1.0)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
